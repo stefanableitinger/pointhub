@@ -1,4 +1,5 @@
-print "Welcome "$(whoami)" on "$(hostname)" [ "$(hostname -I)"]"
+print "\n"
+print "Welcome "$(whoami)" on "$(hostname)" [ "$(hostname -i)"]"
 
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
 # Initialization code that may require console input (password prompts, [y/n]
@@ -154,7 +155,7 @@ alias toPhone="ssh -p 8022 192.168.0.192"
 alias toX="ssh -p k@192.168.0.115"
 
 alias desktop="cd /mnt/c/Users/Administrator/Desktop"
-alias storage="ch /storage/emulated/0/"
+alias storage="cd /storage/emulated/0/"
 
 # Load ; should be last.
 source $ZSH/oh-my-zsh.sh

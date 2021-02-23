@@ -81,6 +81,7 @@ export ZSH=$HOME"/.oh-my-zsh"
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(git)
+plugins=(zsh-autosuggestions zsh-syntax-highlighting autojump)
 
 # User configuration
 
@@ -164,14 +165,12 @@ source $ZSH/oh-my-zsh.sh
 source $ZSH/custom/themes/powerlevel10k/powerlevel10k.zsh-theme
 #get it with git clone --depth=1 https://github.com/romkatv/powerlevel10k.git $ZSH/custom/themes/powerlevel10k
 
-#plugins
-#get it with
+#plugins loaded above get em with:
 #git clone https://github.com/zsh-users/zsh-autosuggestions $ZSH/custom/plugins/zsh-autosuggestions
 #git clone https://github.com/zsh-users/zsh-syntax-highlighting $ZSH/custom/plugins/zsh-syntax-highlighting
 #git clone git://github.com/wting/autojump.git $ZSH/custom/plugins/autojump
 #cd $ZSH/custom/plugins/autojump/
 #python install.py
-plugins=(zsh-autosuggestions zsh-syntax-highlighting autojump)
 
 #useful tools
 #pkg install git -y

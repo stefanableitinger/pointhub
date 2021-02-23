@@ -87,7 +87,7 @@ plugins=(git)
 # export MANPATH="/usr/local/man:$MANPATH"
 
 # You may need to manually set your language environment
-# export LANG=en_US.UTF-8
+ export LANG=en_US.UTF-8
 
 # Preferred editor for local and remote sessions
 # if [[ -n $SSH_CONNECTION ]]; then
@@ -95,6 +95,7 @@ plugins=(git)
 # else
 #   export EDITOR='mvim'
 # fi
+export EDITOR='nano'
 
 # Compilation flags
 # export ARCHFLAGS="-arch x86_64"
@@ -165,12 +166,20 @@ source $ZSH/custom/themes/powerlevel10k/powerlevel10k.zsh-theme
 
 #plugins
 #get it with sudo apt install zsh-syntax-highlighting autojump zsh-autosuggestions -y
-source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh >
-source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlight>
+source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh 2>/dev/null
+source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh 2>/dev/null
 source /usr/share/autojump/autojump.zsh 2>/dev/null
 #or one-by-one
 #git clone https://github.com/zsh-users/zsh-autosuggestions $ZSH/custom/plugins/zsh-autosuggestions
 #git clone https://github.com/zsh-users/zsh-syntax-highlighting $ZSH/custom/plugins/zsh-syntax-highlighting
 #git clone git://github.com/wting/autojump.git $ZSH/custom/plugins/autojump
-#python $ZSH/custom/plugins/autojump/install.py
+#cd $ZSH/custom/plugins/autojump/
+#python install.py
 #plugins=(zsh-autosuggestions zsh-syntax-highlighting autojump)
+
+#useful tools
+#apt/pkg install git -y
+#apt/pkg install zsh -y
+#apt/pkg install wget -y
+#apt/pkg install python -y
+#apt/pkg install openssh -y

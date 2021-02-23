@@ -1,5 +1,6 @@
 print "\n"
-print "Welcome "$(whoami)" on "$(hostname)" [ "$(hostname -i)"]"
+export localip=$(ifconfig | grep broadcast | awk '{print $2}') 2>/dev/null
+print "Welcome "$(whoami)" on "$(hostname)" ["$localip"]"
 
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
 # Initialization code that may require console input (password prompts, [y/n]

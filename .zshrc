@@ -150,10 +150,10 @@ alias zshrc="nano "$HOME"/.zshrc"
 alias pss="sshd"
 #(start) phone ssh server
 
-alias toKali="ssh k@192.168.0.129"
-alias toKodi="ssh root@192.168.0.129"
-alias toPhone="ssh -p 8022 192.168.0.192"
-alias toX="ssh -p k@192.168.0.115"
+alias kali="ssh k@192.168.0.129"
+alias kodi="ssh root@192.168.0.129"
+alias phone="ssh -p 8022 192.168.0.192"
+alias win10="ssh -p k@192.168.0.115"
 
 alias desktop="cd /mnt/c/Users/Administrator/Desktop"
 alias storage="cd /storage/emulated/0/"

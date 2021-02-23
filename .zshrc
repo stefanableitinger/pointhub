@@ -178,8 +178,10 @@ source /usr/share/autojump/autojump.zsh 2>/dev/null
 #plugins=(zsh-autosuggestions zsh-syntax-highlighting autojump)
 
 #useful tools
-#apt/pkg install git -y
-#apt/pkg install zsh -y
-#apt/pkg install wget -y
-#apt/pkg install python -y
-#apt/pkg install openssh -y
+#pkg install git -y
+#pkg install zsh -y
+#pkg install wget -y
+#pkg install python -y
+#pkg install openssh -y
+#pkg install cronie termux-services -y
+#sv enable crond

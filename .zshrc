@@ -1,4 +1,3 @@
-print "\n"
 export localip=$(ifconfig | grep broadcast | awk '{print $2}') 2>/dev/null
 print "Welcome "$(whoami)" on "$(hostname)" ["$localip"]"
 

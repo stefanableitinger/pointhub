@@ -162,7 +162,15 @@ source $ZSH/oh-my-zsh.sh
 #get it with sh -c "$(wget -O- https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 source $ZSH/custom/themes/powerlevel10k/powerlevel10k.zsh-theme
 #get it with git clone --depth=1 https://github.com/romkatv/powerlevel10k.git $ZSH/custom/themes/powerlevel10k
-source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh 2>/dev/null
-source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh 2>/dev/null
-source /usr/share/autojump/autojump.zsh 2>/dev/null
+
+#plugins
 #get it with sudo apt install zsh-syntax-highlighting autojump zsh-autosuggestions -y
+source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh >
+source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlight>
+source /usr/share/autojump/autojump.zsh 2>/dev/null
+#or one-by-one
+#git clone https://github.com/zsh-users/zsh-autosuggestions $ZSH/custom/plugins/zsh-autosuggestions
+#git clone https://github.com/zsh-users/zsh-syntax-highlighting $ZSH/custom/plugins/zsh-syntax-highlighting
+#git clone git://github.com/wting/autojump.git $ZSH/custom/plugins/autojump
+#python $ZSH/custom/plugins/autojump/install.py
+#plugins=(zsh-autosuggestions zsh-syntax-highlighting autojump)

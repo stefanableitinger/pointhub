@@ -165,17 +165,13 @@ source $ZSH/custom/themes/powerlevel10k/powerlevel10k.zsh-theme
 #get it with git clone --depth=1 https://github.com/romkatv/powerlevel10k.git $ZSH/custom/themes/powerlevel10k
 
 #plugins
-#get it with sudo apt install zsh-syntax-highlighting autojump zsh-autosuggestions -y
-source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh 2>/dev/null
-source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh 2>/dev/null
-source /usr/share/autojump/autojump.zsh 2>/dev/null
-#or one-by-one
+#get it with
 #git clone https://github.com/zsh-users/zsh-autosuggestions $ZSH/custom/plugins/zsh-autosuggestions
 #git clone https://github.com/zsh-users/zsh-syntax-highlighting $ZSH/custom/plugins/zsh-syntax-highlighting
 #git clone git://github.com/wting/autojump.git $ZSH/custom/plugins/autojump
 #cd $ZSH/custom/plugins/autojump/
 #python install.py
-#plugins=(zsh-autosuggestions zsh-syntax-highlighting autojump)
+plugins=(zsh-autosuggestions zsh-syntax-highlighting autojump)
 
 #useful tools
 #pkg install git -y

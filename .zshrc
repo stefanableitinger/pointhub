@@ -156,7 +156,7 @@ alias pss="sshd"
 alias kali="ssh k@192.168.0.129"
 alias kodi="ssh root@192.168.0.129"
 alias phone="ssh -p 8022 192.168.0.192"
-alias win10="ssh -p Administrator@192.168.0.115"
+alias win10="ssh Administrator@192.168.0.115"
 
 alias desktop="cd /mnt/c/Users/Administrator/Desktop"
 alias storage="cd /storage/emulated/0/"

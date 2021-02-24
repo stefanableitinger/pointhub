@@ -1,5 +1,7 @@
-export localip=$(ifconfig | grep broadcast | awk '{print $2}') 2>/dev/null
-print "Welcome "$(whoami)" on "$(hostname)" ("$(uname -o)") ["$localip"]"
+if [ "$EUID" -ne 0 ]
+  then export localip=$(ifconfig | grep broadcast | awk '{print $2}') 2>/dev/null
+       echo -e "\n\\e[00;44mWelcome "$(whoami)" on "$(hostname)" ("$(uname -o)") ["$localip"]\\e[0m\n"
+fi
 
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
 # Initialization code that may require console input (password prompts, [y/n]

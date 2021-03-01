@@ -107,6 +107,7 @@ mode "workspace" {
         bindsym 7 workspace 7
         bindsym 8 workspace 8
         bindsym 9 workspace 9
+        bindsym 0 workspace 0
 
         bindsym $mod+1 move container to workspace 1
         bindsym $mod+2 move container to workspace 2
@@ -117,6 +118,7 @@ mode "workspace" {
         bindsym $mod+7 move container to workspace 7
         bindsym $mod+8 move container to workspace 8
         bindsym $mod+9 move container to workspace 9
+        bindsym $mod+0 move container to workspace 0
 
         bindsym Left workspace prev
         bindsym Right workspace next
@@ -152,8 +154,15 @@ bar {
         status_command i3status
 }
 
-exec --no-startup-id setxkbmap -layout de -option grp:alt_shift_toggle 
+exec --no-startup-id setxkbmap -layout de -option grp:alt_shift_toggle
+exec --no-startup-id compton
 
-#tools
+#install
+#apt install i3
+#apt install feh
 #apt install xfce4-terminal
 #apt install rofi
+#apt install compton
+
+#mkdir /usr/share/backgrounds/custom
+#cp pointhub/innere-stadt* /usr/share/backgrounds/custom/

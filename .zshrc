@@ -162,22 +162,22 @@ alias storage="cd /storage/emulated/0/"
 
 # Load ; should be last.
 source $ZSH/oh-my-zsh.sh
-#get it with sh -c "$(wget -O- https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 source $ZSH/custom/themes/powerlevel10k/powerlevel10k.zsh-theme
 #get it with git clone --depth=1 https://github.com/romkatv/powerlevel10k.git $ZSH/custom/themes/powerlevel10k
 
-#plugins loaded above get em with:
+#install
+#sh -c "$(wget -O- https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+#git clone --depth=1 https://github.com/romkatv/powerlevel10k.git $ZSH/custom/themes/powerlevel10k
 #git clone https://github.com/zsh-users/zsh-autosuggestions $ZSH/custom/plugins/zsh-autosuggestions
 #git clone https://github.com/zsh-users/zsh-syntax-highlighting $ZSH/custom/plugins/zsh-syntax-highlighting
 #git clone git://github.com/wting/autojump.git $ZSH/custom/plugins/autojump
 #cd $ZSH/custom/plugins/autojump/
 #python install.py
 
-#useful tools
-#pkg install git -y
-#pkg install zsh -y
-#pkg install wget -y
-#pkg install python -y
-#pkg install openssh -y
-#pkg install cronie termux-services -y
+#termux install
+#pkg install git
+#pkg install zsh
+#pkg install python
+#pkg install openssh
+#pkg install cronie termux-services
 #sv enable crond

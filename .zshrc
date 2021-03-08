@@ -163,7 +163,6 @@ alias storage="cd /storage/emulated/0/"
 # Load ; should be last.
 source $ZSH/oh-my-zsh.sh
 source $ZSH/custom/themes/powerlevel10k/powerlevel10k.zsh-theme
-#get it with git clone --depth=1 https://github.com/romkatv/powerlevel10k.git $ZSH/custom/themes/powerlevel10k
 
 #install
 #sh -c "$(wget -O- https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"

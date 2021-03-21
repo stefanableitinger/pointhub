@@ -37,6 +37,8 @@ bindsym $mod+t exec xfce4-terminal
 
 #start firefox
 bindsym $mod+shift+f exec firefox-esr
+#bindsym $mod+shift+f exec firefox
+#bindsym $mod+shift+f exec firejail --seccomp --nonewprivs --private-tmp firefox-esr
 
 # kill focused window
 #bindsym $mod+Shift+q kill
@@ -156,13 +158,3 @@ bar {
 
 exec --no-startup-id setxkbmap -layout de -option grp:alt_shift_toggle
 exec --no-startup-id compton
-
-#install
-#apt install i3
-#apt install feh
-#apt install xfce4-terminal
-#apt install rofi
-#apt install compton
-
-#mkdir /usr/share/backgrounds/custom
-#cp pointhub/innere-stadt* /usr/share/backgrounds/custom/

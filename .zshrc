@@ -150,11 +150,8 @@ alias home="cd ~"
 alias root="sudo -s"
 alias zshrc="nano "$HOME"/.zshrc"
 
-alias pss="sshd"
-#(start) phone ssh server
-
-alias kali="ssh k@192.168.0.129"
-alias phone="ssh -p 8022 192.168.0.192"
+alias pi="ssh k@192.168.0.129"
+alias phone="ssh -p 8022 k@192.168.0.192"
 alias win="ssh Administrator@192.168.0.115"
 
 alias desktop="cd /mnt/c/Users/Administrator/Desktop"
@@ -164,19 +161,3 @@ alias storage="cd /storage/emulated/0/"
 source $ZSH/oh-my-zsh.sh
 source $ZSH/custom/themes/powerlevel10k/powerlevel10k.zsh-theme
 
-#install
-#sh -c "$(wget -O- https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
-#git clone --depth=1 https://github.com/romkatv/powerlevel10k.git $ZSH/custom/themes/powerlevel10k
-#git clone https://github.com/zsh-users/zsh-autosuggestions $ZSH/custom/plugins/zsh-autosuggestions
-#git clone https://github.com/zsh-users/zsh-syntax-highlighting $ZSH/custom/plugins/zsh-syntax-highlighting
-#git clone git://github.com/wting/autojump.git $ZSH/custom/plugins/autojump
-#cd $ZSH/custom/plugins/autojump/
-#python install.py
-
-#termux install
-#pkg install git
-#pkg install zsh
-#pkg install python
-#pkg install openssh
-#pkg install cronie termux-services
-#sv enable crond

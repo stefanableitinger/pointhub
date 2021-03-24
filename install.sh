@@ -17,7 +17,7 @@ read -p "" answer20
 printf "\033[1;34m[3.0]\033[0m copy images? (y/[n])" 
 read -p "" answer30
 printf "\033[1;34m[4.0]\033[0m setup zsh, plugins and config (not optional)"
-printf "\n\033[1;34m[5.0]\033[0m copy config files? (y/[n])" 
+printf "\n\033[1;34m[5.0]\033[0m copy config files? ([y]/n)" 
 read -p "" answer50
 printf "\033[1;34mstarting setup\033[0m"
 
@@ -87,14 +87,14 @@ else
 fi
 
 #setup zsh
-    printf "\n\033[1;34m>> [4.0]\033[m setup zsh, plugins and config"
+printf "\n\033[1;34m>> [4.0]\033[m setup zsh, plugins and config"
 if [ -e ~/.oh-my-zsh ];
 then
     rm ~/.oh-my-zsh -rf
     unset ZSH
 fi
 
-sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 
 git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ~/.oh-my-zsh/custom/themes/powerlevel10k
 git clone https://github.com/zsh-users/zsh-autosuggestions ~/.oh-my-zsh/custom/plugins/zsh-autosuggestions
@@ -106,7 +106,7 @@ python install.py
 
 curl -o ~/.zshrc https://raw.githubusercontent.com/stefanableitinger/pointhub/master/.zshrc -s
 
-if test "$answer50" = "y"
+if test ! "$answer50" = "n"
 then
     printf "\n\033[1;34m>> [5.0]\033[m copy config files"
     curl -o ~/.config/i3/config https://raw.githubusercontent.com/stefanableitinger/pointhub/master/i3_config -s

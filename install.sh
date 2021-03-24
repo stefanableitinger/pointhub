@@ -1,71 +1,93 @@
 #!/bin/sh
 #script to automate setup
 
-sudo echo ""
+if [ $(id -u) -ne 0 ];
+  then printf "\n\033[1;34m[0]\033[m root permission required for setup"
+       sudo echo ""
+fi
+
+#prepare setup
+printf "\n\033[1;34m[1.0]\033[0m setup required packages (not optional)"
+printf "\n\033[1;34m[1.1]\033[0m setup extra packages? ([y]/n)" 
+read -p "" answer11
+printf "\033[1;34m[1.2]\033[0m setup jail2ban? (y/[n])" 
+read -p "" answer12
+printf "\033[1;34m[2.0]\033[0m setup anonymice fonts? ([y]/n)" 
+read -p "" answer20
+printf "\033[1;34m[3.0]\033[0m copy images? (y/[n])" 
+read -p "" answer30
+printf "\033[1;34m[4.0]\033[0m setup zsh, plugins and config (not optional)"
+printf "\n\033[1;34m[5.0]\033[0m copy config files? (y/[n])" 
+read -p "" answer50
+printf "\033[1;34mstarting setup\033[0m"
 
 #software
-echo "setup required packages"
+printf "\n\033[1;34m>> [1.0]\033[0m setup required packages"
+printf "\n"
 sudo apt install zsh git curl wget unzip python -y
-sudo apt install i3 xfce4-terminal rofi compton -y
 
-read -p "setup extra packages ([Y]/n)?" answer
-if test ! "$answer" = "n"
+if test ! "$answer11" = "n"
 then
-    echo "installing extra packages"
+    printf "\n\033[1;34m>> [1.1]\033[0m setup extra packages"
+    printf "\n"
+    sudo apt install i3 xfce4-terminal rofi compton -y
     sudo apt install remmina nmap net-tools endlessh firejail -y
     sudo apt install feh asciiart cmatrix -y
 else
-    echo "skipping extra packages"
+    printf "\n\033[1;34m>> [1.1]\033[m skipping extra packages"
+    printf "\n"
 fi
 
-read -p "setup jail2ban (y/[N])?" answer
-if test "$answer" = "y"
+if test "$answer12" = "y"
 then
-    echo "installing jail2ban"
+    printf "\n\033[1;34m>> [1.2]\033[m setup jail2ban"
+    printf "\n"    
     sudo apt install jail2ban -y
 else
-    echo "skipping jail2ban"
+    printf "\n\033[1;34m>> [1.2]\033[m skipping jail2ban"
+    printf "\n"
 fi
 
 #fonts
-read -p "setup anonymice fonts ([Y]/n)?" answer
-if test ! "$answer" = "n"
+if test ! "$answer20" = "n"
 then
-    echo "installing anonymice fonts"
+    printf "\n\033[1;34m>> [2.0]\033[m setup anonymice fonts"
+    printf "\n"    
     sudo mkdir -p /usr/share/fonts/truetype/anonymice/
     sudo wget https://github.com/ryanoasis/nerd-fonts/releases/download/v2.1.0/AnonymousPro.zip -P /usr/share/fonts/truetype/anonymice/
     sudo unzip -u /usr/share/fonts/truetype/anonymice/AnonymousPro.zip -d /usr/share/fonts/truetype/anonymice/
     sudo rm /usr/share/fonts/truetype/anonymice/AnonymousPro.zip
     fc-cache -f
 else
-    echo "skipping font packages"
+    printf "\n\033[1;34m>> [2.0]\033[m skipping font packages"
+    printf "\n"
 fi
 
 #pictures
-read -p "copy images ([Y]/n)?" answer
-if test ! "$answer" = "n"
+if test "$answer30" = "y"
 then
-    echo "copying images"
+    printf "\n\033[1;34m>> [3.0]\033[m copy images"
     sudo mkdir -p /usr/share/backgrounds/custom/
     if [ ! -e "/usr/share/backgrounds/custom/innere-stadt-lockscreen.png" ];
     then
-        sudo curl -o /usr/share/backgrounds/custom/innere-stadt-lockscreen.png https://raw.githubusercontent.com/stefanableitinger/pointhub/master/innere-stadt-lockscreen.png
+        sudo curl -o /usr/share/backgrounds/custom/innere-stadt-lockscreen.png https://raw.githubusercontent.com/stefanableitinger/pointhub/master/innere-stadt-lockscreen.png -s
     fi
 
     if [ ! -e "/usr/share/backgrounds/custom/innere-stadt.png" ];
     then
-        sudo curl -o /usr/share/backgrounds/custom/innere-stadt.png https://raw.githubusercontent.com/stefanableitinger/pointhub/master/innere-stadt.png
+        sudo curl -o /usr/share/backgrounds/custom/innere-stadt.png https://raw.githubusercontent.com/stefanableitinger/pointhub/master/innere-stadt.png -s
     fi
 
     if [ ! -e "~/k.png" ];
     then
-        curl -o ~/k.png https://avatars.githubusercontent.com/u/56166006?s=460&u=90d8b9564b0c06ae16ea1b62e2b6b741fdf52842&v=4 -s
+        curl -o ~/k.png https://avatars.githubusercontent.com/u/56166006?s=460&u=90d8b9564b0c06ae16ea1b62e2b6b741fdf52842&v=4
     fi
 else
-    echo "skipping images"
+    printf "\n\033[1;34m>> [3.0]\033[m skipping images"
 fi
 
-#config
+#setup zsh
+    printf "\n\033[1;34m>> [4.0]\033[m setup zsh, plugins and config"
 if [ -e ~/.oh-my-zsh ];
 then
     rm ~/.oh-my-zsh -rf
@@ -83,10 +105,18 @@ cd ~/.oh-my-zsh/custom/plugins/autojump/
 python install.py
 
 curl -o ~/.zshrc https://raw.githubusercontent.com/stefanableitinger/pointhub/master/.zshrc -s
-curl -o ~/.config/i3/config https://raw.githubusercontent.com/stefanableitinger/pointhub/master/i3_config -s
-curl -o ~/win10_20h2.p10k.zsh https://raw.githubusercontent.com/stefanableitinger/pointhub/master/.p10k.win.zsh -s
-curl -o ~/kali.p10k.zsh https://raw.githubusercontent.com/stefanableitinger/pointhub/master/.p10k.pi.zsh -s
-curl -o ~/phone.p10k.zsh https://raw.githubusercontent.com/stefanableitinger/pointhub/master/.p10k.phone.zsh -s
-curl -o ~/smb.conf https://raw.githubusercontent.com/stefanableitinger/pointhub/master/smb.conf -s
 
-echo "setup complete"
+if test "$answer50" = "y"
+then
+    printf "\n\033[1;34m>> [5.0]\033[m copy config files"
+    curl -o ~/.config/i3/config https://raw.githubusercontent.com/stefanableitinger/pointhub/master/i3_config -s
+    curl -o ~/.p10k.win.zsh https://raw.githubusercontent.com/stefanableitinger/pointhub/master/.p10k.win.zsh -s
+    curl -o ~/.p10k.pi.zsh https://raw.githubusercontent.com/stefanableitinger/pointhub/master/.p10k.pi.zsh -s
+    curl -o ~/.p10k.phone.zsh https://raw.githubusercontent.com/stefanableitinger/pointhub/master/.p10k.phone.zsh -s
+    curl -o ~/smb.conf https://raw.githubusercontent.com/stefanableitinger/pointhub/master/smb.conf -s
+else 
+    printf "\n\033[1;34m>> [5.0]\033[m skipping config files"
+fi
+
+    printf "\n\033[1;34msetup complete\033[m "
+    printf "\n"

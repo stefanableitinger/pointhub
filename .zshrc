@@ -1,6 +1,6 @@
-if [ "$EUID" -ne 0 ]
+if [ $(id -u) -ne 0 ];
   then export localip=$(ifconfig | grep broadcast | awk '{print $2}') 2>/dev/null
-       echo -e "\n\\e[00;44mWelcome "$(whoami)" on "$(hostname)" ("$(uname -o)") ["$localip"]\\e[0m\n"
+       echo -e "\n\\e[00;44mwelcome at ["$localip"]\\e[0m\n"
 fi
 
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.

@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 #script to automate setup
 
 if [ $(id -u) -ne 0 ];

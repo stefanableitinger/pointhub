@@ -114,6 +114,7 @@ then
     curl -o ~/.p10k.pi.zsh https://raw.githubusercontent.com/stefanableitinger/pointhub/master/.p10k.pi.zsh -s
     curl -o ~/.p10k.phone.zsh https://raw.githubusercontent.com/stefanableitinger/pointhub/master/.p10k.phone.zsh -s
     curl -o ~/smb.conf https://raw.githubusercontent.com/stefanableitinger/pointhub/master/smb.conf -s
+    curl -o ~/termux.properties https://raw.githubusercontent.com/stefanableitinger/pointhub/master/termux.properties -s
 else 
     printf "\n\033[1;34m>> [5.0]\033[m skipping config files"
 fi

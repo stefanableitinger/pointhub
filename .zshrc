@@ -1,7 +1,7 @@
 if [ $(id -u) -ne 0 ];
     then export localip=$(ifconfig | grep broadcast | awk '{print $2}') 2>/dev/null
         echo -e "\n\\e[00;44mwelcome at ["$localip"]\\e[0m\n"
-    else eche -e "\n"
+    else echo -e "\n"
 fi
 
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
@@ -152,6 +152,7 @@ alias root="sudo -s"
 alias zshrc="nano "$HOME"/.zshrc"
 
 alias pi="ssh k@192.168.0.129"
+alias rpi="ssh root@192.168.0.129"
 alias phone="ssh -p 8022 k@192.168.0.192"
 alias win="ssh Administrator@192.168.0.115"
 

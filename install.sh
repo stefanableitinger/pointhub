@@ -78,6 +78,11 @@ then
         sudo curl -o /usr/share/backgrounds/custom/innere-stadt.png https://raw.githubusercontent.com/stefanableitinger/pointhub/master/innere-stadt.png -s
     fi
 
+    if [ ! -e "/usr/share/backgrounds/custom/ubuntu.png" ];
+    then
+        sudo curl -o /usr/share/backgrounds/custom/ubuntu.png https://raw.githubusercontent.com/stefanableitinger/pointhub/master/ubuntu.png -s
+    fi
+
     if [ ! -e "~/k.png" ];
     then
         curl -o ~/k.png https://avatars.githubusercontent.com/u/56166006?s=460&u=90d8b9564b0c06ae16ea1b62e2b6b741fdf52842&v=4

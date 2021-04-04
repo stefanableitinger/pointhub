@@ -20,9 +20,9 @@ font pango:monospace 8
 font pango:DejaVu Sans Mono 8
 
 #wallpaper
-exec --no-startup-id "feh --bg-fill /usr/share/backgrounds/custom/innere-stadt.png"
+exec --no-startup-id "feh --bg-fill /usr/share/backgrounds/custom/ubuntu.png"
 #lockscreen wallpaper
-bindsym $mod+l exec --no-startup-id "i3lock -i /usr/share/backgrounds/custom/innere-stadt-lockscreen.png -p default|win -f"
+bindsym $mod+l exec --no-startup-id "i3lock -i /usr/share/backgrounds/custom/ubuntu.png -p default|win -f"
 
 # NetworkManager is the most popular way to manage wireless networks on Linux,
 # and nm-applet is a desktop environment-independent system tray GUI for it.

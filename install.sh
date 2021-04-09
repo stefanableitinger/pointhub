@@ -30,7 +30,7 @@ if test ! "$answer11" = "n"
 then
     printf "\n\033[1;34m>> [1.1]\033[0m setup extra packages"
     printf "\n"
-    sudo apt install i3 xfce4-terminal rofi compton -y
+    sudo apt install i3-gaps xfce4-terminal rofi compton -y
     sudo apt install remmina nmap net-tools endlessh firejail -y
     sudo apt install feh asciiart cmatrix -y
 else
@@ -41,7 +41,7 @@ fi
 if test "$answer12" = "y"
 then
     printf "\n\033[1;34m>> [1.2]\033[m setup jail2ban"
-    printf "\n"    
+    printf "\n"
     sudo apt install jail2ban -y
 else
     printf "\n\033[1;34m>> [1.2]\033[m skipping jail2ban"
@@ -52,7 +52,7 @@ fi
 if test ! "$answer20" = "n"
 then
     printf "\n\033[1;34m>> [2.0]\033[m setup anonymice fonts"
-    printf "\n"    
+    printf "\n"
     sudo mkdir -p /usr/share/fonts/truetype/anonymice/
     sudo wget https://github.com/ryanoasis/nerd-fonts/releases/download/v2.1.0/AnonymousPro.zip -P /usr/share/fonts/truetype/anonymice/
     sudo unzip -u /usr/share/fonts/truetype/anonymice/AnonymousPro.zip -d /usr/share/fonts/truetype/anonymice/

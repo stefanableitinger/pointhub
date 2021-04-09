@@ -4,7 +4,7 @@
 set $mod Mod4
 
 # font
-font pango:Anonymice NF
+font pango:DejaVu Sans Mono 8
 
 # gaps
 gaps inner 10

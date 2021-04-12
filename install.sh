@@ -1,17 +1,15 @@
 #!/bin/bash
-#script to automate setup
+# script to automate setup
 
 if [ $(id -u) -ne 0 ];
-  then printf "\n\033[1;34m[0]\033[m root permission required for setup"
-       sudo echo ""
+then printf "\n\033[1;34m[0]\033[m use root permission for setup? ([y]/n)"
+read -p "" answer0
 fi
 
-#prepare setup
+# prepare setup
 printf "\n\033[1;34m[1.0]\033[0m setup required packages (not optional)"
 printf "\n\033[1;34m[1.1]\033[0m setup extra packages? ([y]/n)" 
-read -p "" answer11
-printf "\033[1;34m[1.2]\033[0m setup jail2ban? (y/[n])" 
-read -p "" answer12
+read -p "" answer10
 printf "\033[1;34m[2.0]\033[0m setup anonymice fonts? ([y]/n)" 
 read -p "" answer20
 printf "\033[1;34m[3.0]\033[0m copy images? (y/[n])" 
@@ -21,67 +19,134 @@ printf "\n\033[1;34m[5.0]\033[0m copy config files? ([y]/n)"
 read -p "" answer50
 printf "\033[1;34mstarting setup\033[0m"
 
-#software
+# software
 printf "\n\033[1;34m>> [1.0]\033[0m setup required packages"
 printf "\n"
-sudo apt install zsh git curl wget unzip python -y
+if test ! "$answer0" = "n"
+then 
+    sudo apt install zsh -y
+    sudo apt install git -y
+    sudo apt install curl -y
+    sudo apt install wget -y
+    sudo apt install unzip -y
+    sudo apt install python -y    
+else 
+    apt install zsh -y
+    apt install git -y
+    apt install curl -y
+    apt install wget -y
+    apt install unzip -y
+    apt install python -y
+fi
 
-if test ! "$answer11" = "n"
+if test ! "$answer10" = "n"
 then
     printf "\n\033[1;34m>> [1.1]\033[0m setup extra packages"
     printf "\n"
-    sudo apt install i3-gaps xfce4-terminal rofi compton -y
-    sudo apt install remmina nmap net-tools endlessh firejail -y
-    sudo apt install feh asciiart cmatrix -y
+    
+    if test ! "$answer0" = "n"
+    then 
+        sudo apt install i3-gaps -y
+        sudo apt install xfce4-terminal -y
+        sudo apt install rofi -y
+        sudo apt install compton -y
+        sudo apt install remmina -y
+        sudo apt install nmap -y
+        sudo apt install net-tools -y
+        sudo apt install endlessh -y
+        sudo apt install firejail -y
+        sudo apt install feh -y
+        sudo apt install asciiart -y
+        sudo apt install cmatrix -y
+        sudo apt install tty-clock -y
+        sudo apt install jail2ban -y
+        sudo apt install openfortivpn -y
+    else 
+        apt install i3-gaps -y
+        apt install xfce4-terminal -y
+        apt install rofi -y
+        apt install compton -y
+        apt install remmina -y
+        apt install nmap -y
+        apt install net-tools -y
+        apt install endlessh -y
+        apt install firejail -y
+        apt install feh -y
+        apt install asciiart -y
+        apt install cmatrix -y
+        apt install tty-clock -y
+        apt install jail2ban -y
+        apt install openfortivpn -y
+    fi
 else
     printf "\n\033[1;34m>> [1.1]\033[m skipping extra packages"
     printf "\n"
 fi
 
-if test "$answer12" = "y"
-then
-    printf "\n\033[1;34m>> [1.2]\033[m setup jail2ban"
-    printf "\n"
-    sudo apt install jail2ban -y
-else
-    printf "\n\033[1;34m>> [1.2]\033[m skipping jail2ban"
-    printf "\n"
-fi
-
-#fonts
+# fonts
 if test ! "$answer20" = "n"
 then
     printf "\n\033[1;34m>> [2.0]\033[m setup anonymice fonts"
     printf "\n"
-    sudo mkdir -p /usr/share/fonts/truetype/anonymice/
-    sudo wget https://github.com/ryanoasis/nerd-fonts/releases/download/v2.1.0/AnonymousPro.zip -P /usr/share/fonts/truetype/anonymice/
-    sudo unzip -u /usr/share/fonts/truetype/anonymice/AnonymousPro.zip -d /usr/share/fonts/truetype/anonymice/
-    sudo rm /usr/share/fonts/truetype/anonymice/AnonymousPro.zip
+    
+    if test ! "$answer0" = "n"
+    then 
+        sudo mkdir -p /usr/share/fonts/truetype/anonymice/
+        sudo wget https://github.com/ryanoasis/nerd-fonts/releases/download/v2.1.0/AnonymousPro.zip -P /usr/share/fonts/truetype/anonymice/
+        sudo unzip -u /usr/share/fonts/truetype/anonymice/AnonymousPro.zip -d /usr/share/fonts/truetype/anonymice/
+        sudo rm /usr/share/fonts/truetype/anonymice/AnonymousPro.zip    
+    else 
+        mkdir -p /usr/share/fonts/truetype/anonymice/
+        wget https://github.com/ryanoasis/nerd-fonts/releases/download/v2.1.0/AnonymousPro.zip -P /usr/share/fonts/truetype/anonymice/
+        unzip -u /usr/share/fonts/truetype/anonymice/AnonymousPro.zip -d /usr/share/fonts/truetype/anonymice/
+        rm /usr/share/fonts/truetype/anonymice/AnonymousPro.zip    
+    fi
+    
     fc-cache -f
 else
     printf "\n\033[1;34m>> [2.0]\033[m skipping font packages"
     printf "\n"
 fi
 
-#pictures
+# pictures
 if test "$answer30" = "y"
 then
     printf "\n\033[1;34m>> [3.0]\033[m copy images"
-    sudo mkdir -p /usr/share/backgrounds/custom/
-    if [ ! -e "/usr/share/backgrounds/custom/innere-stadt-lockscreen.png" ];
-    then
-        sudo curl -o /usr/share/backgrounds/custom/innere-stadt-lockscreen.png https://raw.githubusercontent.com/stefanableitinger/pointhub/master/innere-stadt-lockscreen.png -s
-    fi
+    
+    if test ! "$answer0" = "n"
+    then 
+        sudo mkdir -p /usr/share/backgrounds/custom/
+        if [ ! -e "/usr/share/backgrounds/custom/innere-stadt-lockscreen.png" ];
+        then
+            sudo curl -o /usr/share/backgrounds/custom/innere-stadt-lockscreen.png https://raw.githubusercontent.com/stefanableitinger/pointhub/master/innere-stadt-lockscreen.png -s
+        fi
 
-    if [ ! -e "/usr/share/backgrounds/custom/innere-stadt.png" ];
-    then
-        sudo curl -o /usr/share/backgrounds/custom/innere-stadt.png https://raw.githubusercontent.com/stefanableitinger/pointhub/master/innere-stadt.png -s
-    fi
+        if [ ! -e "/usr/share/backgrounds/custom/innere-stadt.png" ];
+        then
+            sudo curl -o /usr/share/backgrounds/custom/innere-stadt.png https://raw.githubusercontent.com/stefanableitinger/pointhub/master/innere-stadt.png -s
+        fi
 
-    if [ ! -e "/usr/share/backgrounds/custom/ubuntu.png" ];
-    then
-        sudo curl -o /usr/share/backgrounds/custom/ubuntu.png https://raw.githubusercontent.com/stefanableitinger/pointhub/master/ubuntu.png -s
-    fi
+        if [ ! -e "/usr/share/backgrounds/custom/ubuntu.png" ];
+        then
+            sudo curl -o /usr/share/backgrounds/custom/ubuntu.png https://raw.githubusercontent.com/stefanableitinger/pointhub/master/ubuntu.png -s
+        fi      
+    else  
+        mkdir -p /usr/share/backgrounds/custom/
+        if [ ! -e "/usr/share/backgrounds/custom/innere-stadt-lockscreen.png" ];
+        then
+            curl -o /usr/share/backgrounds/custom/innere-stadt-lockscreen.png https://raw.githubusercontent.com/stefanableitinger/pointhub/master/innere-stadt-lockscreen.png -s
+        fi
+
+        if [ ! -e "/usr/share/backgrounds/custom/innere-stadt.png" ];
+        then
+            curl -o /usr/share/backgrounds/custom/innere-stadt.png https://raw.githubusercontent.com/stefanableitinger/pointhub/master/innere-stadt.png -s
+        fi
+
+        if [ ! -e "/usr/share/backgrounds/custom/ubuntu.png" ];
+        then
+            curl -o /usr/share/backgrounds/custom/ubuntu.png https://raw.githubusercontent.com/stefanableitinger/pointhub/master/ubuntu.png -s
+        fi
+    fi    
 
     if [ ! -e "~/k.png" ];
     then
@@ -91,7 +156,7 @@ else
     printf "\n\033[1;34m>> [3.0]\033[m skipping images"
 fi
 
-#setup zsh
+# setup zsh
 printf "\n\033[1;34m>> [4.0]\033[m setup zsh, plugins and config"
 if [ -e ~/.oh-my-zsh ];
 then
@@ -124,5 +189,5 @@ else
     printf "\n\033[1;34m>> [5.0]\033[m skipping config files"
 fi
 
-    printf "\n\033[1;34msetup complete\033[m "
-    printf "\n"
+printf "\n\033[1;34msetup complete\033[m "
+printf "\n"

@@ -150,14 +150,14 @@ bindkey '^i' expand-or-complete-prefix
 alias home="cd ~"
 alias root="sudo -s"
 alias zshrc="nano "$HOME"/.zshrc"
-
+alias x="exit"
 alias pi="ssh k@192.168.0.129"
 alias rpi="ssh root@192.168.0.129"
 alias phone="ssh -p 8022 k@192.168.0.192"
 alias win="ssh Administrator@192.168.0.115"
 
-# requires not provided package
-alias vpn="sudo openfortivpn localhost -u stefan.ableitinger --trusted-cert=b4911726d9c038ea77fed8dc2359e8574e4f184746f82ec41b821e5872ff78c4"
+# requires not provided host configuration
+alias vpn="sudo openfortivpn vpnhost:443 -u stefan.ableitinger --trusted-cert=b4911726d9c038ea77fed8dc2359e8574e4f184746f82ec41b821e5872ff78c4"
 alias ws="ssh stefan.ableitinger@10.10.92.229"
 
 alias desktop="cd /mnt/c/Users/Administrator/Desktop"

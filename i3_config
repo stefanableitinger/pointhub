@@ -12,32 +12,36 @@ gaps inner 10
 # border
 new_window pixel
 
+# terminal
+bindsym $mod+Return exec xfce4-terminal
+
+# firefox
+bindsym $mod+shift+f exec firefox-esr
+#bindsym $mod+shift+f exec firejail --seccomp --nonewprivs --private-tmp firefox-esr
+
 # wallpaper
 exec --no-startup-id "feh --bg-fill /usr/share/backgrounds/custom/kali.png"
 
 # lockscreen wallpaper
 bindsym $mod+l exec --no-startup-id "i3lock -i /usr/share/backgrounds/custom/kali-lockscreen.png -p default|win -f"
 
-# keyboar layout
-exec --no-startup-id setxkbmap -layout de -option grp:alt_shift_toggle
-
-# transparent
-exec --no-startup-id compton
-
-# network manager
-exec --no-startup-id nm-applet
-
-# mouse over activates window
-floating_modifier $mod
-
 # menu
-bindsym $mod+a exec rofi -show run -modi run -location 1 -width 100 -lines 2 -line-margin 0 -line-padding 1 -separator-style none -font "hack 10" -columns 9 -bw 0 -theme solarized
+bindsym $mod+a exec "rofi -show drun -modi drun,run -location 1 -width 100 -lines 17 -line-margin 0 -line-padding 1 -separator-style none -font 'roboto mono nerd font mono light 10' -columns 4 -bw 0 -theme solarized -icon-theme 'Papirus' -show-icons"
 
 # exit
 bindsym $mod+x exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -B 'Yes, exit i3' 'i3-msg exit'"
 
 # force exit
 bindsym $mod+Shift+x exit
+
+# network manager
+exec --no-startup-id nm-applet
+
+# transparent
+exec --no-startup-id compton
+
+# mouse over activates window
+floating_modifier $mod
 
 # kill focused window
 bindsym $mod+q kill
@@ -145,11 +149,5 @@ bar {
          status_command while sh "/home/k/.config/i3/i3_status.sh"; do sleep 1; done
 }
 
-# terminal
-bindsym $mod+Return exec xfce4-terminal
-bindsym $mod+t exec xfce4-terminal
-
-# firefox
-bindsym $mod+shift+f exec firefox-esr
-#bindsym $mod+shift+f exec firefox
-#bindsym $mod+shift+f exec firejail --seccomp --nonewprivs --private-tmp firefox-esr
+# keyboard layout
+exec --no-startup-id setxkbmap -layout de -option grp:alt_shift_toggle

@@ -158,7 +158,8 @@ alias win="ssh Administrator@192.168.0.115"
 
 # requires not provided host configuration
 alias vpn="sudo openfortivpn vpnhost:443 -u stefan.ableitinger --trusted-cert=b4911726d9c038ea77fed8dc2359e8574e4f184746f82ec41b821e5872ff78c4"
-alias ws="ssh stefan.ableitinger@10.10.92.229"
+alias ws="ssh stefan.ableitinger@10.10.97.29"
+#"10.10.92.229"
 
 alias desktop="cd /mnt/c/Users/Administrator/Desktop"
 alias storage="cd /storage/emulated/0/"

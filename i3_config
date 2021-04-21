@@ -95,27 +95,27 @@ bindsym $mod+s mode "split"
 
 # workspaces
 mode "workspace" {
-        bindsym 1 workspace I
-        bindsym 2 workspace II
-        bindsym 3 workspace III
-        bindsym 4 workspace IV
-        bindsym 5 workspace V
-        bindsym 6 workspace VI
-        bindsym 7 workspace VII
-        bindsym 8 workspace VIII
-        bindsym 9 workspace IX
-        bindsym 0 workspace X
+        bindsym 1 workspace 1
+        bindsym 2 workspace 2
+        bindsym 3 workspace 3
+        bindsym 4 workspace 4
+        bindsym 5 workspace 5
+        bindsym 6 workspace 6
+        bindsym 7 workspace 7
+        bindsym 8 workspace 8
+        bindsym 9 workspace 9
+        bindsym 0 workspace 0
 
-        bindsym $mod+1 move container to workspace I
-        bindsym $mod+2 move container to workspace II
-        bindsym $mod+3 move container to workspace III
-        bindsym $mod+4 move container to workspace IV
-        bindsym $mod+5 move container to workspace V
-        bindsym $mod+6 move container to workspace VI
-        bindsym $mod+7 move container to workspace VII
-        bindsym $mod+8 move container to workspace VIII
-        bindsym $mod+9 move container to workspace IX
-        bindsym $mod+0 move container to workspace X
+        bindsym $mod+1 move container to workspace 1
+        bindsym $mod+2 move container to workspace 2
+        bindsym $mod+3 move container to workspace 3
+        bindsym $mod+4 move container to workspace 4
+        bindsym $mod+5 move container to workspace 5
+        bindsym $mod+6 move container to workspace 6
+        bindsym $mod+7 move container to workspace 7
+        bindsym $mod+8 move container to workspace 8
+        bindsym $mod+9 move container to workspace 9
+        bindsym $mod+0 move container to workspace 0
 
         bindsym Left workspace prev
         bindsym Right workspace next

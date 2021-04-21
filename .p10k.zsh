@@ -42,7 +42,7 @@
   # automatically hidden when the input line reaches it. Right prompt above the
   # last prompt line gets hidden if it would overlap with left prompt.
   typeset -g POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(
-   	rootIndicator
+	rootIndicator
 	command_execution_time  # duration of the last command
     background_jobs         # presence of background jobs
     status                  # exit code of the last command
@@ -181,18 +181,18 @@
 
 function dynamicOsIcon () {
 	emulate -L zsh
-	
+
 	local res
 	local ostype
 	local osspec
-	
+
 	ostype=$(uname -o)
 	osspec=$(uname -r)
-	
+
 	res=$ostype
 	res+="/"
 	res+=$osspec
-	
+
 	if [ $ostype = "GNU/Linux" ];
 	then
 		case $osspec in 
@@ -208,21 +208,21 @@ function dynamicOsIcon () {
 	elif [ $ostype = "Android" ];
 	then res=''
 	fi
-	
+
 	#other ''
-	#win	 🚽 🧻
-	#pi		💀  
-	#phone	
-	
+	#win  🚽 🧻
+	#pi 💀  
+	#phone 
+
 	typeset -g dynamicOsIconSelected=$res
 	}
-	
+
 	functions -M dynamicOsIcon 2>/dev/null
 
-	typeset -g POWERLEVEL9K_OS_ICON_CONTENT_EXPANSION='${$((dynamicOsIcon()))+${dynamicOsIconSelected}}' 
+	typeset -g POWERLEVEL9K_OS_ICON_CONTENT_EXPANSION='${$((dynamicOsIcon()))+${dynamicOsIconSelected}}'
 
   ################################[ prompt_char: prompt symbol ]################################
-  # Transparent background.
+  # Transparent background
   typeset -g POWERLEVEL9K_PROMPT_CHAR_BACKGROUND=
   # Green prompt symbol if the last command succeeded.
   typeset -g POWERLEVEL9K_PROMPT_CHAR_OK_{VIINS,VICMD,VIVIS,VIOWR}_FOREGROUND=76
@@ -1685,23 +1685,18 @@ function dynamicOsIcon () {
     # and regular prompts.
     prompt_example
   }
-  
-  function prompt_rootIndicator() {
-	
+
+	function prompt_rootIndicator() {
+
 	if [ $(id -u) -eq 0 ];
 	then 
 		p10k segment -b '#ff0000' -f '#ffffff' -t "root@$(hostname)"
 	fi
-  }  
-  
-  function instant_prompt_rootIndicator() {
-    # Since prompt_example always makes the same `p10k segment` calls, we can call it from
-    # instant_prompt_example. This will give us the same `example` prompt segment in the instant
-    # and regular prompts.
-    prompt_rootIndicator
-  }
-  
-  
+	}
+
+	function instant_prompt_rootIndicator() {
+	prompt_rootIndicator
+	}
 
   # User-defined prompt segments can be customized the same way as built-in segments.
   typeset -g POWERLEVEL9K_EXAMPLE_FOREGROUND=3

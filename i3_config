@@ -20,10 +20,10 @@ bindsym $mod+shift+f exec firefox-esr
 #bindsym $mod+shift+f exec firejail --seccomp --nonewprivs --private-tmp firefox-esr
 
 # wallpaper
-exec --no-startup-id "feh --bg-fill /usr/share/backgrounds/custom/kali.png"
+exec --no-startup-id "feh --bg-fill ~/.local/share/backgrounds/fedora.png"
 
 # lockscreen wallpaper
-bindsym $mod+l exec --no-startup-id "i3lock -i /usr/share/backgrounds/custom/kali-lockscreen.png -p default|win -f"
+bindsym $mod+l exec --no-startup-id "i3lock -i ~/.local/share/backgrounds/fedora-lockscreen.png -p default|win -f"
 
 # menu
 bindsym $mod+a exec "rofi -show drun -modi drun,run -location 1 -width 100 -lines 17 -line-margin 0 -line-padding 1 -separator-style none -font 'roboto mono nerd font mono light 10' -columns 4 -bw 0 -theme solarized -icon-theme 'Papirus' -show-icons"
@@ -146,7 +146,7 @@ bindsym $mod+r mode "resize"
 
 # status bar
 bar {
-         status_command while sh "/home/k/.config/i3/i3_status.sh"; do sleep 1; done
+         status_command while sh "~/.config/i3/i3_status.sh"; do sleep 1; done
 }
 
 # keyboard layout

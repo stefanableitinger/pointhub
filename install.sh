@@ -35,7 +35,7 @@ zshSetup () {
 			rm ~/.oh-my-zsh -rf
 			unset ZSH
 		fi
-		
+
 		cd ~
 
 		# oh-my-zsh
@@ -114,8 +114,8 @@ debianSetup () {
 		then 
 			printf "\033[1;34m[?] root privileges required for setup\033[0m \n"
 			sudo printf "" 2>/dev/null
-			
-			if [ "$?" = "1" ]; 
+
+			if [ "$?" = "1" ];
 			then
 				dcr="\033[1;31mno\033[0m"
 			else
@@ -127,7 +127,7 @@ debianSetup () {
 		printf "\033[1;34m[!] setup oh-my-zsh with p10k: \033[0m $dc1\n"
 		printf "\033[1;34m[!] setup i3-gaps with rofi: \033[0m $dc2\n"
 		printf "\033[1;34m[!] setup additional packages: \033[0m $dc3\n"
-		printf "\033[1;34m[!] setup font: \033[0m $dc4\n"		
+		printf "\033[1;34m[!] setup font: \033[0m $dc4\n"
 
 		continueOrQuit
 		printf "\033[1;34m[!] setup starting \033[0m $ac3\n"
@@ -150,7 +150,7 @@ debianSetup () {
 			# config
 			mkdir --parents ~/.config/i3
 			curl --silent --output ~/.config/i3/config https://raw.githubusercontent.com/stefanableitinger/pointhub/master/i3_config
-			curl --silent --output-dir ~/.config/i3/ https://raw.githubusercontent.com/stefanableitinger/pointhub/master/i3_status.sh
+			curl --silent --output ~/.config/i3/i3_status.sh https://raw.githubusercontent.com/stefanableitinger/pointhub/master/i3_status.sh
 
 			# wallpapers
 			mkdir --parents ~/.local/share/backgrounds
@@ -193,7 +193,7 @@ startServices () {
 			sudo systemctl start endlessh.service
 			sudo systemctl enable fail2ban.service
 			sudo systemctl start fail2ban.service
-		fi	
+		fi
 	}
 
 androidSetup () {
@@ -207,7 +207,7 @@ androidSetup () {
 
 		printf "\033[1;34m[?] setup termux configuration and font (meslolgs-nf)?\033[0m\n"
 		includeSkipOrQuit
-		dc3=$choice		
+		dc3=$choice
 
 		printf "\033[1;34m[!] setup oh-my-zsh with p10k: \033[0m $dc1\n"
 		printf "\033[1;34m[!] setup additional packages: \033[0m $dc2\n"
@@ -217,7 +217,7 @@ androidSetup () {
 		printf "\033[1;34m[!] setup starting \033[0m $ac3\n"
 
 		if [ "$dc1" = "yes" ];
-		then	
+		then
 			pkg install curl git python zsh -y
 
 			zshSetup
@@ -229,11 +229,11 @@ androidSetup () {
 
 			sshd
 		fi
-		
+
 		if [ "$dc3" = "yes" ];
 		then
 			curl --silent -O --output-dir ~/.termux https://raw.githubusercontent.com/stefanableitinger/pointhub/master/termux.properties
-			
+
 			cp ~/.termux/font.ttf ~/.termux-font-backup.ttf
 			curl --silent --output ~/.termux/font.ttf https://raw.githubusercontent.com/ryanoasis/nerd-fonts/master/patched-fonts/AnonymousPro/complete/Anonymice%20Nerd%20Font%20Complete%20Mono.ttf
 
@@ -250,10 +250,10 @@ main () {
 		continueOrQuit
 		androidSetup
 		if [ "$dc1" = "yes" ];
-		then	
+		then
 			chsh -s zsh
 		fi
-		
+
 		complete
 
 	elif [ $(uname -o) = "GNU/Linux" ];
@@ -272,13 +272,19 @@ main () {
 						printf "\033[1;34m[!]\033[m kali linux os detected\n"
 						continueOrQuit
 						debianSetup
-						startServices;;						
-				*) ... 
+						startServices;;
+				*) ...
 						printf "\033[1;34m[!]\033[m some linux os detected\n"
 						continueOrQuit
 						debianSetup
 						startServices;;
 		esac
+
+                if [ "$dc1" = "yes" ];
+                then
+                        sudo chsh -s zsh
+                fi
+
 		complete
 	fi
 	}

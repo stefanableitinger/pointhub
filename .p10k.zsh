@@ -201,7 +201,7 @@ function dynamicOsIcon () {
 			*ARCH*)
 				res='';;
 			*Re4son*)
-				res='💀';;
+				res='';;
 			*)
 				res='';;
 		esac

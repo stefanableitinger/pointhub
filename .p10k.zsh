@@ -42,7 +42,8 @@
   # automatically hidden when the input line reaches it. Right prompt above the
   # last prompt line gets hidden if it would overlap with left prompt.
   typeset -g POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(
-    command_execution_time  # duration of the last command
+   	rootIndicator
+	command_execution_time  # duration of the last command
     background_jobs         # presence of background jobs
     status                  # exit code of the last command
 #    direnv                  # direnv status (https://direnv.net/)
@@ -179,7 +180,7 @@
   # Custom icon.
 
 function dynamicOsIcon () {
-	emulate -L sh
+	emulate -L zsh
 	
 	local res
 	local ostype
@@ -1684,6 +1685,23 @@ function dynamicOsIcon () {
     # and regular prompts.
     prompt_example
   }
+  
+  function prompt_rootIndicator() {
+	
+	if [ $(id -u) -eq 0 ];
+	then 
+		p10k segment -b '#ff0000' -f '#ffffff' -t "root@$(hostname)"
+	fi
+  }  
+  
+  function instant_prompt_rootIndicator() {
+    # Since prompt_example always makes the same `p10k segment` calls, we can call it from
+    # instant_prompt_example. This will give us the same `example` prompt segment in the instant
+    # and regular prompts.
+    prompt_rootIndicator
+  }
+  
+  
 
   # User-defined prompt segments can be customized the same way as built-in segments.
   typeset -g POWERLEVEL9K_EXAMPLE_FOREGROUND=3

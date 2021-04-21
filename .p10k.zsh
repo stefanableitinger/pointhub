@@ -42,9 +42,9 @@
   # automatically hidden when the input line reaches it. Right prompt above the
   # last prompt line gets hidden if it would overlap with left prompt.
   typeset -g POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(
-    status                  # exit code of the last command
     command_execution_time  # duration of the last command
     background_jobs         # presence of background jobs
+    status                  # exit code of the last command
 #    direnv                  # direnv status (https://direnv.net/)
 #    asdf                    # asdf version manager (https://github.com/asdf-vm/asdf)
 #    virtualenv              # python virtual environment (https://docs.python.org/3/library/venv.html)
@@ -95,7 +95,7 @@
 #    timewarrior             # timewarrior tracking status (https://timewarrior.net/)
 #    taskwarrior             # taskwarrior task count (https://taskwarrior.org/)
     time                    # current time
-     ip                    # ip address and bandwidth usage for a specified network interface
+#    ip                    # ip address and bandwidth usage for a specified network interface
     # public_ip             # public IP address
     # proxy                 # system-wide http/https/ftp proxy
     # battery               # internal battery
@@ -174,14 +174,51 @@
 
   #################################[ os_icon: os identifier ]##################################
   # OS identifier color.
-  typeset -g POWERLEVEL9K_OS_ICON_FOREGROUND=12
+  typeset -g POWERLEVEL9K_OS_ICON_FOREGROUND=033
   typeset -g POWERLEVEL9K_OS_ICON_BACKGROUND=255
   # Custom icon.
-  typeset -g POWERLEVEL9K_OS_ICON_CONTENT_EXPANSION=''
 
-#win	 🚽 🧻
-#pi		💀  
-#phone	
+function dynamicOsIcon () {
+	emulate -L sh
+	
+	local res
+	local ostype
+	local osspec
+	
+	ostype=$(uname -o)
+	osspec=$(uname -r)
+	
+	res=$ostype
+	res+="/"
+	res+=$osspec
+	
+	if [ $ostype = "GNU/Linux" ];
+	then
+		case $osspec in 
+			*Microsoft*)
+				res='🚽';;
+			*ARCH*)
+				res='';;
+			*Re4son*)
+				res='💀';;
+			*)
+				res='';;
+		esac
+	elif [ $ostype = "Android" ];
+	then res=''
+	fi
+	
+	#other ''
+	#win	 🚽 🧻
+	#pi		💀  
+	#phone	
+	
+	typeset -g dynamicOsIconSelected=$res
+	}
+	
+	functions -M dynamicOsIcon 2>/dev/null
+
+	typeset -g POWERLEVEL9K_OS_ICON_CONTENT_EXPANSION='${$((dynamicOsIcon()))+${dynamicOsIconSelected}}' 
 
   ################################[ prompt_char: prompt symbol ]################################
   # Transparent background.
@@ -208,7 +245,7 @@
 
   ##################################[ dir: current directory ]##################################
   # Current directory background color.
-  typeset -g POWERLEVEL9K_DIR_BACKGROUND=12
+  typeset -g POWERLEVEL9K_DIR_BACKGROUND=033
   # Default current directory foreground color.
   typeset -g POWERLEVEL9K_DIR_FOREGROUND=255
   # If directory is too long, shorten some of its segments to the shortest possible unique
@@ -353,11 +390,11 @@
   typeset -g POWERLEVEL9K_VCS_CONFLICTED_BACKGROUND=255
   typeset -g POWERLEVEL9K_VCS_LOADING_BACKGROUND=255
 
-  typeset -g POWERLEVEL9K_VCS_CLEAN_FOREGROUND=12
-  typeset -g POWERLEVEL9K_VCS_MODIFIED_FOREGROUND=12
-  typeset -g POWERLEVEL9K_VCS_UNTRACKED_FOREGROUND=12
-  typeset -g POWERLEVEL9K_VCS_CONFLICTED_FOREGROUND=12
-  typeset -g POWERLEVEL9K_VCS_LOADING_FOREGROUND=12  
+  typeset -g POWERLEVEL9K_VCS_CLEAN_FOREGROUND=033
+  typeset -g POWERLEVEL9K_VCS_MODIFIED_FOREGROUND=033
+  typeset -g POWERLEVEL9K_VCS_UNTRACKED_FOREGROUND=033
+  typeset -g POWERLEVEL9K_VCS_CONFLICTED_FOREGROUND=033
+  typeset -g POWERLEVEL9K_VCS_LOADING_FOREGROUND=033  
 
   # Branch icon. Set this parameter to '\uF126 ' for the popular Powerline branch icon.
   typeset -g POWERLEVEL9K_VCS_BRANCH_ICON='\uF126 '
@@ -502,14 +539,14 @@
   # it will signify success by turning green.
   typeset -g POWERLEVEL9K_STATUS_OK=true
   typeset -g POWERLEVEL9K_STATUS_OK_VISUAL_IDENTIFIER_EXPANSION='✔'
-  typeset -g POWERLEVEL9K_STATUS_OK_FOREGROUND=12
+  typeset -g POWERLEVEL9K_STATUS_OK_FOREGROUND=033
   typeset -g POWERLEVEL9K_STATUS_OK_BACKGROUND=255
 
   # Status when some part of a pipe command fails but the overall exit status is zero. It may look
   # like this: 1|0.
   typeset -g POWERLEVEL9K_STATUS_OK_PIPE=true
   typeset -g POWERLEVEL9K_STATUS_OK_PIPE_VISUAL_IDENTIFIER_EXPANSION='✔'
-  typeset -g POWERLEVEL9K_STATUS_OK_PIPE_FOREGROUND=12
+  typeset -g POWERLEVEL9K_STATUS_OK_PIPE_FOREGROUND=033
   typeset -g POWERLEVEL9K_STATUS_OK_PIPE_BACKGROUND=255
 
   # Status when it's just an error code (e.g., '1'). No need to show it if prompt_char is enabled as
@@ -536,8 +573,8 @@
 
   ###################[ command_execution_time: duration of the last command ]###################
   # Execution time color.
-  typeset -g POWERLEVEL9K_COMMAND_EXECUTION_TIME_FOREGROUND=0
-  typeset -g POWERLEVEL9K_COMMAND_EXECUTION_TIME_BACKGROUND=3
+  typeset -g POWERLEVEL9K_COMMAND_EXECUTION_TIME_FOREGROUND=255
+  typeset -g POWERLEVEL9K_COMMAND_EXECUTION_TIME_BACKGROUND=033
   # Show duration of the last command if takes at least this many seconds.
   typeset -g POWERLEVEL9K_COMMAND_EXECUTION_TIME_THRESHOLD=3
   # Show this many fractional digits. Zero means round to seconds.
@@ -551,8 +588,8 @@
 
   #######################[ background_jobs: presence of background jobs ]#######################
   # Background jobs color.
-  typeset -g POWERLEVEL9K_BACKGROUND_JOBS_FOREGROUND=6
-  typeset -g POWERLEVEL9K_BACKGROUND_JOBS_BACKGROUND=0
+  typeset -g POWERLEVEL9K_BACKGROUND_JOBS_FOREGROUND=255
+  typeset -g POWERLEVEL9K_BACKGROUND_JOBS_BACKGROUND=033
   # Don't show the number of background jobs.
   typeset -g POWERLEVEL9K_BACKGROUND_JOBS_VERBOSE=false
   # Custom icon.
@@ -1538,7 +1575,7 @@
   ###########[ ip: ip address and bandwidth usage for a specified network interface ]###########
   # IP color.
   typeset -g POWERLEVEL9K_IP_BACKGROUND=255
-  typeset -g POWERLEVEL9K_IP_FOREGROUND=12
+  typeset -g POWERLEVEL9K_IP_FOREGROUND=033
   # The following parameters are accessible within the expansion:
   #
   #   Parameter             | Meaning
@@ -1607,7 +1644,7 @@
   ####################################[ time: current time ]####################################
   # Current time color.
   typeset -g POWERLEVEL9K_TIME_FOREGROUND=255
-  typeset -g POWERLEVEL9K_TIME_BACKGROUND=12
+  typeset -g POWERLEVEL9K_TIME_BACKGROUND=033
   # Format for the current time: 09:51:02. See `man 3 strftime`.
   typeset -g POWERLEVEL9K_TIME_FORMAT='%D{%H:%M:%S}'
   # If set to true, time will update when you hit enter. This way prompts for the past

@@ -1,6 +1,6 @@
 if [ $(id -u) -ne 0 ];
     then export localip=$(ifconfig | grep broadcast | awk '{print $2}') 2>/dev/null
-        echo -e "\n\\e[00;44mwelcome at ["$localip"]\\e[0m\n"
+        echo -e "welcome at\n"$localip
     else echo -e "\n"
 fi
 

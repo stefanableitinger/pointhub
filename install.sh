@@ -223,8 +223,8 @@ kaliSetup () {
 		}
 
 androidSetup () {
-		printf "\033[1;34m[!]\033[0m setup contains required packages for oh-my-zsh with p10k (curl git python zsh).\n"
-		printf "\033[1;34m[?]\033[0m setup additional packages (cmatrix espeak neofetch net-tools nmap openssh tty-clock)?\n\033[1;34m[-]\033[0m press [\033[1;32my\033[m]es to include [\033[1;31mn\033[m]o to skip or [\033[1;30mq\033[m]uit\n"
+		printf "\033[1;34m[!] setup contains required packages for oh-my-zsh with p10k (curl git python zsh)\033[0m\n\033[1;34m[!]\033[0m included\n"
+		printf "\033[1;34m[?] setup additional packages (cmatrix espeak neofetch net-tools nmap openssh tty-clock)?\033[0m\n\033[1;34m[-]\033[0m press [\033[1;32my\033[m]es to include [\033[1;31mn\033[m]o to skip or [\033[1;30mq\033[m]uit\n"
 		
 		while true; do
                 readOne
@@ -243,7 +243,7 @@ androidSetup () {
                 esac
         done
 		
-		printf "\033[1;34m[?]\033[0m download and setup termux configuration?\n\033[1;34m[-]\033[0m press [\033[1;32my\033[m]es to include [\033[1;31mn\033[m]o to skip or [\033[1;30mq\033[m]uit\n"
+		printf "\033[1;34m[?] download and setup termux configuration?\n\033[1;34m[-]\033[0m press [\033[1;32my\033[m]es to include [\033[1;31mn\033[m]o to skip or [\033[1;30mq\033[m]uit\n"
 		
 		while true; do
                 readOne
@@ -293,7 +293,7 @@ androidSetup () {
 			curl -o ~/.termux/termux.properties https://raw.githubusercontent.com/stefanableitinger/pointhub/master/termux.properties -s
 						
 			# avatar
-			curl -o ~/k.png https://avatars.githubusercontent.com/u/56166006?s=460&u=90d8b9564b0c06ae16ea1b62e2b6b741fdf52842&v=4
+			curl -o ~/k.png -fsSL https://avatars.githubusercontent.com/u/56166006?s=460&u=90d8b9564b0c06ae16ea1b62e2b6b741fdf52842&v=4
 		fi		
 		}
 
@@ -307,7 +307,7 @@ main () {
 		yesOrQuit
 		androidSetup
 		complete
-
+		
 	elif [ $(uname -o) = "GNU/Linux" ];
 	then
 		case "$(uname -r)" in

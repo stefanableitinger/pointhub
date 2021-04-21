@@ -146,7 +146,7 @@ bindsym $mod+r mode "resize"
 
 # status bar
 bar {
-         status_command while sh "~/.config/i3/i3_status.sh"; do sleep 1; done
+         status_command while sh "/home/k/.config/i3/i3_status.sh"; do sleep 1; done
 }
 
 # keyboard layout

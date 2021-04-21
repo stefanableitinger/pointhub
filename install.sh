@@ -8,7 +8,7 @@ welcome () {
 	printf "\033[1;34m / __|/ _ \ __| | | | |_ \  \ \ /\ / / |_  / _| | |__/ _| | \033[m\n"
 	printf "\033[1;34m \__ \  __/ |_| |_| | |_) |  \ V  V /| |/ / (_| | | | (_| | \033[m\n"
 	printf "\033[1;34m |___/\___|\__|\__|_| |__/    \_/\_/ |_/___\__|_|_|  \__|_| \033[m\n"
-	printf "\033[1;34mby stefanableitinger|_|       +                             \033[m\n"
+	printf "\033[1;34mby stefanableitinger|_|++                                   \033[m\n"
 	printf "\n"
 	}
 	
@@ -270,22 +270,22 @@ androidSetup () {
 		
 		printf "\033[1;34m[!] setup starting \033[0m $ac3\n"
 		
-		pkg install curl
-		pkg install git
-		pkg install python
-		pkg install zsh		
+		pkg install curl -y
+		pkg install git -y
+		pkg install python -y
+		pkg install zsh -y
 		
 		zshSetup
 
 		if [ "$ac2" = "yes" ]
 		then
-			pkg install cmatrix
-			pkg install espeak
-			pkg install neofetch
-			pkg install net-tools
-			pkg install nmap
-			pkg install openssh
-			pkg install tty-clock
+			pkg install cmatrix -y
+			pkg install espeak -y
+			pkg install neofetch -y
+			pkg install net-tools -y
+			pkg install nmap -y
+			pkg install openssh -y
+			pkg install tty-clock -y
 		fi
 		
 		if [ "$ac3" = "yes" ]

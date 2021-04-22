@@ -1,0 +1,9 @@
+dotfiles except directories . / ..
+.[^.]*
+
+# red led off /boot/config.txt
+dtparam=pwr_led_trigger=none
+dtparam=pwr_led_activelow=off
+
+# bell off /etc/inputrc ~/.inputrc
+set bell-style none

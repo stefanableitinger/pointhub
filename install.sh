@@ -105,7 +105,7 @@ debianSetup () {
 		includeSkipOrQuit
 		dc3=$choice
 
-		printf "\033[1;34m[?] setup font (anonymice-nf unzip wget)?\033[0m\n"
+		printf "\033[1;34m[?] setup font (spacemono-nf unzip wget)?\033[0m\n"
 		includeSkipOrQuit
 		dc4=$choice
 
@@ -177,8 +177,8 @@ debianSetup () {
 
 		if [ "$dc4" = "yes" ]
 		then
-			mkdir --parents ~/.local/share/fonts/anonymice-nf-mono 
-			curl --silent --output ~/.local/share/fonts/anonymice-nf-mono/font.ttf https://raw.githubusercontent.com/ryanoasis/nerd-fonts/master/patched-fonts/AnonymousPro/complete/Anonymice%20Nerd%20Font%20Complete%20Mono.ttf
+			mkdir --parents ~/.local/share/fonts/spacemono-nf 
+			curl --silent --output ~/.local/share/fonts/spacemono-nf/font.ttf https://github.com/ryanoasis/nerd-fonts/raw/master/patched-fonts/SpaceMono/Regular/complete/Space%20Mono%20Nerd%20Font%20Complete%20Mono.ttf
 			fc-cache -rf ~/.local/share/fonts/anonymice-nf-mono
 		fi
 		}
@@ -205,7 +205,7 @@ androidSetup () {
 		includeSkipOrQuit
 		dc2=$choice
 
-		printf "\033[1;34m[?] setup termux configuration and font (meslolgs-nf)?\033[0m\n"
+		printf "\033[1;34m[?] setup termux configuration and font (spacemono-nf)?\033[0m\n"
 		includeSkipOrQuit
 		dc3=$choice
 
@@ -235,7 +235,7 @@ androidSetup () {
 			curl --silent -O --output-dir ~/.termux https://raw.githubusercontent.com/stefanableitinger/pointhub/master/termux.properties
 
 			cp ~/.termux/font.ttf ~/.termux-font-backup.ttf
-			curl --silent --output ~/.termux/font.ttf https://raw.githubusercontent.com/ryanoasis/nerd-fonts/master/patched-fonts/AnonymousPro/complete/Anonymice%20Nerd%20Font%20Complete%20Mono.ttf
+			curl --silent --output ~/.termux/font.ttf https://github.com/ryanoasis/nerd-fonts/raw/master/patched-fonts/SpaceMono/Regular/complete/Space%20Mono%20Nerd%20Font%20Complete%20Mono.ttf
 
 			termux-reload-settings
 		fi

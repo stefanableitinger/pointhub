@@ -38,7 +38,7 @@ bindsym $mod+Shift+x exit
 exec --no-startup-id nm-applet
 
 # transparent
-exec --no-startup-id compton
+exec --no-startup-id picom --config /dev/null -i 0.4
 
 # mouse over activates window
 floating_modifier $mod
@@ -145,9 +145,9 @@ mode "resize" {
 bindsym $mod+r mode "resize"
 
 # status bar
-bar {
-         status_command while sh "/home/k/.config/i3/i3_status.sh"; do sleep 1; done
-}
+#bar {
+#         #status_command while sh "/home/k/.config/i3/i3_status.sh"; do sleep 1; done
+#}
 
 # keyboard layout
 exec --no-startup-id setxkbmap -layout de -option grp:alt_shift_toggle

@@ -97,7 +97,7 @@ debianSetup () {
 		includeSkipOrQuit
 		dc1=$choice
 
-		printf "\033[1;34m[?] setup packages for i3 windowmanager (compton feh i3-gaps mugshot rofi xfce4-terminal dotfiles)?\033[0m\n"
+		printf "\033[1;34m[?] setup packages for i3 windowmanager (feh i3-gaps mugshot picom rofi xfce4-terminal dotfiles)?\033[0m\n"
 		includeSkipOrQuit
 		dc2=$choice
 
@@ -141,7 +141,7 @@ debianSetup () {
 
 		if [ "$dc2" = "yes" ]
 		then
-			sudo apt install compton feh i3-gaps mugshot rofi xfce4-terminal -y
+			sudo apt install feh i3-gaps mugshot picom rofi xfce4-terminal -y
 
 			# avatar
 			mkdir --parents ~/Pictures

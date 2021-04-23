@@ -178,7 +178,7 @@ debianSetup () {
 		if [ "$dc4" = "yes" ]
 		then
 			mkdir --parents ~/.local/share/fonts/spacemono-nf 
-			curl --silent --output ~/.local/share/fonts/spacemono-nf/font.ttf https://github.com/ryanoasis/nerd-fonts/raw/master/patched-fonts/SpaceMono/Regular/complete/Space%20Mono%20Nerd%20Font%20Complete%20Mono.ttf
+			curl --silent --output ~/.local/share/fonts/spacemono-nf/Space%20Mono%20Nerd%20Font%20Complete%20Mono.ttf https://github.com/ryanoasis/nerd-fonts/raw/master/patched-fonts/SpaceMono/Regular/complete/Space%20Mono%20Nerd%20Font%20Complete%20Mono.ttf
 			fc-cache -rf ~/.local/share/fonts/spacemono-nf 
 		fi
 		}

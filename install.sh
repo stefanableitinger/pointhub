@@ -326,7 +326,7 @@ main () {
 				startServices;;
 		esac
 
-                if [ "$dc1" = "yes" ];
+                if [ "$dc1" = "yes" ] || [ ! "$SHELL" = "$(which zsh)" ];
                 then
 			printf "\033[1;34m[-] changing default shell to zsh\033[0m\n"
                         chsh -s $(which zsh) $(whoami)

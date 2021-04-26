@@ -20,13 +20,13 @@ bindsym $mod+shift+f exec firefox-esr
 #bindsym $mod+shift+f exec firejail --seccomp --nonewprivs --private-tmp firefox-esr
 
 # wallpaper
-exec --no-startup-id "feh --bg-fill ~/.local/share/backgrounds/fedora.png"
+exec --no-startup-id "feh --bg-fill HOMEDIR/.local/share/backgrounds/fedora.png"
 
 # lockscreen wallpaper
-bindsym $mod+l exec --no-startup-id "i3lock -i ~/.local/share/backgrounds/fedora-lockscreen.png -p default|win -f"
+bindsym $mod+l exec --no-startup-id "i3lock -i HOMEDIR/.local/share/backgrounds/fedora-lockscreen.png -p default|win -f"
 
 # menu
-bindsym $mod+a exec "rofi -show drun -modi drun,run -location 1 -width 100 -lines 17 -line-margin 0 -line-padding 1 -separator-style none -font 'roboto mono nerd font mono light 10' -columns 4 -bw 0 -theme solarized -icon-theme 'Papirus' -show-icons"
+bindsym $mod+a exec "rofi -show drun -modi drun,run -location 7 -width 20 -lines 40 -font 'Space Mono Nerd Font Complete Mono 11' -columns 1 -theme Arc-Dark dark -show-icons"
 
 # exit
 bindsym $mod+x exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -B 'Yes, exit i3' 'i3-msg exit'"
@@ -145,9 +145,9 @@ mode "resize" {
 bindsym $mod+r mode "resize"
 
 # status bar
-#bar {
-#         #status_command while sh "/home/k/.config/i3/i3_status.sh"; do sleep 1; done
-#}
+bar {
+         status_command while sh HOMEDIR/.config/i3/i3_status.sh"; do sleep 1; done
+}
 
 # keyboard layout
 exec --no-startup-id setxkbmap -layout de -option grp:alt_shift_toggle

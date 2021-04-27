@@ -8,7 +8,7 @@ welcome () {
 	printf "\033[1;34m / __|/ _ \ __| | | | |_ \  \ \ /\ / / |_  / _| | |__/ _| | \033[m\n"
 	printf "\033[1;34m \__ \  __/ |_| |_| | |_) |  \ V  V /| |/ / (_| | | | (_| | \033[m\n"
 	printf "\033[1;34m |___/\___|\__|\__|_| |__/    \_/\_/ |_/___\__|_|_|  \__|_| \033[m\n"
-	printf "\033[1;34mby stefanableitinger|_|++                                   \033[m\n"
+	printf "\033[1;34mby stefanableitinger|_|                                     \033[m\n"
 	printf "\n"
 	}
 
@@ -18,7 +18,8 @@ complete() {
 	printf "\033[1;34m / __|/ _ \ __| | | | |_ \   / _| |/ _ \| |_ \ / _ \ | | \033[m\n"
 	printf "\033[1;34m \__ \  __/ |_| |_| | |_) | | (_| | (_) | | | |  __/ |_| \033[m\n"
 	printf "\033[1;34m |___/\___|\__|\__,_| |__/   \__,_|\___/|_| |_|\___| (_) \033[m\n"
-	printf "\033[1;34mhave a nice day!    |_|                                  \033[m\n"
+	printf "\033[1;34mplease type zsh and |_|                                  \033[m\n"
+	printf "\033[1;34mhave a nice day!                                         \033[m\n"
 	printf "\033[1;34mbye                                                      \033[m\n"
 	}
 
@@ -29,50 +30,14 @@ readOne () {
         stty "$oldstty"
         }
 
-zshSetup () {
-		if [ ! -e ~/.oh-my-zsh ];
-		then
-			printf "\033[1;34m[-] installing ohmyzsh\033[0m\n"
-			cd ~
-			sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh 2>/dev/null)" "" --unattended
-			printf "\033[1;34m[-] installing ohmyzsh: complete\033[0m\n"
+test () {	
+		if [ ! -e ~/.zshrc ]
+		then	
+			echo "exists"
+		else 
+			echo "does not exist"
 		fi
-
-		if [ ! -e ~/.oh-my-zsh/custom/themes/powerlevel10k ];
-		then
-			printf "\033[1;34m[-] installing plugin,powerlevel10k\033[0m\n"
-			git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ~/.oh-my-zsh/custom/themes/powerlevel10k
-			printf "\033[1;34m[-] installing plugin,powerlevel10k: complete\033[0m\n"
-		fi
-
-		if [ ! -e ~/.oh-my-zsh/custom/plugins/zsh-autosuggestions ];
-		then
-			printf "\033[1;34m[-] installing plugin,zsh-autosuggestions\033[0m\n"
-			git clone https://github.com/zsh-users/zsh-autosuggestions ~/.oh-my-zsh/custom/plugins/zsh-autosuggestions
-			printf "\033[1;34m[-] installing plugin,zsh-autosuggestions: complete\033[0m\n"
-		fi
-
-		if [ ! -e ~/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting ];
-		then
-			printf "\033[1;34m[-] installing plugin,zsh-syntax-highlighting\033[0m\n"
-			git clone https://github.com/zsh-users/zsh-syntax-highlighting ~/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting
-			printf "\033[1;34m[-] installing plugin,zsh-syntax-highlighting: complete\033[0m\n"
-		fi
-
-		if [ ! -e ~/.oh-my-zsh/custom/plugins/autojump ];
-		then
-			printf "\033[1;34m[-] installing plugin,autojump\033[0m\n"
-			git clone git://github.com/wting/autojump.git ~/.oh-my-zsh/custom/plugins/autojump
-			cd ~/.oh-my-zsh/custom/plugins/autojump/
-			python install.py
-			printf "\033[1;34m[-] installing plugin,autojump: complete\033[0m\n"
-		fi
-
-		printf "\033[1;34m[-] downloading config files\033[0m\n"
-		curl --silent --output ~/.zshrc https://raw.githubusercontent.com/stefanableitinger/pointhub/master/.zshrc
-		curl --silent --output ~/.p10k.zsh https://raw.githubusercontent.com/stefanableitinger/pointhub/master/.p10k.zsh
-		printf "\033[1;34m[-] downloading config files: complete\033[0m\n"
-		}
+	}
 
 continueOrQuit () {
 		printf "\033[1;34m[?]\033[0m press [\033[1;34mc\033[m] to continue or [\033[1;34mq\033[m] to quit.\n"
@@ -91,13 +56,16 @@ continueOrQuit () {
 		}
 
 includeSkipOrQuit () {
-	printf "\033[1;34m[-]\033[0m press [\033[1;34my\033[m] to include [\033[1;34mn\033[m] to skip or [\033[1;34mq\033[m] to quit\n"
+	printf "\033[1;34m[-]\033[0m press [\033[1;34my\033[m] to install [\033[1;34mf\033[m] to overwrite [\033[1;34mn\033[m] to skip or [\033[1;34mq\033[m] to quit\n"
 
 	while true; do
 		readOne
 		case $result in
 			[yY]* )
-				choice="yes"
+				choice="install"
+				break;;
+			[fF]* )
+				choice="overwrite"
 				break;;
 			[nN]* )
 				choice="no"
@@ -110,6 +78,166 @@ includeSkipOrQuit () {
 		esac
 	done
 	}
+	
+overwriteOrSkip () {
+	printf "\033[1;34m[?]\033[0m press [\033[1;34mo\033[m] to overwrite [\033[1;34mn\033[m] to skip or [\033[1;34mq\033[m] to quit\n"
+
+	while true; do
+		readOne
+		case $result in
+			[nN]* )
+				choice="no"
+				printf "\033[1;31m[ ] skipping\033[0m\n"
+				break;;
+			[oO]* )
+				choice="overwrite"
+				break;;
+			[qQ]* )
+				printf "bye\n"
+				exit;;
+			* )
+				;;
+		esac
+	done	
+	}
+	
+zshSetup () {
+		# github repositories
+		printf "\033[1;34m[ ] setup oh-my-zsh\033[0m\n"		
+		
+		if [ -d ~/.oh-my-zsh/ ] && [ $dc1 != "overwrite" ];
+		then
+			printf "\033[1;31m[!] oh-my-zsh already exists\033[0m\n"
+			overwriteOrSkip
+		fi
+			
+		if [ ! -d ~/.oh-my-zsh/ ] || [ $dc1 = "overwrite" ] || [ $choice = "overwrite" ];
+		then
+			printf "\033[1;34m[ ] downloading oh-my-zsh\033[0m\n"
+			
+			cd ~
+			sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh 2>/dev/null)" "" --unattended
+
+			printf "\033[1;34m[ ] downloading oh-my-zsh: complete\033[0m\n"
+		fi
+
+		choice=""
+		
+		printf "\033[1;34m[ ] setup plugin (1/4) powerlevel10k\033[0m\n"		
+
+		if [ -d ~/.oh-my-zsh/custom/themes/powerlevel10k/ ] && [ $dc1 != "overwrite" ];
+		then
+			printf "\033[1;31m[!] plugin (1/4) powerlevel10k already exists\033[0m\n"
+			overwriteOrSkip
+		fi
+			
+		if [ ! -d ~/.oh-my-zsh/custom/themes/powerlevel10k/ ] || [ $dc1 = "overwrite" ] || [ $choice = "overwrite" ];
+		then
+			printf "\033[1;34m[ ] downloading plugin (1/4) powerlevel10k\033[0m\n"
+			
+			git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ~/.oh-my-zsh/custom/themes/powerlevel10k
+			
+			printf "\033[1;34m[ ] downloading plugin (1/4) powerlevel10k: complete\033[0m\n"
+		fi
+		
+		choice=""
+
+		printf "\033[1;34m[ ] setup plugin (2/4) zsh-autosuggestions\033[0m\n"		
+
+		if [ -d ~/.oh-my-zsh/custom/plugins/zsh-autosuggestions/ ] && [ $dc1 != "overwrite" ];
+		then
+			printf "\033[1;31m[!] plugin (2/4) zsh-autosuggestions already exists\033[0m\n"
+			overwriteOrSkip
+		fi
+			
+		if [ ! -d ~/.oh-my-zsh/custom/plugins/zsh-autosuggestions/ ] || [ $dc1 = "overwrite" ] || [ $choice = "overwrite" ];
+		then
+			printf "\033[1;34m[ ] downloading plugin (2/4) zsh-autosuggestions\033[0m\n"
+			
+			git clone https://github.com/zsh-users/zsh-autosuggestions ~/.oh-my-zsh/custom/plugins/zsh-autosuggestions
+			
+			printf "\033[1;34m[ ] downloading plugin (2/4) zsh-autosuggestions: complete\033[0m\n"
+		fi
+
+		choice=""
+
+		printf "\033[1;34m[ ] setup plugin (3/4) zsh-syntax-highlighting\033[0m\n"		
+
+		if [ -d ~/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting/ ] && [ $dc1 != "overwrite" ];
+		then
+			printf "\033[1;31m[!] plugin (3/4) zsh-syntax-highlighting already exists\033[0m\n"
+			overwriteOrSkip
+		fi
+			
+		if [ ! -d ~/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting/ ] || [ $dc1 = "overwrite" ] || [ $choice = "overwrite" ];
+		then
+			printf "\033[1;34m[ ] downloading plugin (3/4) zsh-syntax-highlighting\033[0m\n"
+			
+			git clone https://github.com/zsh-users/zsh-syntax-highlighting ~/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting
+			
+			printf "\033[1;34m[ ] downloading plugin (3/4) zsh-syntax-highlighting: complete\033[0m\n"
+		fi
+
+		choice=""
+
+		printf "\033[1;34m[ ] setup plugin (4/4) autojump\033[0m\n"		
+
+		if [ -d ~/.oh-my-zsh/custom/plugins/autojump/ ] && [ $dc1 != "overwrite" ];
+		then
+			printf "\033[1;31m[!] plugin (4/4) autojump already exists\033[0m\n"
+			overwriteOrSkip
+		fi
+			
+		if [ ! -d ~/.oh-my-zsh/custom/plugins/autojump/ ] || [ $dc1 = "overwrite" ] || [ $choice = "overwrite" ];
+		then
+			printf "\033[1;34m[ ] downloading plugin (4/4) autojump\033[0m\n"
+			
+			git clone git://github.com/wting/autojump.git ~/.oh-my-zsh/custom/plugins/autojump
+			cd ~/.oh-my-zsh/custom/plugins/autojump/
+			python install.py
+			
+			printf "\033[1;34m[ ] downloading plugin (4/4) autojump: complete\033[0m\n"
+		fi
+
+		choice=""
+
+		printf "\033[1;34m[ ] setup config files\033[0m\n"		
+		
+		# config files
+		if [ -e ~/.zshrc ] && [ $dc1 != "overwrite" ];
+		then
+			printf "\033[1;31m[!] config file (1/2) .zshrc already exists\033[0m\n"
+			overwriteOrSkip
+		fi
+			
+		if [ ! -e ~/.zshrc ] || [ $dc1 = "overwrite" ] || [ $choice = "overwrite" ];
+		then
+			printf "\033[1;34m[ ] downloading config file (1/2) .zshrc\033[0m\n"
+			
+			curl --silent --output ~/.zshrc https://raw.githubusercontent.com/stefanableitinger/pointhub/master/.zshrc		
+
+			printf "\033[1;34m[ ] downloading config file (1/2) .zshrc: complete\033[0m\n"
+		fi
+
+		choice=""
+
+		if [ -e ~/.p10k.zsh ] && [ $dc1 != "overwrite" ];
+		then
+			printf "\033[1;31m[!] config file (2/2) .p10k.zsh already exists\033[0m\n"
+			overwriteOrSkip
+		fi
+			
+		if [ ! -e ~/.p10k.zsh ] || [ $dc1 = "overwrite" ] || [ $choice = "overwrite" ];
+		then
+			printf "\033[1;34m[ ] downloading config file (2/2) .p10k.zsh\033[0m\n"
+			
+			curl --silent --output ~/.p10k.zsh https://raw.githubusercontent.com/stefanableitinger/pointhub/master/.p10k.zsh
+			
+			printf "\033[1;34m[ ] downloading config file (2/2) .p10k.zsh: complete\033[0m\n"
+		fi
+
+		choice=""
+		}
 
 debianSetup () {
 		printf "\033[1;34m[?] setup oh-my-zsh with p10k (curl git python zsh dotfiles)?\033[0m\n"
@@ -124,115 +252,213 @@ debianSetup () {
 		includeSkipOrQuit
 		dc3=$choice
 
-		printf "\033[1;34m[?] setup font (spacemono-nf unzip wget)?\033[0m\n"
+		printf "\033[1;34m[?] get font (spacemono-nf)?\033[0m\n"
 		includeSkipOrQuit
 		dc4=$choice
 
 		# check privileges
 		if [ $(id -u) -ne 0 ];
 		then
-			printf "\033[1;34m[?] root privileges required for setup\033[0m \n"
-			sudo printf "" 2>/dev/null
-
-			if [ "$?" = "1" ];
+			if [ $dc1 != "no" ] || [ $dc2 != "no" ] || [ $dc3 != "no" ];
 			then
-				dcr="\033[1;31mno\033[0m"
-			else
-				dcr="yes"
+				printf "\033[1;34m[!] using root privileges for setup\033[0m\n"
+				sudo printf "" 2>/dev/null
+
+				if [ "$?" = "1" ];
+				then
+					printf "\033[1;31m[!] root privileges were not granted\033[0m\n"			
+					printf "bye\n"
+					exit		
+				fi
 			fi
 		fi
 
-		printf "\033[1;34m[!] root privileges granted: \033[0m $dcr\n"
 		printf "\033[1;34m[!] setup oh-my-zsh with p10k: \033[0m $dc1\n"
 		printf "\033[1;34m[!] setup i3-gaps with rofi: \033[0m $dc2\n"
 		printf "\033[1;34m[!] setup additional packages: \033[0m $dc3\n"
-		printf "\033[1;34m[!] setup font: \033[0m $dc4\n"
+		printf "\033[1;34m[!] get font: \033[0m $dc4\n"
 
 		continueOrQuit
 		printf "\033[1;34m[!] setup starting \033[0m $ac3\n"
 
-		if [ "$dc1" = "yes" ];
+		if [ $dc1 != "no" ];
 		then
 			printf "\033[1;34m[-] setup oh-my-zsh with p10k\033[0m\n"
+			
+			# packages
+			printf "\033[1;34m[ ] installing packages\033[0m\n"
 			sudo apt install curl git python zsh -y
-
+			printf "\033[1;34m[ ] installing packages: complete\033[0m\n"
+			
+			# zshSetup
+			if [ $dc1 = "overwrite" ];
+			then
+				rm ~/.oh-my-zsh -rf
+				unset ZSH
+			fi
+			
 			zshSetup
+			
 			printf "\033[1;34m[-] setup oh-my-zsh with p10k: complete\033[0m\n"
 		fi
 
-		if [ "$dc2" = "yes" ];
+		if [ $dc2 != "no" ];
 		then
 			printf "\033[1;34m[-] setup i3-gaps with rofi\033[0m\n"
+			
+			# packages
+			printf "\033[1;34m[ ] installing packages\033[0m\n"
 			sudo apt install feh i3-gaps mugshot picom rofi xfce4-terminal -y
+			printf "\033[1;34m[ ] installing packages: complete\033[0m\n"
+			
+			# config files
+			if [ ! -d ~/.config/i3/ ] || [ ! -e ~/.config/i3/config ] || [ ! -e ~/.config/i3/i3_status.sh ] || [ $dc2 = "overwrite" ];
+			then
+				printf "\033[1;34m[ ] downloading config files\033[0m\n"
+				
+				mkdir --parents ~/.config/i3
+								
+				if [ ! -e ~/.config/i3/config ] || [ $dc2 = "overwrite" ];
+				then
+					curl --silent --output ~/.config/i3/config https://raw.githubusercontent.com/stefanableitinger/pointhub/master/i3_config
+					sed -i "s,HOMEDIR,$HOME," ~/.config/i3/config
+				fi
 
-			printf "\033[1;34m[-] downloading config files, wallpapers\033[0m\n"
-			mkdir --parents ~/.config/i3
-			curl --silent --output ~/.config/i3/config https://raw.githubusercontent.com/stefanableitinger/pointhub/master/i3_config
-			sed -i "s,HOMEDIR,$HOME," ~/.config/i3/config
-			curl --silent --output ~/.config/i3/i3_status.sh https://raw.githubusercontent.com/stefanableitinger/pointhub/master/i3_status.sh
+				if [ ! -e ~/.config/i3/i3_status.sh ] || [ $dc2 = "overwrite" ];
+				then
+					curl --silent --output ~/.config/i3/i3_status.sh https://raw.githubusercontent.com/stefanableitinger/pointhub/master/i3_status.sh
+				fi
+				
+				printf "\033[1;34m[ ] downloading config files: complete\033[0m\n"
+			fi
+			
+			# wallpapers
+			if [ ! -d ~/.local/share/backgrounds/ ] || [ ! -d ~/Pictures/ ] || [ ! -e ~/Pictures/k.png ] || [ ! -e ~/.local/share/backgrounds/innere-stadt.png ] || [ ! -e ~/.local/share/backgrounds/innere-stadt-lockscreen.png ] || [ ! -e ~/.local/share/backgrounds/fedora.png ] || [ ! -e ~/.local/share/backgrounds/fedora-lockscreen.png ] || [ ! -e ~/.local/share/backgrounds/ubuntu.png ] || [ ! -e ~/.local/share/backgrounds/ubuntu-lockscreen.png ] || [ $dc2 = "overwrite" ];
+			then
+				printf "\033[1;34m[ ] downloading wallpapers\033[0m\n"
 
-			mkdir --parents ~/Pictures
-			curl --silent --output ~/Pictures/k.png https://avatars.githubusercontent.com/u/56166006
+				mkdir --parents ~/Pictures
+				
+				if [ ! -e ~/Pictures/k.png ] || [ $dc2 = "overwrite" ];
+				then
+					curl --silent --output ~/Pictures/k.png https://avatars.githubusercontent.com/u/56166006
+				fi
 
-			mkdir --parents ~/.local/share/backgrounds
-			curl --silent --output-dir ~/.local/share/backgrounds https://raw.githubusercontent.com/stefanableitinger/pointhub/master/innere-stadt.png
-			curl --silent --output-dir ~/.local/share/backgrounds https://raw.githubusercontent.com/stefanableitinger/pointhub/master/innere-stadt-lockscreen.png
+				mkdir --parents ~/.local/share/backgrounds
+				
+				if [ ! -e ~/.local/share/backgrounds/innere-stadt.png ] || [ $dc2 = "overwrite" ];
+				then
+					curl --silent --output-dir ~/.local/share/backgrounds https://raw.githubusercontent.com/stefanableitinger/pointhub/master/innere-stadt.png					
+				fi
 
-			curl --silent --output ~/.local/share/backgrounds https://raw.githubusercontent.com/stefanableitinger/pointhub/master/fedora.png
-			curl --silent --output ~/.local/share/backgrounds https://raw.githubusercontent.com/stefanableitinger/pointhub/master/fedora-lockscreen.png
+				if [ ! -e ~/.local/share/backgrounds/innere-stadt-lockscreen.png ] || [ $dc2 = "overwrite" ];
+				then
+					curl --silent --output-dir ~/.local/share/backgrounds https://raw.githubusercontent.com/stefanableitinger/pointhub/master/innere-stadt-lockscreen.png					
+				fi
 
-			curl --silent --output ~/.local/share/backgrounds https://raw.githubusercontent.com/stefanableitinger/pointhub/master/ubuntu.png
-			curl --silent --output ~/.local/share/backgrounds https://raw.githubusercontent.com/stefanableitinger/pointhub/master/ubuntu-lockscreen.png
-			printf "\033[1;34m[-] downloading config files, wallpapers: complete\033[0m\n"
-			printf "\033[1;34m[-] setup i3-gaps with rofi: complete \033[0m\n"
+				if [ ! -e ~/.local/share/backgrounds/fedora.png ] || [ $dc2 = "overwrite" ];
+				then
+					curl --silent --output ~/.local/share/backgrounds https://raw.githubusercontent.com/stefanableitinger/pointhub/master/fedora.png	
+				fi
+
+				if [ ! -e ~/.local/share/backgrounds/fedora-lockscreen.png ] || [ $dc2 = "overwrite" ];
+				then
+					curl --silent --output ~/.local/share/backgrounds https://raw.githubusercontent.com/stefanableitinger/pointhub/master/fedora-lockscreen.png					
+				fi
+
+				if [ ! -e ~/.local/share/backgrounds/ubuntu.png ] || [ $dc2 = "overwrite" ];
+				then
+					curl --silent --output ~/.local/share/backgrounds https://raw.githubusercontent.com/stefanableitinger/pointhub/master/ubuntu.png					
+				fi
+
+				if [ ! -e ~/.local/share/backgrounds/ubuntu-lockscreen.png ] || [ $dc2 = "overwrite" ];
+				then
+					curl --silent --output ~/.local/share/backgrounds https://raw.githubusercontent.com/stefanableitinger/pointhub/master/ubuntu-lockscreen.png
+				fi
+
+				printf "\033[1;34m[ ] downloading wallpapers: complete\033[0m\n"
+			fi
+			
+			printf "\033[1;34m[-] setup i3-gaps with rofi: complete\033[0m\n"
 		fi
 
-		if [ "$dc3" = "yes" ];
+		if [ $dc3 != "no" ];
 		then
 			printf "\033[1;34m[-] setup additional packages\033[0m\n"
+			
+			# packages
+			printf "\033[1;34m[ ] installing packages\033[0m\n"			
 			sudo apt install asciiart cmatrix endlessh firejail fail2ban neofetch net-tools nmap openfortivpn remmina samba tty-clock -y
+			printf "\033[1;34m[ ] installing packages: complete\033[0m\n"			
+			
+			# config files
+			if [ ! -d /etc/samba/ ] || [ ! -e /etc/samba/smb.conf ] || [ $dc3 = "overwrite" ];
+			then
+				printf "\033[1;34m[ ] downloading config files\033[0m\n"
+				
+				sudo mkdir --parents /etc/samba
+				
+				if [ ! -e /etc/samba/smb.conf ] || [ $dc3 = "overwrite" ];
+				then
+					sudo curl --silent -O --output-dir /etc/samba/ https://raw.githubusercontent.com/stefanableitinger/pointhub/master/smb.conf
+				fi				
 
-			sudo mkdir --parents /etc/samba
-			sudo curl --silent -O --output-dir /etc/samba/ https://raw.githubusercontent.com/stefanableitinger/pointhub/master/smb.conf
+				sudo mkdir --parents /etc/endlessh
+				
+				if [ ! -e /etc/endlessh/config ] || [ $dc3 = "overwrite" ];
+				then
+					sudo curl --silent --output /etc/endlessh/config https://raw.githubusercontent.com/stefanableitinger/pointhub/master/endlessh_config
+				fi				
+				
+				printf "\033[1;34m[ ] downloading config files: complete\033[0m\n"
+			fi
 
-			sudo mkdir -p /etc/endlessh
-			sudo curl --silent --output /etc/endlessh/config https://raw.githubusercontent.com/stefanableitinger/pointhub/master/endlessh_config
 			printf "\033[1;34m[-] setup additional packages: complete\033[0m\n"
 		fi
 
-		if [ "$dc4" = "yes" ];
+		if [ $dc4 != "no" ] || [ $dc4 = "overwrite" ];
 		then
-			printf "\033[1;34m[-] setup font\033[0m\n"
-			mkdir --parents ~/.local/share/fonts/spacemono-nf
-			curl --silent --output '~/.local/share/fonts/spacemono-nf/Space Mono Nerd Font Complete Mono.ttf' https://raw.githubusercontent.com/ryanoasis/nerd-fonts/master/patched-fonts/SpaceMono/Regular/complete/Space%20Mono%20Nerd%20Font%20Complete%20Mono.ttf
-			fc-cache -rf ~/.local/share/fonts/spacemono-nf
-			printf "\033[1;34m[-] setup font: complete\033[0m\n"
-
+			# font
+			if [ ! -d ~/.local/share/fonts/spacemono-nf/ ] || [ ! -e ~/.local/share/fonts/spacemono-nf/Space\ Mono\ Nerd\ Font\ Complete\ Mono.ttf ] || [ $dc4 = "overwrite" ];
+			then
+				printf "\033[1;34m[-] get font\033[0m\n"
+			
+				mkdir --parents ~/.local/share/fonts/spacemono-nf
+				
+				if [ ! -e ~/.local/share/fonts/spacemono-nf/Space\ Mono\ Nerd\ Font\ Complete\ Mono.ttf || $dc4 = "overwrite" ];
+				then
+					curl --silent --output ~/.local/share/fonts/spacemono-nf/Space\ Mono\ Nerd\ Font\ Complete\ Mono.ttf https://raw.githubusercontent.com/ryanoasis/nerd-fonts/master/patched-fonts/SpaceMono/Regular/complete/Space%20Mono%20Nerd%20Font%20Complete%20Mono.ttf
+				fi
+				
+				fc-cache -rf ~/.local/share/fonts/spacemono-nf
+				
+				printf "\033[1;34m[-] get font: complete\033[0m\n"
+			fi
 		fi
 		}
 
 checkStartService () {
 	if [ $(systemctl is-enabled $1.service) = "disabled" ];
 	then
-		printf "\033[1;34m[-] enabling $1.service \033[0m\n"
+		printf "\033[1;34m[ ] enabling $1.service \033[0m\n"
 		sudo systemctl enable $1.service
 	fi
 
 	if [ $(systemctl is-active $1.service) = "inactive" ];
 	then
-		printf "\033[1;34m[-] starting $1.service \033[0m\n"
+		printf "\033[1;34m[ ] starting $1.service \033[0m\n"
 		sudo systemctl start $1.service
 	fi
 	}
 
 startServices () {
-		if [ "$dc3" = "yes" ];
+		if [ $dc3 != "no" ];
 		then
-			printf "\033[1;34m[-] setup additional packages,services\033[0m\n"
+			printf "\033[1;34m[ ] setup additional packages services\033[0m\n"
 			checkStartService smbd
 			checkStartService endlessh
 			checkStartService fail2ban
-			printf "\033[1;34m[-] setup additional packages,services: complete\033[0m\n"
+			printf "\033[1;34m[ ] setup additional packages services: complete\033[0m\n"
 		fi
 	}
 
@@ -254,35 +480,60 @@ androidSetup () {
 		printf "\033[1;34m[!] setup termux configuration and font: \033[0m $dc3\n"
 
 		continueOrQuit
+		
 		printf "\033[1;34m[!] setup starting \033[0m $ac3\n"
 
-		if [ "$dc1" = "yes" ];
+		if [ $dc1 != "no" ];
 		then
-			printf "\033[1;34m[!] setup oh-my-zsh with p10k\033[0m\n"
+			printf "\033[1;34m[-] setup oh-my-zsh with p10k\033[0m\n"
+			
+			# packages
+			printf "\033[1;34m[ ] installing packages\033[0m\n"
 			pkg install curl git python zsh -y
-
+			printf "\033[1;34m[ ] installing packages: complete\033[0m\n"
+			
 			zshSetup
-			printf "\033[1;34m[!] setup oh-my-zsh with p10k: complete\033[0m\n"
+			
+			printf "\033[1;34m[-] setup oh-my-zsh with p10k: complete\033[0m\n"
 		fi
 
-		if [ "$dc2" = "yes" ];
+		if [ $dc2 != "no" ];
 		then
 			printf "\033[1;34m[-] setup additional packages\033[0m\n"
+
+			# packages
+			printf "\033[1;34m[ ] installing packages\033[0m\n"			
 			pkg install cmatrix espeak neofetch net-tools nmap openssh tty-clock -y
+			printf "\033[1;34m[ ] installing packages: complete\033[0m\n"
 
 			sshd
+			
 			printf "\033[1;34m[-] setup additional packages: complete\033[0m\n"
 		fi
 
-		if [ "$dc3" = "yes" ];
+		if [ $dc3 != "no" ];
 		then
 			printf "\033[1;34m[-] setup termux configuration and font\033[0m $dc3\n"
-			curl --silent -output ~/.termux/termux.properties https://raw.githubusercontent.com/stefanableitinger/pointhub/master/termux.properties
+			
+			if [ ! -e ~/.termux/termux.properties/termux.properties || ! -e ~/.termux/font.ttf || $dc3 = "overwrite" ];
+			then				
+				printf "\033[1;34m[ ] downloading config files\033[0m\n"
+				
+				if [ ! -e ~/.termux/termux.properties/termux.properties || $dc3 = "overwrite" ];
+				then
+					curl --silent -output ~/.termux/termux.properties https://raw.githubusercontent.com/stefanableitinger/pointhub/master/termux.properties
+				fi
 
-			cp ~/.termux/font.ttf ~/.termux-font-backup.ttf
-			curl --silent --output ~/.termux/font.ttf https://raw.githubusercontent.com/ryanoasis/nerd-fonts/master/patched-fonts/AnonymousPro/complete/Anonymice%20Nerd%20Font%20Complete%20Mono.ttf
+				if [ ! -e ~/.termux/font.ttf || $dc3 = "overwrite" ];
+				then
+					curl --silent --output ~/.termux/font.ttf https://raw.githubusercontent.com/ryanoasis/nerd-fonts/master/patched-fonts/AnonymousPro/complete/Anonymice%20Nerd%20Font%20Complete%20Mono.ttf
+				fi
 
-			termux-reload-settings
+				termux-reload-settings
+				
+				printf "\033[1;34m[ ] downloading config files: complete\033[0m\n"
+			fi
+			
 			printf "\033[1;34m[-] setup termux configuration and font: complete\033[0m $dc3\n"
 		fi
 		}
@@ -295,7 +546,7 @@ main () {
 		printf "\033[1;34m android os detected\033[m\n"
 		continueOrQuit
 		androidSetup
-		if [ "$dc1" = "yes" ];
+		if [ $dc1 = "yes" ];
 		then
 			chsh -s zsh
 		fi
@@ -326,9 +577,9 @@ main () {
 				startServices;;
 		esac
 
-                if [ "$dc1" = "yes" ] || [ ! "$SHELL" = "$(which zsh)" ];
+                if [ $dc1 = "yes" ] || [ ! "$SHELL" = "$(which zsh)" ];
                 then
-			printf "\033[1;34m[-] changing default shell to zsh\033[0m\n"
+			printf "\033[1;34m[-] changing default shell to zsh for user \033[0m$(whoami)\n"
                         chsh -s $(which zsh) $(whoami)
 			printf "\033[1;34m[-] changing default shell to zsh: complete\033[0m\n"
                 fi
@@ -338,3 +589,4 @@ main () {
 	}
 
 main
+#test

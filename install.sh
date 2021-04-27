@@ -30,11 +30,11 @@ readOne () {
         stty "$oldstty"
         }
 
-testit () {	
+testit () {
 		if [ ! -e ~/.zshrc ]
-		then	
+		then
 			echo "exists"
-		else 
+		else
 			echo "does not exist"
 		fi
 	}
@@ -78,7 +78,7 @@ includeSkipOrQuit () {
 		esac
 	done
 	}
-	
+
 overwriteOrSkip () {
 	printf "\033[1;34m[?]\033[0m press [\033[1;34mo\033[m] to overwrite [\033[1;34mn\033[m] to skip or [\033[1;34mq\033[m] to quit\n"
 
@@ -98,33 +98,33 @@ overwriteOrSkip () {
 			* )
 				;;
 		esac
-	done	
+	done
 	}
-	
+
 zshSetup () {
 		# github repositories
 		# https://github.com/ohmyzsh/ohmyzsh
 		printf "\033[1;34m[1.2] setup oh-my-zsh\033[0m\n"		
-		
+
 		if [ -d ~/.oh-my-zsh/ ] && [ $dc1 != "overwrite" ];
 		then
 			printf "\033[1;31m[1.2] oh-my-zsh already exists\033[0m\n"
 			overwriteOrSkip
 		fi
-			
+
 		if [ ! -d ~/.oh-my-zsh/ ] || [ $dc1 = "overwrite" ] || [ $choice = "overwrite" ];
 		then
-			printf "\033[1;34m[1.2] downloading oh-my-zsh\033[0m\n"
+			printf "\033[1;34m[1.2] download oh-my-zsh\033[0m\n"
 
 			rm ~/.oh-my-zsh -rf
 			unset ZSH
 			cd ~
 			sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh 2>/dev/null)" "" --unattended
 
-			printf "\033[1;34m[1.2] downloading oh-my-zsh: complete\033[0m\n"
+			printf "\033[1;34m[1.2] download oh-my-zsh: complete\033[0m\n"
 		fi
 		choice=""
-		
+
 		# https://github.com/romkatv/powerlevel10k
 		printf "\033[1;34m[1.3] setup plugin (1/3) powerlevel10k\033[0m\n"		
 
@@ -133,17 +133,17 @@ zshSetup () {
 			printf "\033[1;31m[1.3] plugin (1/3) powerlevel10k already exists\033[0m\n"
 			overwriteOrSkip
 		fi
-			
+
 		if [ ! -d ~/.oh-my-zsh/custom/themes/powerlevel10k/ ] || [ $dc1 = "overwrite" ] || [ $choice = "overwrite" ];
 		then
-			printf "\033[1;34m[1.3] downloading plugin (1/3) powerlevel10k\033[0m\n"
-			
+			printf "\033[1;34m[1.3] download plugin (1/3) powerlevel10k\033[0m\n"
+
 			git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ~/.oh-my-zsh/custom/themes/powerlevel10k
-			
-			printf "\033[1;34m[1.3] downloading plugin (1/3) powerlevel10k: complete\033[0m\n"
+
+			printf "\033[1;34m[1.3] download plugin (1/3) powerlevel10k: complete\033[0m\n"
 		fi
 		choice=""
-		
+
 		# https://github.com/zsh-users/zsh-autosuggestions
 		printf "\033[1;34m[1.4] setup plugin (2/3) zsh-autosuggestions\033[0m\n"		
 
@@ -152,17 +152,17 @@ zshSetup () {
 			printf "\033[1;31m[1.4] plugin (2/3) zsh-autosuggestions already exists\033[0m\n"
 			overwriteOrSkip
 		fi
-			
+
 		if [ ! -d ~/.oh-my-zsh/custom/plugins/zsh-autosuggestions/ ] || [ $dc1 = "overwrite" ] || [ $choice = "overwrite" ];
 		then
-			printf "\033[1;34m[1.4] downloading plugin (2/3) zsh-autosuggestions\033[0m\n"
-			
+			printf "\033[1;34m[1.4] download plugin (2/3) zsh-autosuggestions\033[0m\n"
+
 			git clone https://github.com/zsh-users/zsh-autosuggestions ~/.oh-my-zsh/custom/plugins/zsh-autosuggestions
-			
-			printf "\033[1;34m[1.4] downloading plugin (2/3) zsh-autosuggestions: complete\033[0m\n"
+
+			printf "\033[1;34m[1.4] download plugin (2/3) zsh-autosuggestions: complete\033[0m\n"
 		fi
 		choice=""
-		
+
 		# https://github.com/zsh-users/zsh-syntax-highlighting
 		printf "\033[1;34m[1.5] setup plugin (3/3) zsh-syntax-highlighting\033[0m\n"		
 
@@ -171,33 +171,33 @@ zshSetup () {
 			printf "\033[1;31m[1.5] plugin (3/3) zsh-syntax-highlighting already exists\033[0m\n"
 			overwriteOrSkip
 		fi
-			
+
 		if [ ! -d ~/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting/ ] || [ $dc1 = "overwrite" ] || [ $choice = "overwrite" ];
 		then
-			printf "\033[1;34m[1.5] downloading plugin (3/3) zsh-syntax-highlighting\033[0m\n"
-			
+			printf "\033[1;34m[1.5] download plugin (3/3) zsh-syntax-highlighting\033[0m\n"
+
 			git clone https://github.com/zsh-users/zsh-syntax-highlighting ~/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting
-			
-			printf "\033[1;34m[1.5] downloading plugin (3/3) zsh-syntax-highlighting: complete\033[0m\n"
+
+			printf "\033[1;34m[1.5] download plugin (3/3) zsh-syntax-highlighting: complete\033[0m\n"
 		fi
 		choice=""
-		
+
 		# config files
 		printf "\033[1;34m[1.6] setup config files\033[0m\n"		
-		
+
 		if [ -e ~/.zshrc ] && [ $dc1 != "overwrite" ];
 		then
 			printf "\033[1;31m[1.6] config file (1/2) .zshrc already exists\033[0m\n"
 			overwriteOrSkip
 		fi
-			
+
 		if [ ! -e ~/.zshrc ] || [ $dc1 = "overwrite" ] || [ $choice = "overwrite" ];
 		then
-			printf "\033[1;34m[1.6] downloading config file (1/2) .zshrc\033[0m\n"
-			
+			printf "\033[1;34m[1.6] download config file (1/2) .zshrc\033[0m\n"
+
 			curl --silent --output ~/.zshrc https://raw.githubusercontent.com/stefanableitinger/pointhub/master/.zshrc		
 
-			printf "\033[1;34m[1.6] downloading config file (1/2) .zshrc: complete\033[0m\n"
+			printf "\033[1;34m[1.6] download config file (1/2) .zshrc: complete\033[0m\n"
 		fi
 		choice=""
 
@@ -206,14 +206,14 @@ zshSetup () {
 			printf "\033[1;31m[1.6] config file (2/2) .p10k.zsh already exists\033[0m\n"
 			overwriteOrSkip
 		fi
-			
+
 		if [ ! -e ~/.p10k.zsh ] || [ $dc1 = "overwrite" ] || [ $choice = "overwrite" ];
 		then
-			printf "\033[1;34m[1.6] downloading config file (2/2) .p10k.zsh\033[0m\n"
-			
+			printf "\033[1;34m[1.6] download config file (2/2) .p10k.zsh\033[0m\n"
+
 			curl --silent --output ~/.p10k.zsh https://raw.githubusercontent.com/stefanableitinger/pointhub/master/.p10k.zsh
-			
-			printf "\033[1;34m[1.6] downloading config file (2/2) .p10k.zsh: complete\033[0m\n"
+
+			printf "\033[1;34m[1.6] download config file (2/2) .p10k.zsh: complete\033[0m\n"
 		fi
 		choice=""
 		}
@@ -247,7 +247,7 @@ debianSetup () {
 				then
 					printf "\033[1;31m[!] root privileges were not granted\033[0m\n"			
 					printf "bye\n"
-					exit		
+					exit
 				fi
 			fi
 		fi
@@ -263,31 +263,31 @@ debianSetup () {
 		if [ $dc1 != "no" ];
 		then
 			printf "\033[1;34m[1] start\033[0m\n"
-			
+
 			# packages
 			printf "\033[1;34m[1.1] installing packages\033[0m\n"
 			sudo apt install curl git python zsh -y
 			printf "\033[1;34m[1.1] installing packages: complete\033[0m\n"
-			
+
 			# zshSetup
 			zshSetup
-			
+
 			printf "\033[1;34m[1] complete\033[0m\n"
 		fi
 
 		if [ $dc2 != "no" ];
 		then
 			printf "\033[1;34m[2] start\033[0m\n"
-			
+
 			# packages
 			printf "\033[1;34m[2.1] installing packages\033[0m\n"
 			sudo apt install feh i3-gaps mugshot picom rofi xfce4-terminal -y
 			printf "\033[1;34m[2.1] installing packages: complete\033[0m\n"
-			
+
 			# config files
 			printf "\033[1;34m[2.2] download config files\033[0m\n"		
 			mkdir --parents ~/.config/i3
-			
+
 			if [ -e ~/.config/i3/config ] && [ $dc2 != "overwrite" ];
 			then
 				printf "\033[1;31m[2.2] config file (1/2) i3/config already exists\033[0m\n"
@@ -296,14 +296,14 @@ debianSetup () {
 			if [ ! -e ~/.config/i3/config ] || [ $dc2 = "overwrite" ] || [ $choice = "overwrite" ];
 			then
 				printf "\033[1;34m[2.2] download config file (1/2) i3/config\033[0m\n"
-				
+
 				curl --silent --output ~/.config/i3/config https://raw.githubusercontent.com/stefanableitinger/pointhub/master/i3_config
 				sed -i "s,HOMEDIR,$HOME," ~/.config/i3/config		
 
 				printf "\033[1;34m[2.2] download config file (1/2) i3/config: complete\033[0m\n"
 			fi
-			choice=""		
-			
+			choice=""
+
 			if [ -e ~/.config/i3/i3_status.sh ] && [ $dc2 != "overwrite" ];
 			then
 				printf "\033[1;31m[2.2] config file (2/2) i3_status.sh already exists\033[0m\n"
@@ -312,20 +312,20 @@ debianSetup () {
 			if [ ! -e ~/.config/i3/i3_status.sh ] || [ $dc2 = "overwrite" ] || [ $choice = "overwrite" ];
 			then
 				printf "\033[1;34m[2.2] download config file (2/2) i3/config\033[0m\n"
-				
+
 				curl --silent --output ~/.config/i3/i3_status.sh https://raw.githubusercontent.com/stefanableitinger/pointhub/master/i3_status.sh		
 
 				printf "\033[1;34m[2.2] download config file (2/2) i3_status.sh: complete\033[0m\n"
 			fi
-			choice=""			
-			
+			choice=""
+
 			printf "\033[1;34m[2.2] download config files: complete\033[0m\n"
 
 			# image ressources
 			printf "\033[1;34m[2.3] download image ressources\033[0m\n"		
 			mkdir --parents ~/Pictures
 			mkdir --parents ~/.local/share/backgrounds
-			
+
 			# user icon
 			if [ -e ~/Pictures/k.png ] && [ $dc2 != "overwrite" ];
 			then
@@ -339,7 +339,7 @@ debianSetup () {
 				printf "\033[1;34m[2.3] image ressource (1/4) user icon: complete\033[0m\n"
 			fi
 			choice=""
-			
+
 			# wallpaper
 			if [ -e ~/.local/share/backgrounds/innere-stadt.png ] && [ $dc2 != "overwrite" ];
 			then
@@ -354,7 +354,7 @@ debianSetup () {
 				printf "\033[1;34m[2.3] image ressource (2/4) wallpaper/innere-stadt: complete\033[0m\n"
 			fi
 			choice=""
-			
+
 			if [ -e ~/.local/share/backgrounds/fedora.png ] && [ $dc2 != "overwrite" ];
 			then
 				printf "\033[1;31m[2.3] image ressource (3/4) wallpaper/fedora already exists\033[0m\n"
@@ -368,7 +368,7 @@ debianSetup () {
 				printf "\033[1;34m[2.3] image ressource (3/4) wallpaper/fedora: complete\033[0m\n"
 			fi
 			choice=""
-			
+
 			if [ -e ~/.local/share/backgrounds/ubuntu.png ] && [ $dc2 != "overwrite" ];
 			then
 				printf "\033[1;31m[2.3] image ressource (4/4) wallpaper/ubuntu already exists\033[0m\n"
@@ -384,24 +384,24 @@ debianSetup () {
 			choice=""
 
 			printf "\033[1;34m[2.3] download image ressources: complete\033[0m\n"	
-			
+
 			printf "\033[1;34m[2] complete\033[0m\n"
 		fi
 
 		if [ $dc3 != "no" ];
 		then
 			printf "\033[1;34m[3] start\033[0m\n"
-			
+
 			# packages
 			printf "\033[1;34m[3.1] installing packages\033[0m\n"			
 			sudo apt install asciiart cmatrix endlessh firejail fail2ban neofetch net-tools nmap openfortivpn remmina samba tty-clock -y
 			printf "\033[1;34m[3.1] installing packages: complete\033[0m\n"			
-			
+
 			# config files
 			printf "\033[1;34m[3.2] download config files\033[0m\n"		
 			sudo mkdir --parents /etc/samba
 			sudo mkdir --parents /etc/endlessh
-			
+
 			if [ -e /etc/samba/smb.conf ] && [ $dc3 != "overwrite" ];
 			then
 				printf "\033[1;31m[3.2] config file (1/2) smb.conf already exists\033[0m\n"
@@ -413,8 +413,8 @@ debianSetup () {
 				sudo curl --silent -O --output-dir /etc/samba/ https://raw.githubusercontent.com/stefanableitinger/pointhub/master/smb.conf
 				printf "\033[1;34m[3.2] download config file (1/2) smb.conf: complete\033[0m\n"
 			fi
-			choice=""	
-			
+			choice=""
+
 			if [ -e /etc/endlessh/config ] && [ $dc3 != "overwrite" ];
 			then
 				printf "\033[1;31m[3.2] config file (2/2) endlessh/config already exists\033[0m\n"
@@ -426,21 +426,20 @@ debianSetup () {
 				sudo curl --silent --output /etc/endlessh/config https://raw.githubusercontent.com/stefanableitinger/pointhub/master/endlessh_config
 				printf "\033[1;34m[3.2] download config file (2/2) endlessh/config: complete\033[0m\n"
 			fi
-			choice=""	
-				
+			choice=""
+
 			printf "\033[1;34m[3.2] download config files: complete\033[0m\n"
-			
+
 			printf "\033[1;34m[3] complete\033[0m\n"
 		fi
 
 		if [ $dc4 != "no" ] || [ $dc4 = "overwrite" ];
 		then
 			printf "\033[1;34m[4] start\033[0m\n"
-			
+
 			# font
-			printf "\033[1;34m[4.1] download font\033[0m\n"		
 			mkdir --parents ~/.local/share/fonts/spacemono-nf
-			
+
 			if [ -e ~/.local/share/fonts/spacemono-nf/Space\ Mono\ Nerd\ Font\ Complete\ Mono.ttf ] && [ $dc4 != "overwrite" ];
 			then
 				printf "\033[1;31m[4.1] font spacemono-nf already exists\033[0m\n"
@@ -450,12 +449,12 @@ debianSetup () {
 			then
 				printf "\033[1;34m[4.1] download font spacemono-nf\033[0m\n"
 				curl --silent --output ~/.local/share/fonts/spacemono-nf/Space\ Mono\ Nerd\ Font\ Complete\ Mono.ttf https://raw.githubusercontent.com/ryanoasis/nerd-fonts/master/patched-fonts/SpaceMono/Regular/complete/Space%20Mono%20Nerd%20Font%20Complete%20Mono.ttf
-				
+
 				fc-cache -rf ~/.local/share/fonts/spacemono-nf
 				printf "\033[1;34m[4.1] download font spacemono-nf: complete\033[0m\n"
 			fi
 			choice=""
-			
+
 			printf "\033[1;34m[4] complete\033[0m\n"
 		fi
 		}
@@ -463,13 +462,13 @@ debianSetup () {
 checkStartService () {
 	if [ $(systemctl is-enabled $1.service) = "disabled" ];
 	then
-		printf "\033[1;34m[ ] enabling $1.service \033[0m\n"
+		printf "\033[1;34m[3.x] enabling $1.service \033[0m\n"
 		sudo systemctl enable $1.service
 	fi
 
 	if [ $(systemctl is-active $1.service) = "inactive" ];
 	then
-		printf "\033[1;34m[ ] starting $1.service \033[0m\n"
+		printf "\033[1;34m[3.x] starting $1.service \033[0m\n"
 		sudo systemctl start $1.service
 	fi
 	}
@@ -477,11 +476,9 @@ checkStartService () {
 startServices () {
 		if [ $dc3 != "no" ];
 		then
-			printf "\033[1;34m[ ] setup additional packages services\033[0m\n"
 			checkStartService smbd
 			checkStartService endlessh
 			checkStartService fail2ban
-			printf "\033[1;34m[ ] setup additional packages services: complete\033[0m\n"
 		fi
 	}
 

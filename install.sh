@@ -56,7 +56,7 @@ continueOrQuit () {
 		}
 
 includeSkipOrQuit () {
-	printf "\033[1;34m[-]\033[0m press [\033[1;34my\033[m] to install [\033[1;34mf\033[m] to overwrite [\033[1;34mn\033[m] to skip or [\033[1;34mq\033[m] to quit\n"
+	printf "\033[1;34m[?]\033[0m press [\033[1;34my\033[m] to install [\033[1;34mf\033[m] to overwrite [\033[1;34mn\033[m] to skip or [\033[1;34mq\033[m] to quit\n"
 
 	while true; do
 		readOne
@@ -231,7 +231,7 @@ debianSetup () {
 		includeSkipOrQuit
 		dc3=$choice
 
-		printf "\033[1;34m[4] get font (spacemono-nf)?\033[0m\n"
+		printf "\033[1;34m[4] download font (spacemono-nf)?\033[0m\n"
 		includeSkipOrQuit
 		dc4=$choice
 
@@ -255,7 +255,7 @@ debianSetup () {
 		printf "\033[1;34m[1] setup oh-my-zsh with p10k: \033[0m $dc1\n"
 		printf "\033[1;34m[2] setup i3-gaps with rofi: \033[0m $dc2\n"
 		printf "\033[1;34m[3] setup additional packages: \033[0m $dc3\n"
-		printf "\033[1;34m[4] get font: \033[0m $dc4\n"
+		printf "\033[1;34m[4] download font: \033[0m $dc4\n"
 
 		continueOrQuit
 		printf "\033[1;34m[!] setup starting \033[0m $ac3\n"
@@ -494,18 +494,18 @@ androidSetup () {
 		includeSkipOrQuit
 		dc2=$choice
 
-		printf "\033[1;34m[3] setup termux configuration and font (meslolgs-nf)?\033[0m\n"
+		printf "\033[1;34m[3] download termux configuration?\033[0m\n"
 		includeSkipOrQuit
 		dc3=$choice
 
-		printf "\033[1;34m[4] get font (meslolgs-nf)?\033[0m\n"
+		printf "\033[1;34m[4] download font (meslolgs-nf)?\033[0m\n"
 		includeSkipOrQuit
 		dc4=$choice
 
 		printf "\033[1;34m[1] setup oh-my-zsh with p10k: \033[0m $dc1\n"
 		printf "\033[1;34m[2] setup additional packages: \033[0m $dc2\n"
-		printf "\033[1;34m[3] get termux configuration: \033[0m $dc3\n"
-		printf "\033[1;34m[4] get font: \033[0m $dc4\n"
+		printf "\033[1;34m[3] download termux configuration: \033[0m $dc3\n"
+		printf "\033[1;34m[4] download font: \033[0m $dc4\n"
 
 		continueOrQuit
 		
@@ -545,11 +545,11 @@ androidSetup () {
 				
 			if [ ! -e ~/.termux/termux.properties/termux.properties ] || [ $dc3 = "overwrite" ];
 			then
-				printf "\033[1;34m[3.1] downloading config file\033[0m\n"
-				curl --silent -output ~/.termux/termux.properties https://raw.githubusercontent.com/stefanableitinger/pointhub/master/termux.properties
+				printf "\033[1;34m[3.1] download config file\033[0m\n"
+				curl --silent --output ~/.termux/termux.properties https://raw.githubusercontent.com/stefanableitinger/pointhub/master/termux.properties
 				
 				termux-reload-settings
-				printf "\033[1;34m[3.1] downloading config file: complete\033[0m\n"
+				printf "\033[1;34m[3.1] download config file: complete\033[0m\n"
 			fi			
 				
 			printf "\033[1;34m[3] complete\033[0m\n"
@@ -561,11 +561,11 @@ androidSetup () {
 			
 			if [ ! -e ~/.termux/font.ttf ] || [ $dc4 = "overwrite" ];
 			then				
-				printf "\033[1;34m[4.1] downloading font\033[0m\n"
+				printf "\033[1;34m[4.1] download font\033[0m\n"
 				curl --silent --output ~/.termux/font.ttf https://raw.githubusercontent.com/ryanoasis/nerd-fonts/master/patched-fonts/AnonymousPro/complete/Anonymice%20Nerd%20Font%20Complete%20Mono.ttf
 
 				termux-reload-settings
-				printf "\033[1;34m[4.1] downloading font: complete\033[0m\n"
+				printf "\033[1;34m[4.1] download font: complete\033[0m\n"
 			fi
 			
 			printf "\033[1;34m[4] complete\033[0m\n"

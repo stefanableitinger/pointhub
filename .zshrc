@@ -84,7 +84,7 @@ export ZSH=$HOME"/.oh-my-zsh"
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(git)
-plugins=(zsh-autosuggestions zsh-syntax-highlighting autojump)
+plugins=(zsh-autosuggestions zsh-syntax-highlighting)
 
 # User configuration
 
@@ -146,23 +146,8 @@ bindkey "e[F" end-of-line
 # completion in the middle of a line
 bindkey '^i' expand-or-complete-prefix
 
-# aliases
-alias home="cd ~"
-alias root="sudo -s"
-alias zshrc="nano "$HOME"/.zshrc"
+# alias
 alias x="exit"
-alias pi="ssh k@192.168.0.129"
-alias rpi="ssh root@192.168.0.129"
-alias phone="ssh -p 8022 k@192.168.0.192"
-alias win="ssh Administrator@192.168.0.115"
-
-# requires not provided host configuration
-alias vpn="sudo openfortivpn vpnhost:443 -u stefan.ableitinger --trusted-cert=b4911726d9c038ea77fed8dc2359e8574e4f184746f82ec41b821e5872ff78c4"
-alias ws="ssh stefan.ableitinger@10.10.97.29"
-#"10.10.92.229"
-
-alias desktop="cd /mnt/c/Users/Administrator/Desktop"
-alias storage="cd /storage/emulated/0/"
 
 # Load ; should be last.
 source $ZSH/oh-my-zsh.sh

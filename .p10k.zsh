@@ -14,7 +14,7 @@
 
 # accent color
 #typeset -g FOREGROUND=$(shuf -i 0-255 -n 1)
-typeset -g FOREGROUND=202
+typeset -g FOREGROUND=033
 typeset -g BACKGROUND=255
 
 # Temporarily change options.

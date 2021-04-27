@@ -425,7 +425,7 @@ debianSetup () {
 			
 				mkdir --parents ~/.local/share/fonts/spacemono-nf
 				
-				if [ ! -e ~/.local/share/fonts/spacemono-nf/Space\ Mono\ Nerd\ Font\ Complete\ Mono.ttf || $dc4 = "overwrite" ];
+				if [ ! -e ~/.local/share/fonts/spacemono-nf/Space\ Mono\ Nerd\ Font\ Complete\ Mono.ttf ] || [ $dc4 = "overwrite" ];
 				then
 					curl --silent --output ~/.local/share/fonts/spacemono-nf/Space\ Mono\ Nerd\ Font\ Complete\ Mono.ttf https://raw.githubusercontent.com/ryanoasis/nerd-fonts/master/patched-fonts/SpaceMono/Regular/complete/Space%20Mono%20Nerd%20Font%20Complete%20Mono.ttf
 				fi

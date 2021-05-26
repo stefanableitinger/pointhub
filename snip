@@ -5,5 +5,15 @@ dotfiles except directories . / ..
 dtparam=pwr_led_trigger=none
 dtparam=pwr_led_activelow=off
 
+# no rainbow screen or black borders /boot/config.txt
+disable_splash=1
+disable_overscan=1
+
+# bluetooth controller /boot/config.txt
+dtparam=krnbt=on
+
+# audio jack /boot/config.txt
+dtparam=audio=on
+
 # bell off /etc/inputrc ~/.inputrc
 set bell-style none

@@ -78,7 +78,7 @@ export ZSH=$HOME"/.oh-my-zsh"
 # Would you like to use another custom folder than $ZSH/custom?
 # ZSH_CUSTOM=/path/to/new-custom-folder
 
-# Which plugins would you like to load?
+# wHICH PLUGINS WOULD YOU like to load?
 # Standard plugins can be found in $ZSH/plugins/
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
@@ -151,6 +151,7 @@ alias home="cd ~"
 alias root="sudo -s"
 alias zshrc="nano "$HOME"/.zshrc"
 alias x="exit"
+alias q="exit"
 alias pi="ssh k@192.168.0.129"
 alias rpi="ssh root@192.168.0.129"
 alias phone="ssh -p 8022 k@192.168.0.192"

@@ -164,6 +164,10 @@ alias ws="ssh stefan.ableitinger@10.10.97.29"
 alias desktop="cd /mnt/c/Users/Administrator/Desktop"
 alias storage="cd /storage/emulated/0/"
 
+#export TERM=xterm-256color
+export LANG=en_US.UTF-8
+export LC_CTYPE=en_US.UTF-8
+
 # Load ; should be last.
 source $ZSH/oh-my-zsh.sh
 source $ZSH/custom/themes/powerlevel10k/powerlevel10k.zsh-theme

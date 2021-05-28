@@ -99,7 +99,7 @@ plugins=(zsh-autosuggestions zsh-syntax-highlighting)
 # else
 #   export EDITOR='mvim'
 # fi
-export EDITOR='nano'
+export EDITOR='nvim'
 
 # Compilation flags
 # export ARCHFLAGS="-arch x86_64"

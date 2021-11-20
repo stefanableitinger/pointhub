@@ -1,0 +1,28 @@
+#!/bin/sh
+
+usage(){
+	printf "radio [OPTION]\n\nOPTION:\noe1 ... play radio ö1\nfm4 ... play radio fm4\naus ... stop radio\n"
+	exit 1
+}
+
+while [ $# -gt 0 ]; do
+	case "$1" in
+		oe1)
+			printf "starting stream in background\n"
+			
+			/bin/mpv http://ors-sn04.ors-shoutcast.at/oe1-q1a </dev/null >/dev/null 2>&1 &;;
+		fm4)
+			printf "starting stream in background\n"
+			
+			/bin/mpv http://ors-sn04.ors-shoutcast.at/fm4-q1a </dev/null >/dev/null 2>&1 &;;
+		aus)
+			printf "radio aus\n"
+
+			if pidof -x mpv > /dev/null
+			then
+				sudo kill $(ps ax| grep "[m]pv http://ors-sn04.ors-shoutcast.at/fm4-q1a" | awk '{print $1}')
+			fi;;
+		*) usage;;
+	esac
+	shift
+done

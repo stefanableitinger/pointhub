@@ -31,19 +31,17 @@
 #usermod -aG wheel,audio k
 #cp setup.sh /home/k/
 #chown k:k /home/k/setup.sh
-#chmod +x /home/k/setup.s#cp setup.sh /home/k/
-#chown k:k /home/k/setup.sh
 #chmod +x /home/k/setup.shh
 #passwd
 #passwd k
 #su k
 
 sudo pacman -Sy xorg xorg-xinit base-devel rofi i3-gaps --noconfirm
+
 mkdir -p /home/k/.local/share/fonts/spacemono-nf
 curl -so /home/k/.local/share/fonts/spacemono-nf/Space\ Mono\ Nerd\ Font\ Complete\ Mono.ttf https://raw.githubusercontent.com/ryanoasis/nerd-fonts/master/patched-fonts/SpaceMono/Regular/complete/Space%20Mono%20Nerd%20Font%20Complete%20Mono.ttf
 #put font on my github and get from there
 fc-cache -rf /home/k/.local/share/fonts/spacemono-nf
-mkdir -p /home/k/Downloads
 curl -s -O --output-dir /home/k/Downloads/ https://dl.suckless.org/st/st-0.8.4.tar.gz
 bsdtar -xpf /home/k/Downloads/st-0.8.4.tar.gz -C /home/k/Downloads/
 curl -so /home/k/Downloads/st-0.8.4/st-scrollback-0.8.4.diff https://st.suckless.org/patches/scrollback/st-scrollback-0.8.4.diff
@@ -53,3 +51,6 @@ sed -i 's/Liberation Mono:pixelsize=12/SpaceMono Nerd Font Mono:pixelsize=15/g' 
 sudo make clean install
 head /etc/X11/xinit/xinitrc --lines=50 > /home/k/.xinitrc
 echo "exec i3" >> /home/k/.xinitrc
+echo "KEYMAP=de" | sudo tee -a /etc/vconsole.conf
+curl -so /home/k/.config/i3/config https://raw.githubusercontent.com/stefanableitinger/pointhub/master/config
+echo "disable_overscan=1" | sudo tee -a /boot/config.txt 

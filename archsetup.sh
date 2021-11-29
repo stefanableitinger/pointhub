@@ -1,6 +1,9 @@
 #!/bin/bash
+#loadkeys de
+#wifi-menu
+#pacman -Syu sudo curl
 
-sudo pacman -Suy curl wget git neovim xorg-xinit base-devel rofi i3-gaps
+sudo pacman -Sy wget git neovim xorg-xinit base-devel rofi i3-gaps
 sudo useradd k -m
 sudo usermod -aG wheel,audio k
 

@@ -1,11 +1,18 @@
 #!/bin/bash
+#run as root after setting up
 #loadkeys de
+#pacman-key --init
+#pacman-key --populate archlinuxarm
 #wifi-menu
-#pacman -Syu sudo curl
+#pacman -Syu sudo curl neovim
+#EDITOR=nvim visudo
+#useradd -m k
+#usermod -aG wheel,audio k
+#passwd
+#passwd k
+#su k
 
-sudo pacman -Sy wget git neovim xorg-xinit base-devel rofi i3-gaps
-sudo useradd k -m
-sudo usermod -aG wheel,audio k
+#sudo pacman -Sy xorg-xinit base-devel rofi i3-gaps
 
 mkdir --parents /home/k/.local/share/fonts/spacemono-nf
 curl --silent --output ~/.local/share/fonts/spacemono-nf/Space\ Mono\ Nerd\ Font\ Complete\ Mono.ttf https://raw.githubusercontent.com/ryanoasis/nerd-fonts/master/patched-fonts/SpaceMono/Regular/complete/Space%20Mono%20Nerd%20Font%20Complete%20Mono.ttf

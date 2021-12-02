@@ -42,6 +42,7 @@ mkdir -p /home/k/.local/share/fonts/spacemono-nf
 curl -so /home/k/.local/share/fonts/spacemono-nf/Space\ Mono\ Nerd\ Font\ Complete\ Mono.ttf https://raw.githubusercontent.com/ryanoasis/nerd-fonts/master/patched-fonts/SpaceMono/Regular/complete/Space%20Mono%20Nerd%20Font%20Complete%20Mono.ttf
 #put font on my github and get from there
 fc-cache -rf /home/k/.local/share/fonts/spacemono-nf
+mkdir -p /home/k/Download
 curl -s -O --output-dir /home/k/Downloads/ https://dl.suckless.org/st/st-0.8.4.tar.gz
 bsdtar -xpf /home/k/Downloads/st-0.8.4.tar.gz -C /home/k/Downloads/
 curl -so /home/k/Downloads/st-0.8.4/st-scrollback-0.8.4.diff https://st.suckless.org/patches/scrollback/st-scrollback-0.8.4.diff

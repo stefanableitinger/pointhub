@@ -1,6 +1,0 @@
-extra-keys-style = arrows-only
-extra-keys = [ \
- ['CTRL','~','HOME','UP','END','-','TAB'], \
- ['ALT','|','LEFT','DOWN','RIGHT','/','DEL'] \
-]
-bell-character=ignore

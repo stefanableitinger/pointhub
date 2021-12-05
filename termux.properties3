@@ -1,7 +1,0 @@
-extra-keys-style = arrows-only 
-extra-keys = [ \
-['PGUP','HOME','UP','END','ESC','TAB','DEL'], \
-['PGDN','LEFT','DOWN','RIGHT','CTRL','ALT','ENTER'], \
-['KEYBOARD','~','$','/',':','|','-'] \
-]
-bell-character=ignore

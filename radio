@@ -1,7 +1,7 @@
 #!/bin/sh
 
 usage(){
-	printf "radio [OPTION]\n\nOPTION:\noe1 ... play radio ö1\ndhr ... deep house radio\naus ... stop radio\n"
+	printf "radio [OPTION]\n\nOPTION:\noe1 ... play radio ö1\ndhr ... deep house radio\nnm ... nice music for nice people\naus ... stop radio\n"
 	exit 1
 }
 
@@ -10,6 +10,9 @@ while [ $# -gt 0 ]; do
 		oe1)
 			printf "starting stream in background\n"
 			/bin/mpv http://ors-sn04.ors-shoutcast.at/oe1-q1a </dev/null >/dev/null 2>&1 &;;
+		
+		nm)	printf "starting stream in background\n"
+			/bin/mpv http://167.86.93.118:8000/stream.mp3
 		
 		dhr)
 			printf "starting stream in background\n"

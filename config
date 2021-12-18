@@ -5,8 +5,7 @@
 set $mod Mod4
 
 # Configure border style <normal|1pixel|pixel xx|none|pixel>
-default_border pixel 2
-default_floating_border pixel 2
+default_border none
 
 # Hide borders
 hide_edge_borders smart_no_gaps 
@@ -41,22 +40,22 @@ bindsym $mod+F10 exec stremio
 bindsym $mod+F11 exec wireshark
 
 # change focus
-bindsym $mod+h focus left
-bindsym $mod+j focus down
-bindsym $mod+k focus up
-bindsym $mod+l focus right
+bindsym $mod+h border none; focus left
+bindsym $mod+j border none; focus down
+bindsym $mod+k border none; focus up
+bindsym $mod+l border none; focus right
 
 # alternatively, you can use the cursor keys:
-bindsym $mod+Left focus left
-bindsym $mod+Down focus down
-bindsym $mod+Up focus up
-bindsym $mod+Right focus right
+bindsym $mod+Left border none; focus left
+bindsym $mod+Down border none; focus down
+bindsym $mod+Up border none; focus up
+bindsym $mod+Right border none; focus right
 
 # move focused window
-bindsym $mod+Shift+h move left 
-bindsym $mod+Shift+j move down
-bindsym $mod+Shift+k move up
-bindsym $mod+Shift+l move right
+bindsym $mod+Shift+h border none; move left 
+bindsym $mod+Shift+j border none; move down
+bindsym $mod+Shift+k border none; move up
+bindsym $mod+Shift+l border none; move right
 
 # alternatively, you can use the cursor keys:
 bindsym $mod+Shift+Left move left 140 px
@@ -92,7 +91,7 @@ for_window [class=".*"] split toggle #toggles split at each new window
 # manual split orientation
 bindsym $mod+d split h;exec notify-send 'tile horizontally'
 bindsym $mod+x split v;exec notify-send 'tile vertically'
-bindsym $mod+s split toggle
+bindsym $mod+s border pixel 1; split toggle
 
 # toggle fullscreen mode for the focused container
 bindsym $mod+f fullscreen toggle
@@ -300,38 +299,41 @@ set_from_resource $term_color15    color15
 
 # Start i3bar to display a workspace bar (plus the system information i3status if available)
 # Start i3bar to display a workspace bar (plus i3blocks)
-bar {
-	i3bar_command /usr/bin/i3bar
-	#status_command /usr/bin/i3blocks -c /home/k/Downloads/i3blocks/i3blocks.conf
-        #status_command /usr/bin/i3blocks -c .config/i3/i3blocks.conf
-	status_command /usr/bin/i3status -c .config/i3/i3status.conf
-        id bar-0
-	position top
-        font pango:SpaceMono Nerd Font Mono Regular 12
-	tray_output primary
-	workspace_buttons yes
-        
-    colors {
-         background #161616
-         statusline #FFFFFF
-
-         focused_workspace #FFFFFF #161616 #FFFFFF
-#        background #646464
-#        statusline #161616
-#        separator #161616
-    
-#    	focused_workspace  #161616 #646464 #161616
-    }
-}
-
-# hide/unhide i3status bar
-bindsym $mod+m bar mode toggle
+#bar {
+#	i3bar_command /usr/bin/i3bar
+#	#status_command /usr/bin/i3blocks -c /home/k/Downloads/i3blocks/i3blocks.conf
+#        #status_command /usr/bin/i3blocks -c .config/i3/i3blocks.conf
+#	status_command /usr/bin/i3status -c .config/i3/i3status.conf
+#        id bar-0
+#	position top
+#        font pango:SpaceMono Nerd Font Mono Regular 12
+#	tray_output primary
+#	workspace_buttons yes
+#        
+#    colors {
+#         background #161616
+#         statusline #FFFFFF
+#
+#         focused_workspace #FFFFFF #161616 #FFFFFF
+##        background #646464
+##        statusline #161616
+##        separator #161616
+#    
+##    	focused_workspace  #161616 #646464 #161616
+#    }
+#}
+#
+## hide/unhide i3status bar
+#bindsym $mod+m bar mode toggle
 
 #############################
 ### settings for i3-gaps: ###
 #############################
-#for_window [class=".*"] border pixel 0
-#border_radius 24
+
+#<colorclass> <border> <background> <text> <indicator> <child_border>
+client.focused	#000000 #000000 #000000 #ffffff #000000
+client.focused_inactive #000000 #000000 #000000 #000000 #000000
+client.unfocused #000000 #000000 #000000 #000000 #000000
 
 # Set inner/outer gaps
 gaps inner 14

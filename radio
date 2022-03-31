@@ -7,17 +7,17 @@ usage(){
 
 while [ $# -gt 0 ]; do
 	case "$1" in
-		oe1)
+		"oe1")
 			printf "starting stream in background\n"
 			/bin/mpv http://ors-sn04.ors-shoutcast.at/oe1-q1a </dev/null >/dev/null 2>&1 &;;
 		
-		nm)	printf "starting stream in background\n"
+		"nm")	printf "starting stream in background\n"
 			/bin/mpv http://167.86.93.118:8000/stream.mp3
 		
-		dhr)
+		"dhr")
 			printf "starting stream in background\n"
 			/bin/mpv http://62.210.105.16:7000/stream </dev/null >/dev/null 2>&1 &;;
-		aus)
+		"aus")
 			printf "radio aus\n"
 
 			if pidof -x mpv > /dev/null

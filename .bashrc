@@ -15,3 +15,4 @@ else
 fi
 
 export EDITOR=nvim
+export MANPAGER="less -R"

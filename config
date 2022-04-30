@@ -178,7 +178,7 @@ client.unfocused #000000 #000000 #000000 #000000 #000000
 # Set inner/outer gaps
 gaps inner 10
 gaps outer 0
-gaps top 30
+gaps top 20
 
 exec "setxkbmap -layout de"
 bindsym $mod+g "exec setxkbmap -layout de"

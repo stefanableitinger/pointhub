@@ -49,7 +49,7 @@ bsdtar -xpf /home/k/Downloads/st-0.8.4.tar.gz -C /home/k/Downloads/
 curl -so /home/k/Downloads/st-0.8.4/st-scrollback-0.8.4.diff https://st.suckless.org/patches/scrollback/st-scrollback-0.8.4.diff
 cd /home/k/Downloads/st-0.8.4
 patch -p1 < st-scrollback-0.8.4.diff
-sed -i 's/Liberation Mono:pixelsize=12/SpaceMono Nerd Font Mono:pixelsize=17/g' config.def.h
+sed -i 's/Liberation Mono:pixelsize=12/SpaceMono Nerd Font Mono:pixelsize=20/g' config.def.h
 sudo make clean install
 #config
 curl -so .config/i3/config https://raw.githubusercontent.com/stefanableitinger/pointhub/master/config

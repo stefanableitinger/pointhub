@@ -25,7 +25,7 @@ bindsym $mod+q kill
 bindsym $mod+a exec "rofi -show drun -modi drun,run,ssh -location 0 -yoffset -30 -lines 30 -font 'SpaceMono Nerd Font Mono 11' -columns 1 -theme Arc-Dark dark -show-icons -icon-theme Adwaita -theme-str 'window {width: 666px;}' -scroll-method 1"
 
 # Start Applications
-bindsym F1 exec chromium
+bindsym F1 exec firefox
 
 # change focus
 bindsym $mod+Left border none; focus left
@@ -137,7 +137,7 @@ bindsym $mod+Shift+x exec "i3-msg exit"
 # Autostart applications
 exec --no-startup-id nitrogen --restore
 exec --no-startup-id "conky -c /home/k/.config/conky.conf"
-exec picom --conf=/home/k/.config/picom.conf
+exec --no startup-id "picom --conf /home/k/.config/picom.conf"
 
 # Color palette used for the terminal ( ~/.Xresources file )
 # Colors are gathered based on the documentation:
@@ -176,7 +176,9 @@ client.focused_inactive #000000 #000000 #000000 #000000 #000000
 client.unfocused #000000 #000000 #000000 #000000 #000000
 
 # Set inner/outer gaps
-gaps inner 17
-gaps outer 7
+gaps inner 10
+gaps outer 0
+gaps top 30
 
+exec "setxkbmap -layout de"
 bindsym $mod+g "exec setxkbmap -layout de"

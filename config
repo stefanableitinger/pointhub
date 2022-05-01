@@ -140,9 +140,9 @@ bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcu
 bindsym $mod+Shift+x exec "i3-msg exit"
 
 # Autostart applications
-exec --no-startup-id nitrogen --restore
+exec --no-startup-id "nitrogen --restore"
 exec --no-startup-id "conky -c /home/k/.config/conky.conf"
-exec --no startup-id "picom --conf /home/k/.config/picom.conf"
+exec --no-startup-id "picom --config /home/k/.config/picom.conf"
 
 # Color palette used for the terminal ( ~/.Xresources file )
 # Colors are gathered based on the documentation:

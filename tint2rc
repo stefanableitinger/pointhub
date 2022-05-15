@@ -1,0 +1,22 @@
+#-------------------------------------
+# Panel
+panel_items = FLF
+panel_size = 100% 66
+autohide = 1
+autohide_show_timeout = 0
+autohide_hide_timeout = 0.5
+
+#-------------------------------------
+# Launcher
+launcher_icon_size = 66
+launcher_padding = 0 0 10
+launcher_tooltip = 0
+launcher_item_app = st.desktop
+launcher_item_app = firefox.desktop
+launcher_item_app = pcmanfm.desktop
+launcher_item_app = vlc.desktop
+launcher_item_app = net.minetest.minetest.desktop
+launcher_item_app = smartcode-stremio.desktop
+launcher_item_app = gimp.desktop
+launcher_item_app = i3-log-out.desktop
+

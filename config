@@ -22,10 +22,11 @@ bindsym $mod+Return exec st
 bindsym $mod+q kill
 
 # start program launcher
-bindsym $mod+a exec "rofi -show drun -modi drun,run,ssh -location 0 -yoffset -30 -lines 30 -font 'SpaceMono Nerd Font Mono 11' -columns 1 -theme Arc-Dark dark -show-icons -icon-theme Adwaita -theme-str 'window {width: 666px;}' -scroll-method 1"
+bindsym $mod+a exec "rofi -show drun -modi drun,run,ssh -location 0 -yoffset -30 -lines 40 -font 'SpaceMono Nerd Font Mono 11' -columns 1 -theme Arc-Dark dark -show-icons -icon-theme Adwaita -theme-str 'window {width: 666px;}' -scroll-method 1"
 
 # Start Applications
-bindsym F1 exec firefox
+bindsym $mod+1 exec firefox
+bindsym $mod+2 exec pcmanfm
 
 # change focus
 bindsym $mod+Left border none; focus left
@@ -92,14 +93,16 @@ set $ws7 7
 set $ws8 8
 
 # switch to workspace
-bindsym $mod+1 workspace $ws1
-bindsym $mod+2 workspace $ws2
-bindsym $mod+3 workspace $ws3
-bindsym $mod+4 workspace $ws4
-bindsym $mod+5 workspace $ws5
-bindsym $mod+6 workspace $ws6
-bindsym $mod+7 workspace $ws7
-bindsym $mod+8 workspace $ws8
+bindsym $mod+F1 workspace $ws1
+bindsym $mod+F2 workspace $ws2
+bindsym $mod+F3 workspace $ws3
+bindsym $mod+F4 workspace $ws4
+bindsym $mod+F5 workspace $ws5
+bindsym $mod+F6 workspace $ws6
+bindsym $mod+F7 workspace $ws7
+bindsym $mod+F8 workspace $ws8
+
+bindsym $mod+n workspace next
 
 # Move focused container to workspace
 bindsym $mod+Ctrl+1 move container to workspace $ws1
@@ -185,5 +188,6 @@ gaps inner 10
 gaps outer 0
 gaps top 20
 
+exec "tint2"
 exec "setxkbmap -layout de"
 bindsym $mod+g "exec setxkbmap -layout de"

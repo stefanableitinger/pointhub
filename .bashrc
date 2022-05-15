@@ -14,5 +14,8 @@ else
 	PS1="\[\033[7;37m\][\u@\h]\[\033[0;37m\] \[\033[1;37m\][\w]\[\033[0;37m\] "
 fi
 
+alias xq="xbps-query -Rs $@"
+alias xi="sudo xbps-install $@"
+
 export EDITOR=nvim
 export MANPAGER="less -R"

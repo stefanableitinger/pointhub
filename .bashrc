@@ -16,6 +16,9 @@ fi
 
 alias xq="xbps-query -Rs $@"
 alias xi="sudo xbps-install $@"
+alias xr="sudo xbps-remove -Ry $@"
+alias clock="tty-clock -s -c -D -C 7"
+alias zzz="sudo ethtool -s enp1s0 wol g && sudo zzz"
 
 export EDITOR=nvim
 export MANPAGER="less -R"

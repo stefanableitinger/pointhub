@@ -3,10 +3,10 @@
 set $mod Mod4
 
 # Configure border style <normal|1pixel|pixel xx|none|pixel>
-default_border none
+default_border pixel 1
 
 # Hide borders
-hide_edge_borders smart_no_gaps 
+hide_edge_borders smart_no_gaps
 
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below.
@@ -18,21 +18,33 @@ floating_modifier $mod
 # start a terminal
 bindsym $mod+Return exec st
 
+# Start Applications
+bindsym $mod+1 exec firefox; exec "notify-send 'starting firefox'"
+bindsym $mod+2 exec pcmanfm; exec "notify-send 'starting filemanager'"
+bindsym $mod+3 exec code-oss; exec "notify-send 'starting vscode'"
+bindsym $mod+v exec pavucontrol
+bindsym $mod+p exec /home/k/.config/picom/picom.sh
+bindsym $mod+r exec /home/k/.config/radio/radio.sh
+
 # kill focused window
 bindsym $mod+q kill
 
-# start program launcher
-bindsym $mod+a exec "rofi -show drun -modi drun,run,ssh -location 0 -yoffset -30 -lines 40 -font 'SpaceMono Nerd Font Mono 11' -columns 1 -theme Arc-Dark dark -show-icons -icon-theme Adwaita -theme-str 'window {width: 666px;}' -scroll-method 1"
+# restart pulseaudio
+bindsym $mod+k exec "pulseaudio -k"; exec "notify-send 'restarting pulseaudio'"
 
-# Start Applications
-bindsym $mod+1 exec firefox
-bindsym $mod+2 exec pcmanfm
+# start program launcher
+bindsym $mod+a exec "rofi -show drun -modi drun,run,ssh -location 0 -yoffset -30 -lines 40 -font 'SpaceMono Nerd Font Mono 13' -columns 1 -theme Arc-Dark -show-icons -icon-theme Adwaita -theme-str 'window {width: 666px;} listview {lines:10;} element-icon {size: 66px;} element-text {vertical-align:0.5;}' -scroll-method 0"
+
+# Pulse Audio controls (now handled by pa-applet)
+bindsym XF86AudioRaiseVolume exec --no-startup-id "/home/k/.config/volumecontrol/up.sh"
+bindsym XF86AudioLowerVolume exec --no-startup-id "/home/k/.config/volumecontrol/down.sh"
+bindsym XF86AudioMute exec --no-startup-id "/home/k/.config/volumecontrol/mute.sh"
 
 # change focus
-bindsym $mod+Left border none; focus left
-bindsym $mod+Down border none; focus down
-bindsym $mod+Up border none; focus up
-bindsym $mod+Right border none; focus right
+bindsym $mod+Left focus left
+bindsym $mod+Down focus down
+bindsym $mod+Up focus up
+bindsym $mod+Right focus right
 
 # move focused window
 bindsym $mod+Shift+Left move left 100 px
@@ -57,10 +69,12 @@ bindsym $mod+Shift+Ctrl+k resize shrink height 10 px
 bindsym $mod+Shift+Ctrl+l resize grow width 10 px
 
 # fibonacci split orientation
-default_orientation vertical #start in opposite orientation from your monitor
-for_window [class=".*"] split toggle #toggles split at each new window
-#bindsym $mod+shift+q split toggle kill #kill command resets the split
-#bindsym $mod+e layout toggle split # should already exist but use if split
+# start in opposite orientation from your monitor
+default_orientation vertical
+
+# toggles split at each new window
+for_window [class=".*"] split toggle
+
 # manual split orientation
 bindsym $mod+d border pixel 1; split h
 bindsym $mod+x border pixel 1; split v
@@ -75,7 +89,7 @@ bindsym $mod+space floating toggle
 # change focus between tiling / floating windows
 bindsym $mod+Shift+space focus mode_toggle
 
-#navigate workspaces next / previous
+# navigate workspaces next / previous
 bindsym $mod+Ctrl+Right workspace next
 bindsym $mod+Ctrl+Left workspace prev
 
@@ -93,16 +107,16 @@ set $ws7 7
 set $ws8 8
 
 # switch to workspace
-bindsym $mod+F1 workspace $ws1
-bindsym $mod+F2 workspace $ws2
-bindsym $mod+F3 workspace $ws3
-bindsym $mod+F4 workspace $ws4
-bindsym $mod+F5 workspace $ws5
-bindsym $mod+F6 workspace $ws6
-bindsym $mod+F7 workspace $ws7
-bindsym $mod+F8 workspace $ws8
+bindsym $mod+F1 workspace $ws1; exec --no-startup-id "notify-send 'workspace 1'"
+bindsym $mod+F2 workspace $ws2; exec --no-startup-id "notify-send 'workspace 2'"
+bindsym $mod+F3 workspace $ws3; exec --no-startup-id "notify-send 'workspace 3'"
+bindsym $mod+F4 workspace $ws4; exec --no-startup-id "notify-send 'workspace 4'"
+bindsym $mod+F5 workspace $ws5; exec --no-startup-id "notify-send 'workspace 5'"
+bindsym $mod+F6 workspace $ws6; exec --no-startup-id "notify-send 'workspace 6'"
+bindsym $mod+F7 workspace $ws7; exec --no-startup-id "notify-send 'workspace 7'"
+bindsym $mod+F8 workspace $ws8; exec --no-startup-id "notify-send 'workspace 8'"
 
-bindsym $mod+n workspace next
+bindsym $mod+n workspace next; exec --no-startup-id 'notify-send "next workspace"'
 
 # Move focused container to workspace
 bindsym $mod+Ctrl+1 move container to workspace $ws1
@@ -124,13 +138,10 @@ bindsym $mod+Shift+6 move container to workspace $ws6; workspace $ws6
 bindsym $mod+Shift+7 move container to workspace $ws7; workspace $ws7
 bindsym $mod+Shift+8 move container to workspace $ws8; workspace $ws8
 
-# Open applications on specific workspaces
-# assign [class="Firefox"] $ws1
-
 # Open specific applications in floating mode
-#for_window [title="alsamixer"] floating enable sticky border pixel 1
-#for_window [class=".*"] floating enable border pixel 3
-#for_window [floating] resize set 2400 1300 move position center 
+for_window [title="Volume Control"] floating enable, border pixel 0, resize set 640 480, move position center
+for_window [class="Nitrogen"] floating enable, border pixel 1, resize set 640 480, move position center
+for_window [title="oclock"] floating enable, border pixel 0, resize set 60 70, move position 2475 0, mode dock
 
 # switch to workspace with urgent window automatically
 for_window [urgent=latest] focus
@@ -139,47 +150,10 @@ for_window [urgent=latest] focus
 bindsym $mod+Shift+r restart
 
 # exit i3 (logs you out of your X session)
-bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
 bindsym $mod+Shift+x exec "i3-msg exit"
 
-# Autostart applications
-exec --no-startup-id "nitrogen --restore"
-exec --no-startup-id "conky -c /home/k/.config/conky.conf"
-exec --no-startup-id "picom --config /home/k/.config/picom.conf"
-
-# Color palette used for the terminal ( ~/.Xresources file )
-# Colors are gathered based on the documentation:
-# https://i3wm.org/docs/userguide.html#xresources
-# Change the variable name at the place you want to match the color
-# of your terminal like this:
-# [example]
-# If you want your bar to have the same background color as your 
-# terminal background change the line 362 from:
-# background #14191D
-# to:
-# background $term_background
-# Same logic applied to everything else.
-set_from_resource $term_background background
-set_from_resource $term_foreground foreground
-set_from_resource $term_color0     color0
-set_from_resource $term_color1     color1
-set_from_resource $term_color2     color2
-set_from_resource $term_color3     color3
-set_from_resource $term_color4     color4
-set_from_resource $term_color5     color5
-set_from_resource $term_color6     color6
-set_from_resource $term_color7     color7
-set_from_resource $term_color8     color8
-set_from_resource $term_color9     color9
-set_from_resource $term_color10    color10
-set_from_resource $term_color11    color11
-set_from_resource $term_color12    color12
-set_from_resource $term_color13    color13
-set_from_resource $term_color14    color14
-set_from_resource $term_color15    color15
-
-#<colorclass> <border> <background> <text> <indicator> <child_border>
-client.focused	#000000 #000000 #000000 #ffffff #000000
+# <colorclass> <border> <background> <text> <indicator> <child_border>
+client.focused  #000000 #000000 #000000 #ffffff #000000
 client.focused_inactive #000000 #000000 #000000 #000000 #000000
 client.unfocused #000000 #000000 #000000 #000000 #000000
 
@@ -188,6 +162,17 @@ gaps inner 10
 gaps outer 0
 gaps top 20
 
-exec "tint2"
-exec "setxkbmap -layout de"
-bindsym $mod+g "exec setxkbmap -layout de"
+# if no bar is used:
+# gaps top -10
+
+# Autostart applications
+exec --no-startup-id "nitrogen --restore"
+exec --no-startup-id "conky -c /home/k/.config/conky/conkyrc"
+exec --no-startup-id "picom --config /home/k/.config/picom/picom.conf"
+exec --no-startup-id "setxkbmap -layout de"
+# exec --no-startup-id "tint2"
+# exec --no-startup-id "/bin/pa-applet"
+exec --no-startup-id "dunst"
+
+# german keyboard layout
+# bindsym $mod+g "exec setxkbmap -layout de"

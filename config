@@ -6,7 +6,7 @@ set $mod Mod4
 default_border pixel 1
 
 # Hide borders
-hide_edge_borders smart_no_gaps
+hide_edge_borders smart_no_gaps 
 
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below.
@@ -19,26 +19,21 @@ floating_modifier $mod
 bindsym $mod+Return exec st
 
 # Start Applications
-bindsym $mod+1 exec firefox; exec "notify-send 'starting firefox'"
-bindsym $mod+2 exec pcmanfm; exec "notify-send 'starting filemanager'"
-bindsym $mod+3 exec code-oss; exec "notify-send 'starting vscode'"
-bindsym $mod+v exec pavucontrol
-bindsym $mod+p exec /home/k/.config/picom/picom.sh
-bindsym $mod+r exec /home/k/.config/radio/radio.sh
+bindsym $mod+1 exec --no-startup-id "/bin/firefox"; exec --no-startup-id "/bin/notify-send 'starting firefox'"
+bindsym $mod+2 exec --no-startup-id "/bin/pcmanfm"; exec --no-startup-id "/bin/notify-send 'starting filemanager'"
+bindsym $mod+3 exec --no-startup-id "/bin/code-oss"; exec --no-startup-id "/bin/notify-send 'starting vscode'"
+bindsym $mod+v exec --no-startup-id "/bin/pavucontrol"
+bindsym $mod+p exec --no-startup-id "/home/k/.config/picom/picom.sh"
+bindsym $mod+r exec --no-startup-id "/home/k/.config/radio/radio.sh"
+bindsym $mod+g exec --no-startup-id "/bin/setxkbmap -layout de"; exec --no-startup-id "/bin/notify-send 'keyboard layout'"
+bindsym $mod+k exec --no-startup-id "/bin/pulseaudio -k"; exec --no-startup-id "/bin/notify-send 'restarting pulseaudio'"
+bindsym $mod+a exec --no-startup-id "/bin/rofi -show drun -modi drun,run,ssh -location 0 -yoffset -30 -lines 40 -font 'SpaceMono Nerd Font Mono 13' -columns 1 -theme Arc-Dark -show-icons -icon-theme Adwaita -theme-str 'window {width: 666px;} listview {lines:10;} element-icon {size: 66px;} element-text {vertical-align:0.5;}' -scroll-method 0"
+bindsym XF86AudioRaiseVolume exec --no-startup-id "/home/k/.config/volume up"
+bindsym XF86AudioLowerVolume exec --no-startup-id "/home/k/.config/volume down"
+bindsym XF86AudioMute exec --no-startup-id "/home/k/.config/volume mute"
 
 # kill focused window
-bindsym $mod+q kill
-
-# restart pulseaudio
-bindsym $mod+k exec "pulseaudio -k"; exec "notify-send 'restarting pulseaudio'"
-
-# start program launcher
-bindsym $mod+a exec "rofi -show drun -modi drun,run,ssh -location 0 -yoffset -30 -lines 40 -font 'SpaceMono Nerd Font Mono 13' -columns 1 -theme Arc-Dark -show-icons -icon-theme Adwaita -theme-str 'window {width: 666px;} listview {lines:10;} element-icon {size: 66px;} element-text {vertical-align:0.5;}' -scroll-method 0"
-
-# Pulse Audio controls (now handled by pa-applet)
-bindsym XF86AudioRaiseVolume exec --no-startup-id "/home/k/.config/volumecontrol/up.sh"
-bindsym XF86AudioLowerVolume exec --no-startup-id "/home/k/.config/volumecontrol/down.sh"
-bindsym XF86AudioMute exec --no-startup-id "/home/k/.config/volumecontrol/mute.sh"
+bindsym $mod+q kill; exec --no-startup-id "/home/k/.config/i3/fibonacci.sh"
 
 # change focus
 bindsym $mod+Left focus left
@@ -70,10 +65,10 @@ bindsym $mod+Shift+Ctrl+l resize grow width 10 px
 
 # fibonacci split orientation
 # start in opposite orientation from your monitor
-default_orientation vertical
+default_orientation vertical 
 
 # toggles split at each new window
-for_window [class=".*"] split toggle
+for_window [class=".*"] split toggle; exec --no-startup-id "/home/k/.config/i3/fibonacci.sh"
 
 # manual split orientation
 bindsym $mod+d border pixel 1; split h
@@ -107,16 +102,16 @@ set $ws7 7
 set $ws8 8
 
 # switch to workspace
-bindsym $mod+F1 workspace $ws1; exec --no-startup-id "notify-send 'workspace 1'"
-bindsym $mod+F2 workspace $ws2; exec --no-startup-id "notify-send 'workspace 2'"
-bindsym $mod+F3 workspace $ws3; exec --no-startup-id "notify-send 'workspace 3'"
-bindsym $mod+F4 workspace $ws4; exec --no-startup-id "notify-send 'workspace 4'"
-bindsym $mod+F5 workspace $ws5; exec --no-startup-id "notify-send 'workspace 5'"
-bindsym $mod+F6 workspace $ws6; exec --no-startup-id "notify-send 'workspace 6'"
-bindsym $mod+F7 workspace $ws7; exec --no-startup-id "notify-send 'workspace 7'"
-bindsym $mod+F8 workspace $ws8; exec --no-startup-id "notify-send 'workspace 8'"
+bindsym $mod+F1 workspace $ws1; exec --no-startup-id  "/bin/dunstctl close-all"; exec --no-startup-id "/bin/notify-send 'workspace 1'"
+bindsym $mod+F2 workspace $ws2; exec --no-startup-id  "/bin/dunstctl close-all"; exec --no-startup-id "/bin/notify-send 'workspace 2'"
+bindsym $mod+F3 workspace $ws3; exec --no-startup-id  "/bin/dunstctl close-all"; exec --no-startup-id "/bin/notify-send 'workspace 3'"
+bindsym $mod+F4 workspace $ws4; exec --no-startup-id  "/bin/dunstctl close-all"; exec --no-startup-id "/bin/notify-send 'workspace 4'"
+bindsym $mod+F5 workspace $ws5; exec --no-startup-id  "/bin/dunstctl close-all"; exec --no-startup-id "/bin/notify-send 'workspace 5'"
+bindsym $mod+F6 workspace $ws6; exec --no-startup-id  "/bin/dunstctl close-all"; exec --no-startup-id "/bin/notify-send 'workspace 6'"
+bindsym $mod+F7 workspace $ws7; exec --no-startup-id  "/bin/dunstctl close-all"; exec --no-startup-id "/bin/notify-send 'workspace 7'"
+bindsym $mod+F8 workspace $ws8; exec --no-startup-id  "/bin/dunstctl close-all"; exec --no-startup-id "/bin/notify-send 'workspace 8'"
 
-bindsym $mod+n workspace next; exec --no-startup-id 'notify-send "next workspace"'
+bindsym $mod+n workspace next; exec --no-startup-id '/bin/notify-send "next workspace"'
 
 # Move focused container to workspace
 bindsym $mod+Ctrl+1 move container to workspace $ws1
@@ -138,14 +133,6 @@ bindsym $mod+Shift+6 move container to workspace $ws6; workspace $ws6
 bindsym $mod+Shift+7 move container to workspace $ws7; workspace $ws7
 bindsym $mod+Shift+8 move container to workspace $ws8; workspace $ws8
 
-# Open specific applications in floating mode
-for_window [title="Volume Control"] floating enable, border pixel 0, resize set 640 480, move position center
-for_window [class="Nitrogen"] floating enable, border pixel 1, resize set 640 480, move position center
-for_window [title="oclock"] floating enable, border pixel 0, resize set 60 70, move position 2475 0, mode dock
-
-# switch to workspace with urgent window automatically
-for_window [urgent=latest] focus
-
 # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
 bindsym $mod+Shift+r restart
 
@@ -153,7 +140,7 @@ bindsym $mod+Shift+r restart
 bindsym $mod+Shift+x exec "i3-msg exit"
 
 # <colorclass> <border> <background> <text> <indicator> <child_border>
-client.focused  #000000 #000000 #000000 #ffffff #000000
+client.focused	#000000 #000000 #000000 #ffffff #000000
 client.focused_inactive #000000 #000000 #000000 #000000 #000000
 client.unfocused #000000 #000000 #000000 #000000 #000000
 
@@ -166,13 +153,12 @@ gaps top 20
 # gaps top -10
 
 # Autostart applications
-exec --no-startup-id "nitrogen --restore"
-exec --no-startup-id "conky -c /home/k/.config/conky/conkyrc"
-exec --no-startup-id "picom --config /home/k/.config/picom/picom.conf"
-exec --no-startup-id "setxkbmap -layout de"
-# exec --no-startup-id "tint2"
+exec --no-startup-id "/bin/picom --config /home/k/.config/picom/picom.conf"
+exec --no-startup-id "/bin/nitrogen --restore"
+exec --no-startup-id "/bin/setxkbmap -layout de"
+# exec --no-startup-id "/bin/tint2"
 # exec --no-startup-id "/bin/pa-applet"
-exec --no-startup-id "dunst"
-
-# german keyboard layout
-# bindsym $mod+g "exec setxkbmap -layout de"
+exec --no-startup-id "/bin/dunst"
+exec --no-startup-id "/bin/xclip --silent"
+exec --no-startup-id "/bin/conky -c /home/k/.config/conky/conkyrc"
+exec --no-startup-id "/bin/conky -c /home/k/.config/conky/calconkyrc"

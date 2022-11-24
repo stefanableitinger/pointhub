@@ -1,2 +1,0 @@
-#!/bin/bash
-$(which python3) /home/k/Documents/sag.py -y 0 -s 20 -f /home/k/Documents/5x7.ttf $@

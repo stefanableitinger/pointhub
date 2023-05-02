@@ -47,7 +47,6 @@ curl -O https://raw.githubusercontent.com/stefanableitinger/pointhub/master/.bas
 sudo xbps-install -y neovim tmux curl alsa-firmware alsa-utils pulseaudio pulsemixer mpv cava xorg i3-gaps rofi picom conky nitrogen base-devel fontconfig-devel libX11-devel libXft-devel bsdtar git ntfs-3g dbus xdotool pcmanfm dunst noto-fonts-ttf vimiv ffmpegthumbnailer tty-clock cmatrix neofetch pipes.c firefox chromium gimp gparted lightdm lightdm-gtk3-greeter lightdm-gtk-greeter-settings freerdp-server remmina
 
 #font (--l=14)
-#font (--l=14)
 sudo mkdir -p /usr/share/fonts/spacemono-nf
 sudo curl -so /usr/share/fonts/spacemono-nf/Space\ Mono\ Nerd\ Font\ Complete\ Mono.ttf https://raw.githubusercontent.com/stefanableitinger/pointhub/master/spacemono-nf.ttf
 fc-cache -rf /usr/share/fonts/spacemono-nf

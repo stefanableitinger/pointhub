@@ -43,7 +43,7 @@ if @simulateOnly=1 rollback transaction
 <ITEM NAME>_aan
 inner join	AllocAccountNumber n on n.AccountNumberId = a.AccountNumberId
 <ITEM NAME>_ac
---> prüfen vom aktuellen status:
+--> prÃ¼fen vom aktuellen status:
 
 -- IST
 select d.SystemKey+' is '+case json_value (StringValue, N'lax $.CalculationSettings.Active') when 'true' then 'active' when 'false' then 'not active' else 'undefined' end from SystemDefault d
@@ -241,9 +241,9 @@ cross apply sys.dm_os_volume_stats(database_id, file_id)
 for json auto, without_array_wrapper
 
 <ITEM NAME>_db
-SELECT * FROM sys.master_files 
+SELECTÂ * FROMÂ sys.master_filesÂ 
 
-EXEC master.dbo.xp_fixeddrives   
+EXECÂ master.dbo.xp_fixeddrivesÂ Â  
 
 SELECT DISTINCT
 SUBSTRING(volume_mount_point, 1, 1) AS volume_mount_point
@@ -290,7 +290,7 @@ from DealerGroupHeaderDefinition h
 join DealerGroupHeaderDefinition t on isnull(t.TakesDataFrom, t.ID)=h.ID
 join DealerGroupDefinition g on g.GroupHeaderID=t.ID
 join Dealer d on d.DealerGroupDefinitionGroupID=g.GroupID
-where h.GroupHeader='|ZD| Region Eigentümer SUM'
+where h.GroupHeader='|ZD| Region EigentÃ¼mer SUM'
 
 <ITEM NAME>_di
 select distinct [Server]=rtrim(convert(char(100),serverproperty('Servername'))),
@@ -925,3 +925,30 @@ print @Y*100+@M
 set @Y=case when @M=12 then @Y+1 else @Y end
 set @M=case when @M=12 then 1 else @M+1 end
 end 
+
+<ITEM NAME>_upv
+declare @table nvarchar(255)='nav.Employee' 
+	,@predicate nvarchar(max)='SalespersPurchCode='
+	,@value nvarchar(max)='NETM3K'
+	,@sql nvarchar(max)
+	,@headers nvarchar(max)
+	,@columns nvarchar(max)
+
+set @headers=stuff((select ','+quotename([name])
+	from sys.columns
+	where object_id=object_id(@table)
+	for xml path('')), 1, 1, '')
+
+set @columns=stuff((select ','+quotename([name])+'=isnull(try_convert(nvarchar(max), '+quotename([name])+'), '''')'
+	from sys.columns
+	where object_id=object_id(@table)
+	for xml path('')), 1, 1, '')
+	
+set @sql='select [column], [value] 
+	from (select '+@columns+'
+		from '+@table+' e
+		where '+@predicate+''''+@value+''') p
+	unpivot (value for [column] in ('+@headers+')) pvt'
+
+print @sql
+exec (@sql)

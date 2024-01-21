@@ -1,0 +1,24 @@
+conky.config = {
+    alignment = 'top_middle',
+    double_buffer = true,
+    font = 'SpaceMono Nerd Font Mono:size=12',
+    gap_x = 17,
+    gap_y = 3,
+    own_window = true,
+    own_window_type = 'override',
+    own_window_transparent = true,
+    draw_shades = false,
+    draw_graph_borders = true,
+    update_interval = 1,
+    use_xft = true,
+}
+
+conky.text = [[
+${color white} \
+cpu ${voffset 2}${cpubar cpu0 11,66}${voffset -2} \
+| ram ${voffset 2}${membar 11,66}${voffset -2} \
+| root ${voffset 2}${fs_bar 11,66}${voffset -2} \
+| sync ${voffset 2}${fs_bar 11,66 /sync}${voffset -2} \
+| ${exec "ifconfig | grep -Eo 'inet (addr:)?([0-9]*\.){3}[0-9]*' | grep -Eo '([0-9]*\.){3}[0-9]*' | grep -v '127.0.0.1' | head --l=1"} \
+| ${time} \
+]]

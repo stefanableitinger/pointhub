@@ -1,0 +1,90 @@
+set $mod Mod4
+default_border pixel 1
+font xft:SpaceMono Nerd Font Mono Regular 12
+floating_modifier $mod
+
+bindsym --release $mod+l exec "/usr/local/bin/slock"
+bindsym $mod+Return exec "/usr/local/bin/st"
+bindsym $mod+w exec "/bin/firefox"; exec "/bin/dunstify -r 1337 -i /usr/share/icons/hicolor/32x32/apps/firefox.png 'starting firefox'"
+bindsym $mod+e exec "/bin/pcmanfm" 
+bindsym $mod+p exec "/home/k/.config/picom/picom.sh"
+bindsym $mod+g exec "/bin/setxkbmap -layout de"; exec "/bin/dunstify -r 1337 'keyboard layout'"
+bindsym $mod+k exec "/bin/pulseaudio -k"; exec "/bin/dunstify -r 1337 'restarting pulseaudio'"
+bindsym $mod+a exec "/home/k/.config/i3/rofi.sh"
+bindsym XF86AudioRaiseVolume exec --no-startup-id "/home/k/.config/i3/volume.sh up"
+bindsym XF86AudioLowerVolume exec "/home/k/.config/i3/volume.sh down"
+bindsym XF86AudioMute exec "/home/k/.config/i3/volume.sh mute"
+bindsym Print exec "/bin/flameshot gui --delay 500"
+bindsym $mod+q kill; exec "/home/k/.config/i3/fibonacci.sh"
+bindsym $mod+Left focus left
+bindsym $mod+Down focus down
+bindsym $mod+Up focus up
+bindsym $mod+Right focus right
+bindsym $mod+Shift+Left move left 100 px
+bindsym $mod+Shift+Down move down 100 px
+bindsym $mod+Shift+Up move up 100 px
+bindsym $mod+Shift+Right move right 100 px
+bindsym $mod+Shift+h move left 10 px
+bindsym $mod+Shift+j move down 10 px
+bindsym $mod+Shift+k move up 10 px
+bindsym $mod+Shift+l move right 10 px
+bindsym $mod+Shift+Ctrl+Left resize shrink width 100 px
+bindsym $mod+Shift+Ctrl+Down resize grow height 100 px
+bindsym $mod+Shift+Ctrl+Up resize shrink height 100 px
+bindsym $mod+Shift+Ctrl+Right resize grow width 100 px
+bindsym $mod+Shift+Ctrl+h resize shrink width 10 px
+bindsym $mod+Shift+Ctrl+j resize grow height 10 px
+bindsym $mod+Shift+Ctrl+k resize shrink height 10 px
+bindsym $mod+Shift+Ctrl+l resize grow width 10 px
+#default_orientation vertical 
+for_window [class=".*"] exec "/home/k/.config/i3/fibonacci.sh"
+for_window [class="Nitrogen" instance="nitrogen"] floating enable exec "/home/k/.config/i3/floating.sh"
+for_window [class="Blueman-manager" instance="blueman-manager"] floating enable exec "/home/k/.config/i3/floating.sh"
+bindsym $mod+d split h
+bindsym $mod+x split v
+bindsym $mod+s exec "/home/k/.config/i3/fibonacci.sh"
+bindsym $mod+f fullscreen toggle
+bindsym $mod+space floating toggle exec "/home/k/.config/i3/floating.sh"
+bindsym $mod+Shift+space focus mode_toggle
+set $ws1 1
+set $ws2 2
+set $ws3 3
+set $ws4 4
+set $ws5 5
+set $ws6 6
+set $ws7 7
+set $ws8 8
+bindsym $mod+1 workspace $ws1
+bindsym $mod+2 workspace $ws2
+bindsym $mod+3 workspace $ws3
+bindsym $mod+4 workspace $ws4
+bindsym $mod+5 workspace $ws5
+bindsym $mod+6 workspace $ws6
+bindsym $mod+7 workspace $ws7
+bindsym $mod+8 workspace $ws8
+bindsym $mod+Shift+1 move container to workspace $ws1; workspace $ws1; exec "/bin/dunstify -r 1337 'moved to ws1'"
+bindsym $mod+Shift+2 move container to workspace $ws2; workspace $ws2; exec "/bin/dunstify -r 1337 'moved to ws2'"
+bindsym $mod+Shift+3 move container to workspace $ws3; workspace $ws3; exec "/bin/dunstify -r 1337 'moved to ws3'"
+bindsym $mod+Shift+4 move container to workspace $ws4; workspace $ws4; exec "/bin/dunstify -r 1337 'moved to ws4'"
+bindsym $mod+Shift+5 move container to workspace $ws5; workspace $ws5; exec "/bin/dunstify -r 1337 'moved to ws5'"
+bindsym $mod+Shift+6 move container to workspace $ws6; workspace $ws6; exec "/bin/dunstify -r 1337 'moved to ws6'"
+bindsym $mod+Shift+7 move container to workspace $ws7; workspace $ws7; exec "/bin/dunstify -r 1337 'moved to ws7'"
+bindsym $mod+Shift+8 move container to workspace $ws8; workspace $ws8; exec "/bin/dunstify -r 1337 'moved to ws8'"
+bindsym $mod+Shift+r restart
+bindsym $mod+Shift+x exec "i3-msg exit"
+client.focused		#ffffff  #000000      #000000 #ffffff
+client.focused_inactive	#000000  #000000      #000000 #000000
+client.unfocused	#000000  #000000      #000000 #000000
+gaps inner 10
+gaps outer 0
+gaps top 20
+#exec "/bin/picom --config /home/k/.config/picom/picom.conf"
+exec "/bin/nitrogen --restore"
+exec "/bin/setxkbmap -layout de"
+exec "/bin/dunst"
+#exec "/bin/xclip -silent"
+exec "/bin/conky -c /home/k/.config/conky/conkyrc"
+exec "/bin/conky -c /home/k/.config/conky/calconkyrc"
+exec "/bin/conky -c /home/k/.config/conky/wsconkyrc"
+exec "/bin/xautolock -time 10 -locker /home/k/.config/i3/lock.sh"
+exec "/usr/bin/blueman-applet"

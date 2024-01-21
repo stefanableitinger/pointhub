@@ -1,0 +1,17 @@
+conky.config = {
+    alignment = 'top_right',
+    double_buffer = true,
+    font = 'SpaceMono Nerd Font Mono:size=12',
+    gap_x = 17,
+    gap_y = 34,
+    own_window = true,
+    own_window_transparent = true,
+    own_window_type = 'override',
+    draw_shades = false,
+    update_interval = 1,
+    use_xft = true,
+}
+
+conky.text = [[
+${execpi 18000 /home/k/.config/conky/wcal/wcal_color
+]]

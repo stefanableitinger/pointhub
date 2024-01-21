@@ -1,0 +1,17 @@
+conky.config = {
+    alignment = 'top_left',
+    double_buffer = true,
+    font = 'SpaceMono Nerd Font Mono:size=12',
+    gap_x = 17,
+    gap_y = 3,
+    own_window = true,
+    own_window_transparent = true,
+    own_window_type = 'override',
+    draw_shades = false,
+    update_interval = 1,
+    use_xft = true,
+}
+
+conky.text = [[
+${execpi 0 /home/k/.config/conky/wsinfo }
+]]

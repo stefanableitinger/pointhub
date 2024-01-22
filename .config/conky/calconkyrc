@@ -13,5 +13,5 @@ conky.config = {
 }
 
 conky.text = [[
-${execpi 18000 /home/k/.config/conky/wcal/wcal_color
+${execpi 18000 /home/k/.config/conky/calconkyrc.sh
 ]]

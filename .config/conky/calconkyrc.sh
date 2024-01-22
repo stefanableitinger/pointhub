@@ -1,6 +1,6 @@
 #!/bin/bash
 wcal -C \
-| sed -e "s//g" \
+| sed -e "s/\x1b//g" \
 | sed -e "s/\[4m//g" \
 | sed -e "s/\[0m//g" \
 | sed -e "s/\[7m/\$\{color black\}/g" \

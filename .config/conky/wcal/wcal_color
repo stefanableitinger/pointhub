@@ -1,0 +1,5 @@
+#!/bin/bash
+/home/k/.config/conky/wcal/wcal -C | sed -e "s/purple/black/g"
+#/home/k/.config/conky/wcal/wcal -C | sed -e "s/purple/#888888/g"
+#/home/k/.config/conky/wcal/wcal -C | sed -e "s/\${color purple}//g" | sed -e "s/\$color//g"
+#/home/k/.config/conky/wcal/wcal -C | sed -e "s/\${color purple}/\${font SpaceMono Nerd Font Mono:size=12}\${color black}/g" | sed -e "s/\$color/$\{font SpaceMono Nerd Font Mono:size=12}\$color/g"

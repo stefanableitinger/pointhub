@@ -1,0 +1,8 @@
+[Desktop Entry]
+Type=Application
+Name=media pholder shuffler
+GenericName=it's what it says man
+Exec=/usr/local/bin/mps
+Icon=mps
+Terminal=false
+

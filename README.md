@@ -6,6 +6,7 @@
 <p><a href="https://raw.githubusercontent.com/stefanableitinger/pointhub/master/shelly_control.sh">shelly daily limit</a></p>
 <p>etc</p>
 
+<p>once was...</p>
 <p>setup oh-my-zsh with zsh-autosuggestions, zsh-syntax-highlighting and autojump</p>
 <p>optionally setup i3 windowmanager with rofi and compton etc*</p>
 <p>optionally setup anonymice nerdfont</p>

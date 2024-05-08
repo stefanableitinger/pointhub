@@ -78,6 +78,7 @@ if [ $(echo "$power > 0" | bc -l) -eq 1 ]; then
 	# if power is supposed to be off force shutdown and enable password protection
 	if [ "$remaining_time" == "-1" ]; then
 		password=$(echo $ini_credentials | cut -d ":" -f2 - | cut -d "@" -f1)
+		bash -c "curl --data 'turn=off' $login$shelly_ip/relay/0 -s"
 		bash -c "curl --data 'password=$password&enabled=true' $login$shelly_ip/settings/login -s"
 		bash -c "echo $(date '+%Y-%m-%d %H:%M:%S') force_shutdown | tee -a $log_file"
 		force_shutdown="true"

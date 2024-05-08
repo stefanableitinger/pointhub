@@ -2,6 +2,10 @@
 
 <p>development flows, this has shifted to a collection of configuration files and scripts</p>
 <p><img width=40% src="https://raw.githubusercontent.com/stefanableitinger/pointhub/master/wallpaper_blackbeach.png"></p>
+<p><a href="https://raw.githubusercontent.com/stefanableitinger/pointhub/master/mps">media pholder shuffle</a></p>
+<p><a href="[https://raw.githubusercontent.com/stefanableitinger/pointhub/master/mps">shelly daily limit</a></p>
+<p>etc</p>
+
 <p>setup oh-my-zsh with zsh-autosuggestions, zsh-syntax-highlighting and autojump</p>
 <p>optionally setup i3 windowmanager with rofi and compton etc*</p>
 <p>optionally setup anonymice nerdfont</p>

@@ -3,12 +3,12 @@
 # custom script that controls shelly plug and limits daily usage time 
 # created by stefan ableitinger
 
-# use cron to call script eg every 10 minutes:
+# use cron to call script repeatedly eg every 10 minutes:
 # m h  dom mon dow   comman
 # */10 * * * * shelly_control.sh
 
 # debug flag
-#set -x
+set -x
 
 # define custom settings
 time_file="shelly_control.time"
@@ -32,7 +32,7 @@ fi
 if [ -f "$time_file" ]; then
 	file_timestamp=$(bash -c "date -r $time_file +%s")
 	curr_timestamp=$(date +%s)
-	minutes_since_last=$(((time_file_unix_timestamp - cur_time_unix_timestamp)/60))
+	minutes_since_last=$(((curr_timestamp - file_timestamp)/60))
 
 	# daily reset
 	if ! [ "$(date -r $time_file +%F)" == "$(date +%F)" ]; then
@@ -58,7 +58,7 @@ case $weekday_nr in
 		ini_time=120;;
 esac
 
-# get remaining time or create time_file with initial value
+# get remaining time from time_file or use initial value
 if [ -f "$time_file" ]; then
 	remaining_time=$(bash -c "cat $time_file")
 else

@@ -99,5 +99,5 @@ if [ $(echo "$power > 0" | bc -l) -eq 1 ]; then
 	fi
 			
 	bash -c "echo $remaining_time | tee $time_file"
-	bash -c "echo $(date '+%Y-%m-%d %H:%M:%S') current usage $power wph, $remaining_time minutes remaining, every $cron_fq minutes | tee -a $log_file"
+	bash -c "echo $(date '+%Y-%m-%d %H:%M:%S') current usage $power wph, $remaining_time minutes remaining | tee -a $log_file"
 fi

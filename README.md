@@ -1,7 +1,7 @@
 <h1>pointhub</h1>
 
 <p>development flows, this has shifted to a collection of configuration files and scripts</p>
-
+<p><img width=40% src="https://raw.githubusercontent.com/stefanableitinger/pointhub/master/wallpaper_blackbeach.png"></p>
 <p>setup oh-my-zsh with zsh-autosuggestions, zsh-syntax-highlighting and autojump</p>
 <p>optionally setup i3 windowmanager with rofi and compton etc*</p>
 <p>optionally setup anonymice nerdfont</p>

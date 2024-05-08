@@ -1,6 +1,6 @@
 <h1>pointhub</h1>
 
-<p>development flows, this has shifted to a collection of configuration files and scripts</p>
+<p>development flows, this has become dot files and scripts</p>
 <p><img width=40% src="https://raw.githubusercontent.com/stefanableitinger/pointhub/master/wallpaper_blackbeach.png"></p>
 <p><a href="https://raw.githubusercontent.com/stefanableitinger/pointhub/master/mps">media pholder shuffle</a></p>
 <p><a href="https://raw.githubusercontent.com/stefanableitinger/pointhub/master/shelly_control.sh">shelly daily limit</a></p>

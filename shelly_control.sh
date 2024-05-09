@@ -8,7 +8,7 @@
 # */10 * * * * shelly_control.sh
 
 # debug flag
-set -x
+#set -x
 
 # define custom settings
 time_file="shelly_control.time"
@@ -19,7 +19,7 @@ locked_credentials="admin:u1wpa@"
 # check login
 if [ "$(curl $shelly_ip/meter/0 -s)" == "401 Unauthorized" ]; then
 	if [ "$(curl $locked_credentials$shelly_ip/meter/0 -s)" == "401 Unauthorized" ]; then
-		bash -c "echo $(date '+%Y-%m-%d %H:%M:%S') login_denied | tee -a $log_file"
+		bash -c "echo $(date '+%Y-%m-%d %H:%M:%S') login_denied >> $log_file"
 		exit
 	else
 		login="$locked_credentials"
@@ -43,7 +43,7 @@ if [ -f "$time_file" ]; then
 		fi
 		# remove time file
 		bash -c "rm $time_file"
-		bash -c "echo $(date '+%Y-%m-%d %H:%M:%S') daily_reset weekday_nr=$weekday_nr time=$ini_time | tee -a $log_file"
+		bash -c "echo $(date '+%Y-%m-%d %H:%M:%S') daily_reset weekday_nr=$weekday_nr time=$ini_time >> $log_file"
 	fi
 else
 	minutes_since_last=0
@@ -51,7 +51,7 @@ else
 	# remove login if no file exists
 	if ! [ -f "$time_file" ] && [ "$login" == "$locked_credentials" ]; then
 		bash -c "curl --data 'enabled=false' $login$shelly_ip/settings/login -s"
-
+		login=""
 	fi
 fi
 
@@ -76,35 +76,32 @@ power=$(bash -c "curl $login$shelly_ip/meter/0 -s | jq '.power'");
 
 # power is on 
 if [ $(echo "$power > 0" | bc -l) -eq 1 ]; then 
-	# overridden do nothing
-	if [ "$remaining_time" == "-2" ]; then
-		exit
-	fi
-	
-	# if power is supposed to be off force shutdown and enable password protection
-	if [ "$remaining_time" == "-1" ]; then
-		password=$(echo $locked_credentials | cut -d ":" -f2 - | cut -d "@" -f1)
-		bash -c "curl --data 'turn=off' $login$shelly_ip/relay/0 -s"
-		bash -c "curl --data 'password=$password&enabled=true' $login$shelly_ip/settings/login -s"
-		bash -c "echo $(date '+%Y-%m-%d %H:%M:%S') force_shutdown | tee -a $log_file"
-		force_shutdown="true"
-		remaining_time=-2
-	else
-		remaining_time=$((remaining_time - minutes_since_last))
-		if [ $(echo "$remaining_time < 0" | bc -l) -eq 1 ]; then
-			remaining_time=0
-		fi
-
-		force_shutdown="false"
-	fi
+	case $remaining_time in
+		-2)
+			# override do nothing
+			exit;;
+		-1)
+			password=$(echo $locked_credentials | cut -d ":" -f2 - | cut -d "@" -f1)
+			bash -c "curl --data 'turn=off' $login$shelly_ip/relay/0 -s"
+			bash -c "curl --data 'password=$password&enabled=true' $login$shelly_ip/settings/login -s"
+			bash -c "echo $(date '+%Y-%m-%d %H:%M:%S') force_shutdown >> $log_file"
+			force_shutdown="true"
+			remaining_time=-2;;
+		*)
+			remaining_time=$((remaining_time - minutes_since_last))
+			if [ $(echo "$remaining_time < 0" | bc -l) -eq 1 ]; then
+				remaining_time=0
+			fi
+			force_shutdown="false";;
+	esac
 
 	# turn off when remaining minutes in counter is equal to 0
-	if [ "$force_shutdown" == "false" ] && [ $(echo "$remaining_time == 1" | bc -l) -eq 1 ]; then 
+	if [ "$force_shutdown" == "false" ] && [ $(echo "$remaining_time == 0" | bc -l) -eq 1 ]; then 
 		bash -c "curl --data 'turn=off' $login$shelly_ip/relay/0 -s"
-		bash -c "echo $(date '+%Y-%m-%d %H:%M:%S') shutdown | tee -a $log_file"
+		bash -c "echo $(date '+%Y-%m-%d %H:%M:%S') shutdown >> $log_file"
 		remaining_time=-1
 	fi
 			
-	bash -c "echo $remaining_time | tee $time_file"
-	bash -c "echo $(date '+%Y-%m-%d %H:%M:%S') current usage $power wph, $remaining_time minutes remaining | tee -a $log_file"
+	bash -c "echo $remaining_time > $time_file"
+	bash -c "echo $(date '+%Y-%m-%d %H:%M:%S') current usage $power wph, $remaining_time minutes remaining >> $log_file"
 fi

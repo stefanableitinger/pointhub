@@ -14,15 +14,15 @@ set -x
 time_file="shelly_control.time"
 log_file="shelly_control.log"
 shelly_ip="192.168.0.3"
-ini_credentials="admin:admin@"
+locked_credentials="admin:u1wpa@"
 
 # check login
 if [ "$(curl $shelly_ip/meter/0 -s)" == "401 Unauthorized" ]; then
-	if [ "$(curl $ini_credentials$shelly_ip/meter/0 -s)" == "401 Unauthorized" ]; then
+	if [ "$(curl $locked_credentials$shelly_ip/meter/0 -s)" == "401 Unauthorized" ]; then
 		bash -c "echo $(date '+%Y-%m-%d %H:%M:%S') login_denied | tee -a $log_file"
 		exit
 	else
-		login="$ini_credentials"
+		login="$locked_credentials"
 	fi
 else
 	login=""
@@ -37,7 +37,7 @@ if [ -f "$time_file" ]; then
 	# daily reset
 	if ! [ "$(date -r $time_file +%F)" == "$(date +%F)" ]; then
 		# remove login
-		if [ "$login" == "$ini_credentials" ]; then
+		if [ "$login" == "$locked_credentials" ]; then
 			bash -c "curl --data 'enabled=false' $login$shelly_ip/settings/login -s"
 			login=""
 		fi
@@ -47,6 +47,12 @@ if [ -f "$time_file" ]; then
 	fi
 else
 	minutes_since_last=0
+
+	# remove login if no file exists
+	if ! [ -f "$time_file" ] && [ "$login" == "$locked_credentials" ]; then
+		bash -c "curl --data 'enabled=false' $login$shelly_ip/settings/login -s"
+
+	fi
 fi
 
 # weekday time ini values eg friday, saturday double time
@@ -77,7 +83,7 @@ if [ $(echo "$power > 0" | bc -l) -eq 1 ]; then
 	
 	# if power is supposed to be off force shutdown and enable password protection
 	if [ "$remaining_time" == "-1" ]; then
-		password=$(echo $ini_credentials | cut -d ":" -f2 - | cut -d "@" -f1)
+		password=$(echo $locked_credentials | cut -d ":" -f2 - | cut -d "@" -f1)
 		bash -c "curl --data 'turn=off' $login$shelly_ip/relay/0 -s"
 		bash -c "curl --data 'password=$password&enabled=true' $login$shelly_ip/settings/login -s"
 		bash -c "echo $(date '+%Y-%m-%d %H:%M:%S') force_shutdown | tee -a $log_file"

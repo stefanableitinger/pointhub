@@ -38,7 +38,7 @@ if [ -f "$time_file" ]; then
 	if ! [ "$(date -r $time_file +%F)" == "$(date +%F)" ]; then
 		# remove login
 		if [ "$login" == "$locked_credentials" ]; then
-			bash -c "curl --data 'enabled=false' $login$shelly_ip/settings/login -s"
+			bash -c "curl --data 'enabled=false' $login$shelly_ip/settings/login -s" > /dev/null
 			login=""
 		fi
 		# remove time file
@@ -50,7 +50,7 @@ else
 
 	# remove login if no file exists
 	if ! [ -f "$time_file" ] && [ "$login" == "$locked_credentials" ]; then
-		bash -c "curl --data 'enabled=false' $login$shelly_ip/settings/login -s"
+		bash -c "curl --data 'enabled=false' $login$shelly_ip/settings/login -s" > /dev/null
 		login=""
 	fi
 fi

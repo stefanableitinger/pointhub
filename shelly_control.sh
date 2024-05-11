@@ -8,7 +8,7 @@
 # */10 * * * * shelly_control.sh
 
 # debug flag
-#set -x
+set -x
 
 # define custom settings
 time_file="shelly_control.time"
@@ -27,6 +27,15 @@ if [ "$(curl $shelly_ip/meter/0 -s)" == "401 Unauthorized" ]; then
 else
 	login=""
 fi
+
+# weekday time ini values eg friday, saturday double time
+weekday_nr=$(date "+%u")
+case $weekday_nr in
+	5|6)
+		ini_time=240;;
+	*)
+		ini_time=120;;
+esac
 
 # set minutes since last script call from time file
 if [ -f "$time_file" ]; then
@@ -54,15 +63,6 @@ else
 		login=""
 	fi
 fi
-
-# weekday time ini values eg friday, saturday double time
-weekday_nr=$(date "+%u")
-case $weekday_nr in
-	5|6)
-		ini_time=240;;
-	*)
-		ini_time=120;;
-esac
 
 # get remaining time from time_file or use initial value
 if [ -f "$time_file" ]; then
@@ -103,5 +103,7 @@ if [ $(echo "$power > 0" | bc -l) -eq 1 ]; then
 	fi
 			
 	bash -c "echo $remaining_time > $time_file"
-	bash -c "echo $(date '+%Y-%m-%d %H:%M:%S') current usage $power wph, $remaining_time minutes remaining >> $log_file"
+	if [ $(echo "$remaining_time >= 0" | bc -l) -eq 1 ]; then
+		bash -c "echo $(date '+%Y-%m-%d %H:%M:%S') current usage $power wph, $remaining_time minutes remaining >> $log_file"
+	fi
 fi

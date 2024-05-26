@@ -15,6 +15,8 @@ time_file="shelly_control.time"
 log_file="shelly_control.log"
 shelly_ip="192.168.0.3"
 locked_credentials="admin:u1wpa@"
+ini_time_weekday=180
+ini_time_weekend=300
 
 # check login
 if [ "$(curl $shelly_ip/meter/0 -s)" == "401 Unauthorized" ]; then
@@ -32,9 +34,9 @@ fi
 weekday_nr=$(date "+%u")
 case $weekday_nr in
 	5|6)
-		ini_time=240;;
+		ini_time=$ini_time_weekend;;
 	*)
-		ini_time=120;;
+		ini_time=$ini_time_weekday;;
 esac
 
 # set minutes since last script call from time file
@@ -75,7 +77,7 @@ fi
 power=$(bash -c "curl $login$shelly_ip/meter/0 -s | jq '.power'"); 
 
 # power is on 
-if [ $(echo "$power > 0" | bc -l) -eq 1 ]; then 
+if [ $(echo "$power > 10" | bc -l) -eq 1 ]; then 
 	case $remaining_time in
 		-2)
 			# override do nothing

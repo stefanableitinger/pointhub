@@ -4,40 +4,32 @@ video_cue=()
 player_windows=()
 
 mpv_command_parameter="--pause --mute=yes --start=96% --end=99% --auto-window-resize=no --loop-playlist=inf --keepaspect-window=no"
-search_path="/home/k/Videos/xyz/"
+search_path="/home/k/Videos/xyz"
 search_pattern="*"
-number_of_players=4
+number_of_players=1
 floating="True"
 
 # for debugging
-#set -x
+set -x
 
 # set file separator for arrays to handle spaces in filenames
 IFS="
 "
 
+if [ ! "$2" == "" ] && [ ! "$2" == "-" ]; then search_path="$2"; fi
+if [ ! "$3" == "" ] && [ ! "$3" == "-" ]; then search_pattern=*"$3"*; fi
 
-if [ "$#" -eq 3 ]; then
-	search_pattern="*$2*"
-	search_path="$3"
-elif [ "$#" -eq 2 ]; then
-	search_path="$2"
-elif [ "$#" -eq 1 ]; then
-	if [ "$1" == "--help" ] || [ "$1" == "--h" ] || [ "$1" == "-help" ] || [ "$1" == "-h" ]; then
-		echo "usage: mps"
-		echo "1st parameter is the number of windows (if prefixed 'x' eg x1 then without floating mode)" 
-		echo " 	if two parameters are provided"
-		echo "		2nd parameter is path to search for videos"
-		echo " 	if three parameters are provided"
-		echo "		2nd parameter is search string"
-		echo "		3rd parameter is path to search for videos that contain the search string"
-		echo ""
-		echo "without parameters defaults are used"
-		echo "	number of floating windows: $number_of_players"
-		echo "	search path: $search_path"
-		echo "	search pattern: $search_pattern"
-		exit
-	fi
+if [ "$#" -eq 1 ] && [ "$1" == "--help" ] || [ "$1" == "--h" ] || [ "$1" == "-help" ] || [ "$1" == "-h" ]; then
+	echo "usage: mps [-]n path/- name/-"
+	echo "	n defines number of windows, if prefixed with \"-\" the windows do not float"
+	echo "	path defines path to search for videos when \"-\" is used the default path applies"
+	echo "	name defines search string when \"-\" is used the default search string applies"
+	echo ""
+	echo "defaults are"
+	echo "	number of floating windows: $number_of_players"
+	echo "	search path: $search_path"
+	echo "	search string: $search_pattern"
+	exit
 fi
 
 # create list of video files in random order
@@ -51,9 +43,17 @@ fi
 
 # get number of players on screen from 1st parameter prefix x and windows are not floating
 if [ ! "$1" = "" ]; then 
-	if [[ "$1" == *"x"* ]]; then floating="False"; fi
-	number_of_players=$(echo "$1" | cut -dx -f2)
+	if [[ "$1" == "-"* ]]; then floating="False"; else floating="True"; fi
+	number_of_players=$(echo "$1" | cut -d- -f2)
 fi
+
+#debug
+params="number_of_players: $number_of_players
+search path: $search_path
+search string: $search_pattern
+videos: ${videos[@]}"
+
+#notify-send "$params" -w
 
 screen_width=$(xrandr | grep '*' | awk '{print $1}' | cut -dx -f1)
 screen_height=$(xrandr | grep '*' | awk '{print $1}' | cut -dx -f2)
@@ -87,18 +87,22 @@ for player in $(seq 1 "$number_of_players"); do
 	player_pid=$(ps wwwaux | grep -i "[m]pv.*mps_player_index_$player_guid" | awk '{print $2}')
 	player_window=$(xdotool search --sync --pid "$player_pid")
 	player_windows+=("$player_window")
+done
 
+for player in $(seq 1 "$number_of_players"); do
+	player_index=$(($player - 1))
+	player_window="${player_windows[$player_index]}"
 	case $number_of_players in
 		1)
-window_width=$(printf "%.0f" "$(echo "$screen_width - 20" | bc -l)")
+			window_width=$(printf "%.0f" "$(echo "$screen_width - 20" | bc -l)")
 			window_height=$(printf "%.0f" "$(echo "$screen_height - 40" | bc -l)")
 			posx=10
 			posy=30;;
 		2)
 			window_width=$(printf "%.0f" "$(echo "(($screen_width - 30) / 2)" | bc -l)")
-			window_height=$(printf "%.0f" "$(echo "$screen_height - 40" | bc -l)")
+			window_height=$(printf "%.0f" "$(echo "($screen_height / 2)" | bc -l)")
 			posx=$(printf "%.0f" "$(echo "$player_index * ($window_width + 10) + 10" | bc -l)")
-			posy=30;;
+			posy=$(printf "%.0f" "$(echo "(($screen_height - $window_height) / 2) + 30" | bc -l)");;
 		3)
 			window_height=$(printf "%.0f" "$(echo "($screen_height - 50) / 2" | bc -l)")
 			case $player in
@@ -108,7 +112,7 @@ window_width=$(printf "%.0f" "$(echo "$screen_width - 20" | bc -l)")
 					posy=30;;
 				2)
 					window_width=$(printf "%.0f" "$(echo "(($screen_width - 30) / 2)" | bc -l)")
-	posx=10
+					posx=10
 					posy=$(printf "%.0f" "$(echo "$window_height + 40" | bc -l)");;
 				3)
 					window_width=$(printf "%.0f" "$(echo "(($screen_width - 30) / 2)" | bc -l)")
@@ -132,7 +136,7 @@ window_width=$(printf "%.0f" "$(echo "$screen_width - 20" | bc -l)")
 			esac;;
 	esac
 	if [ "$floating" == "True" ]; then 
-		i3-msg "[ id=$player_window ] floating enable, resize set $window_width px $window_height px, move position $posx px $posy px"
+		i3-msg "[ id=$player_window ] floating enable, resize set $window_width px $window_height px, move position $posx px $posy px" > /dev/null
 	fi
 done
 

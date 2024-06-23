@@ -17,13 +17,15 @@ alias gnm="xinit /bin/gnome-session -- /etc/X11/xinit/xserverrc :0 vt1 -keeptty 
 alias ll='ls --color -lh'
 alias oe1="mpv http://ors-sn04.ors-shoutcast.at/oe1-q1a < /dev/null > /dev/null 2>&1 &"
 alias oe1_="mpv http://ors-sn04.ors-shoutcast.at/oe1-q1a"
+alias fm4="mpv http://ors-sn04.ors-shoutcast.at/fm4-q1a < /dev/null > /dev/null 2>&1 &"
+alias fm4_="mpv http://ors-sn04.ors-shoutcast.at/fm4-q1a"
 alias 247='mpv https://stream19.expo-media.eu/radio/9000 < /dev/null > /dev/null 2>&1 &'
 alias 247_='mpv https://stream19.expo-media.eu/radio/9000'
 alias shellytv="curl --data 'turn=toggle' 192.168.0.3/relay/0"
 alias shellypc="curl --data 'turn=toggle' 192.168.0.4/relay/0"
+alias pico="[ -c /dev/ttyACM0 ] && ampy -p /dev/ttyACM0"
 mnt() { sudo mkdir -p /mnt/"$1"; sudo mount /dev/"$1" /mnt/"$1"; cd /mnt/"$1"; ll -al; }
 umt() { cd ~; sudo umount /mnt/"$1"; [ "$(ls -A /mnt/"$1")" ] && lsblk || sudo rm -rf /mnt/"$1";  }
-opatrix() { picom --active-opacity 0.5 & cmatrix -C white && pkill picom; }
 
 export HISTFILESIZE=
 export HISTSIZE=
@@ -32,4 +34,3 @@ export MANPAGER="less -R"
 export GOOGLE_API_KEY="no"
 export GOOGLE_DEFAULT_CLIENT_ID="no"
 export GOOGLE_DEFAULT_CLIENT_SECRET="no"
-export ANDROID_HOME="/home/k/Downloads/commandlinetools-linux-10406996_latest/cmdline-tools/bin"

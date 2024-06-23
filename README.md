@@ -7,7 +7,7 @@
 <p>etc</p>
 
 <p>once was...</p>
-<p>setup oh-my-zsh with zsh-autosuggestions, zsh-syntax-highlighting and autojump</p>
+<p>setup oh-my-zsh with zsh-autosuggestions, zsh-syntax-highlighting and autojump using <a href="https://raw.githubusercontent.com/stefanableitinger/pointhub/master/install.sh">install.sh</a></p>
 <p>optionally setup i3 windowmanager with rofi and compton etc*</p>
 <p>optionally setup anonymice nerdfont</p>
 <p>optionally get wallpaper lockscreen and config files for zsh powerlevel10k i3 samba termux</p>

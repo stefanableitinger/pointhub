@@ -19,6 +19,8 @@ alias oe1="mpv http://ors-sn04.ors-shoutcast.at/oe1-q1a < /dev/null > /dev/null 
 alias oe1_="mpv http://ors-sn04.ors-shoutcast.at/oe1-q1a"
 alias fm4="mpv http://ors-sn04.ors-shoutcast.at/fm4-q1a < /dev/null > /dev/null 2>&1 &"
 alias fm4_="mpv http://ors-sn04.ors-shoutcast.at/fm4-q1a"
+alias him='mpv http://hirschmilch.de:7000/techno.mp3 < /dev/null > /dev/null 2>&1 &'
+alias him_='mpv http://hirschmilch.de:7000/techno.mp3'
 alias 247='mpv https://stream19.expo-media.eu/radio/9000 < /dev/null > /dev/null 2>&1 &'
 alias 247_='mpv https://stream19.expo-media.eu/radio/9000'
 alias shellytv="curl --data 'turn=toggle' 192.168.0.3/relay/0"

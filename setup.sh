@@ -44,7 +44,7 @@ curl -O https://raw.githubusercontent.com/stefanableitinger/pointhub/master/.tmu
 curl -O https://raw.githubusercontent.com/stefanableitinger/pointhub/master/.bashrc
 
 #void tools (--l=17)
-sudo xbps-install -y neovim tmux curl alsa-firmware alsa-utils pulseaudio pulsemixer mpv cava xorg i3-gaps rofi picom conky nitrogen base-devel fontconfig-devel libX11-devel libXft-devel bsdtar git ntfs-3g dbus xdotool pcmanfm dunst noto-fonts-ttf vimiv ffmpegthumbnailer tty-clock cmatrix neofetch pipes.c firefox chromium gimp gparted lightdm lightdm-gtk3-greeter lightdm-gtk-greeter-settings freerdp-server remmina
+sudo xbps-install -y neovim tmux curl alsa-firmware alsa-utils pulseaudio pulsemixer mpv cava xorg i3-gaps rofi picom conky nitrogen base-devel fontconfig-devel libX11-devel libXft-devel bsdtar git ntfs-3g dbus xdotool pcmanfm dunst noto-fonts-ttf vimiv ffmpegthumbnailer tty-clock cmatrix neofetch pipes.c firefox chromium gimp gparted lightdm lightdm-gtk3-greeter lightdm-gtk-greeter-settings freerdp-server remmina net-tools tree progress feh
 
 #font (--l=14)
 sudo mkdir -p /usr/share/fonts/spacemono-nf

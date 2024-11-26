@@ -1,0 +1,28 @@
+[global]
+        font = "SpaceMono Nerd Font Mono 13"
+        origin = top-right
+      offset = 10x2
+      padding = 0
+      alignment = right
+      frame_width = 0
+      #frame_width = 2
+      #corner_radius = 10
+      ignore_newline = yes
+      width = (0, 800)
+      height = 33
+      progress_bar = false
+      icon_position = right
+      sticky_history = no
+      background = "#00000000"
+      #frame_color = "#ffffffff"
+      notification_limit = 0
+      separator_height = 0
+      stack_duplicates = true
+      hide_duplicate_count = true
+      max_icon_size = 20
+[urgency_low]
+      timeout = 5
+[urgency_normal]
+      timeout = 5
+[urgency_critical]
+      timeout = 5

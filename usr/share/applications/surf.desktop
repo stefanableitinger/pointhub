@@ -1,0 +1,9 @@
+[Desktop Entry]
+Type=Application
+Name=surf browser
+GenericName=Surf browser
+Exec=/usr/bin/surf
+Icon=surf
+Terminal=false
+Categories=Terminal;
+

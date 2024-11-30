@@ -3,7 +3,7 @@ search_result_videos=()
 video_cue=()
 player_windows=()
 
-mpv_command_parameter="--pause --mute=yes --start=96% --end=99% --auto-window-resize=no --loop-playlist=inf --keepaspect-window=no"
+mpv_command_parameter="--pause --mute=yes -start=96% --end=100% --auto-window-resize=no --loop-playlist=inf --keepaspect-window=no"
 search_path="/home/k/Videos/xyz"
 search_pattern="*"
 number_of_players=1
@@ -33,8 +33,11 @@ if [ "$#" -eq 1 ] && [ "$1" == "--help" ] || [ "$1" == "--h" ] || [ "$1" == "-he
 fi
 
 # create list of video files in random order
-mapfile -t videos < <(find "$search_path" -type f -iname "$search_pattern" -a \( -iname "*.mp4" -o -iname "*.mkv" -o -iname "*.webm" \) )
+mapfile -t videos < <(find "$search_path" -type f -iname "$search_pattern" -a \( -iname "*.mp4" -o -iname "*.mkv" -o -iname "*.webm" -o -iname "*.avi" \) )
 videos=( $(shuf -e "${videos[@]}") )
+
+echo ${#videos[@]}
+echo ${videos[@]}
 
 if [ "$DISPLAY" = "" ]; then
 	bash -c "mpv $mpv_command_parameter ${videos[@]}"
@@ -134,6 +137,60 @@ for player in $(seq 1 "$number_of_players"); do
 				2|4)
 					posx=$(printf "%.0f" "$(echo "$window_width + 20" | bc -l)");;
 			esac;;
+		10)
+			case $player in
+				1)
+					window_width=1265
+					window_height=695
+					posx=10
+					posy=30;;
+				2)
+					window_width=630
+					window_height=340
+					posx=1285
+					posy=30;;
+				3)
+					window_width=630
+					window_height=345
+					posx=1285
+					posy=380;;
+				4)
+					window_width=630
+					window_height=345
+					posx=1925
+					posy=30;;
+				5)
+					window_width=630
+					window_height=345
+					posx=1925
+					posy=380;;
+				6)
+					window_width=630
+					window_height=345
+					posx=10
+					posy=735;;
+				7)
+					window_width=630
+					window_height=345
+					posx=10
+					posy=1090;;
+				8)
+					window_width=630
+					window_height=345
+					posx=645
+					posy=735;;
+				9)
+					window_width=630
+					window_height=345
+					posx=645
+					posy=1090;;
+				10)
+					window_width=1265
+					window_height=695
+					posx=1285
+					posy=735;;
+			esac;;
+
 	esac
 	if [ "$floating" == "True" ]; then 
 		i3-msg "[ id=$player_window ] floating enable, resize set $window_width px $window_height px, move position $posx px $posy px" > /dev/null

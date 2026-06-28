@@ -1,0 +1,11 @@
+#!/bin/sh
+exec 2>&1
+exec /usr/bin/seatd -g _seatd
+
+# added for starting sway
+export XDG_RUNTIME_DIR="/run/user/${UID}"
+if [ ! -d ${XDG_RUNTIME_DIR} ]; then
+	sudo mkdir ${XDG_RUNTIME_DIR}
+	sudo chown ${UID}:${UID} ${XDG_RUNTIME_DIR}
+fi
+

@@ -29,21 +29,24 @@ alias gnm="xinit /bin/gnome-session -- /etc/X11/xinit/xserverrc :0 vt1 -keeptty 
 
 ## functions
 xfind() { echo "searching $1..."; if [[ "$2" != "" ]]; then dir="$2"; else dir="."; fi; readarray -t results < <(find "${dir}" -maxdepth 4 -iname "*$1*";); found="${#results[@]}"; lines=$(tput lines); if [ "$found" -ge "$lines" ]; then echo "found "$found" results, display(Y/n)?"; read -n 1 -s -r display; if [[ "$display" != "n" ]]; then printf "%s\n" "${results[@]}" | less --quit-at-eof --ignore-case --clear-screen; fi else printf "%s\n" "${results[@]}"; fi }
-mnt() { mountpoint=$(udevil mount /dev/"$1"); if [ "$?" == "0" ]; then mountpoint=$(echo $mountpoint | sed 's/ at /|/g' | cut -d'|' -f2); echo "mounted at "$mountpoint; cd "$mountpoint"; ll -al; fi; }
+mnt() { mountpoint=$(udevil mount /dev/"$1"); if [ "$?" == "0" ]; then mountpoint=$(echo $mountpoint | sed 's/ at /|/g' | cut -d'|' -f2); echo "mounted at "$mountpoint; cd "$mountpoint"; lla; fi; }
 umt() { cd ~; udevil unmount /dev/"$1"; udisksctl power-off -b /dev/"$1";  }
 adbfs() { pid=$(pidof adbfs); if [[ $pid != "" ]]; then cd ~; sudo fusermount -u /media; else sudo /home/k/Downloads/adbfs-rootless/adbfs -o allow_other -o rescan /media && cd /media/storage/emulated/0/; ls --color -lh; fi; }
 xw3m() { w3m -o auto_image=false -M http://duckduckgo.com/lite; }
 safepath() { [ -d "$1" ] && export PATH="$PATH:$1"; }
 
-alias oe1='mpv http://ors-sn04.ors-shoutcast.at/oe1-q1a < /dev/null > /dev/null 2>&1'
+alias oe1='mpv http://ors-sn04.ors-shoutcast.at/oe1-q1a < /dev/null > /dev/null 2>&1 &'
 alias oe1_='mpv http://ors-sn04.ors-shoutcast.at/oe1-q1a'
-alias fm4='mpv http://ors-sn04.ors-shoutcast.at/fm4-q1a < /dev/null > /dev/null 2>&1'
+alias fm4='mpv http://ors-sn04.ors-shoutcast.at/fm4-q1a < /dev/null > /dev/null 2>&1 &'
 alias fm4_='mpv http://ors-sn04.ors-shoutcast.at/fm4-q1a'
-alias 247='mpv https://stream19.expo-media.eu/radio/9000 < /dev/null > /dev/null 2>&1'
+alias 247='mpv https://stream19.expo-media.eu/radio/9000 < /dev/null > /dev/null 2>&1 &'
 alias 247_='mpv https://stream19.expo-media.eu/radio/9000'
+alias sshc='ssh k@catcam'
+alias sshp='ssh k@pihole'
+alias sshm='ssh k@stefan-pc-m'
 
-export HISTFILESIZE=
-export HISTSIZE=
+export HISTFILESIZE=10000
+export HISTSIZE=10000
 export EDITOR=nvim
 export MANPAGER="less -R"
 export GOOGLE_API_KEY="no"
@@ -52,6 +55,10 @@ export GOOGLE_DEFAULT_CLIENT_SECRET="no"
 export DOTNET_CLI_TELEMETRY_OPTOUT=1
 export AZURE_DEV_COLLECT_TELEMETRY=no
 export XDG_RUNTIME_DIR="/run/user/$UID"
+#export GTK_IM_MODULE=ibus
+#export XMODIFIERS=@im=ibus
+#export QT_IM_MODULE=ibus
+export NVIM_NOTTYFAST=1
 
 [ -f "$HOME/.cargo/env" ] && source "$HOME/.cargo/env"
 [ -f /usr/share/bash-completion/000_bash_completion_compat.bash ] && source /usr/share/bash-completion/000_bash_completion_compat.bash
@@ -71,4 +78,4 @@ mkdir -p ${XDG_RUNTIME_DIR}
 ## testing mitm proxy locally
 #export http_proxy="http://localhost:8080"
 #export https_proxy="http://localhost:8080"
-#export no_proxy="localhost,127.0.0.1" 
+#export no_proxy="localhost,127.0.0.1"
